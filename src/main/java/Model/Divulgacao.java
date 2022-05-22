@@ -8,6 +8,15 @@ package Model;
  *
  * @author felip
  */
-public class Divulgacao {
+public class Divulgacao extends Atendimento{
+
+    public Divulgacao(String responsavel, String produto, String cliente, String descricaoTramite) {
+        super(responsavel, produto, cliente, descricaoTramite);
+    }
+    
+    @Override
+    public String toString() {
+        return super.toString() + " Tipo Atendimento: Divulgação";
+    }
     
 }

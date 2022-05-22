@@ -8,6 +8,15 @@ package Model;
  *
  * @author felip
  */
-public class Pesquisa {
+public class Pesquisa extends Atendimento{
+
+    public Pesquisa(String responsavel, String produto, String cliente, String descricaoTramite) {
+        super(responsavel, produto, cliente, descricaoTramite);
+    }
+    
+    @Override
+    public String toString() {
+        return super.toString() + " Tipo Atendimento: Pesquisa";
+    }
     
 }
