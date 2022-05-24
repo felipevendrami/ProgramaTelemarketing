@@ -34,6 +34,9 @@ public class MenuInicialView extends javax.swing.JFrame {
         mnAtendimento = new javax.swing.JMenu();
         miNovoAtendimento = new javax.swing.JMenuItem();
         miListaAtendimentos = new javax.swing.JMenuItem();
+        mnPedido = new javax.swing.JMenu();
+        miNovoPedido = new javax.swing.JMenuItem();
+        miListaPedidos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Telemarketing");
@@ -72,6 +75,30 @@ public class MenuInicialView extends javax.swing.JFrame {
 
         mbSistemaTelemarketing.add(mnAtendimento);
 
+        mnPedido.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mnPedido.setText("Pedido");
+        mnPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        miNovoPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        miNovoPedido.setText("Novo Pedido ...");
+        miNovoPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNovoPedidoActionPerformed(evt);
+            }
+        });
+        mnPedido.add(miNovoPedido);
+
+        miListaPedidos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        miListaPedidos.setText("Lista Pedidos ...");
+        miListaPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListaPedidosActionPerformed(evt);
+            }
+        });
+        mnPedido.add(miListaPedidos);
+
+        mbSistemaTelemarketing.add(mnPedido);
+
         setJMenuBar(mbSistemaTelemarketing);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -89,7 +116,7 @@ public class MenuInicialView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miNovoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoAtendimentoActionPerformed
-        NovoAtendimentoView novoAtendimentoView = new NovoAtendimentoView();
+        CadastroAtendimentoView novoAtendimentoView = new CadastroAtendimentoView();
         novoAtendimentoView.setVisible(true);
     }//GEN-LAST:event_miNovoAtendimentoActionPerformed
 
@@ -97,6 +124,16 @@ public class MenuInicialView extends javax.swing.JFrame {
         ListaAtendimentosView listaAtendimentosView = new ListaAtendimentosView();
         listaAtendimentosView.setVisible(true);
     }//GEN-LAST:event_miListaAtendimentosActionPerformed
+
+    private void miNovoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoPedidoActionPerformed
+        CadastroPedidoView novoPedidoView = new CadastroPedidoView();
+        novoPedidoView.setVisible(true);
+    }//GEN-LAST:event_miNovoPedidoActionPerformed
+
+    private void miListaPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaPedidosActionPerformed
+        ListaPedidosView listaPedidosView = new ListaPedidosView();
+        listaPedidosView.setVisible(true);
+    }//GEN-LAST:event_miListaPedidosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,9 +173,12 @@ public class MenuInicialView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar mbSistemaTelemarketing;
     private javax.swing.JMenuItem miListaAtendimentos;
+    private javax.swing.JMenuItem miListaPedidos;
     private javax.swing.JMenuItem miNovoAtendimento;
+    private javax.swing.JMenuItem miNovoPedido;
     private javax.swing.JMenu mnAtendimento;
     private javax.swing.JMenu mnEntidades;
+    private javax.swing.JMenu mnPedido;
     private javax.swing.JMenu mnProdutos;
     // End of variables declaration//GEN-END:variables
 }

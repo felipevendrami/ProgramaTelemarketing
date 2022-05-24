@@ -8,12 +8,12 @@ package View;
  *
  * @author felip
  */
-public class HistoricoAtendimentoView extends javax.swing.JFrame {
+public class ListaPedidosView extends javax.swing.JFrame {
 
     /**
-     * Creates new form HistoricoAtendimentoView
+     * Creates new form ListaAtendimentosView
      */
-    public HistoricoAtendimentoView() {
+    public ListaPedidosView() {
         initComponents();
     }
 
@@ -26,24 +26,39 @@ public class HistoricoAtendimentoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        taHistorico = new javax.swing.JTextArea();
-        Fechar = new javax.swing.JButton();
+        jScrollPane = new javax.swing.JScrollPane();
+        tbPedidos = new javax.swing.JTable();
+        btFechar = new javax.swing.JButton();
+        btVisualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Histórico do Atendimento");
-        setMaximumSize(new java.awt.Dimension(600, 300));
-        setMinimumSize(new java.awt.Dimension(600, 300));
-        setResizable(false);
+        setTitle("Lista de Pedidos");
+        setMinimumSize(new java.awt.Dimension(600, 410));
 
-        taHistorico.setColumns(20);
-        taHistorico.setRows(5);
-        jScrollPane1.setViewportView(taHistorico);
+        tbPedidos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane.setViewportView(tbPedidos);
 
-        Fechar.setText("Fechar");
-        Fechar.addActionListener(new java.awt.event.ActionListener() {
+        btFechar.setText("Fechar");
+        btFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FecharActionPerformed(evt);
+                btFecharActionPerformed(evt);
+            }
+        });
+
+        btVisualizar.setText("Visualizar");
+        btVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVisualizarActionPerformed(evt);
             }
         });
 
@@ -54,28 +69,37 @@ public class HistoricoAtendimentoView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Fechar)))
+                        .addComponent(btVisualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btFechar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Fechar)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btFechar)
+                    .addComponent(btVisualizar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void FecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FecharActionPerformed
+    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
+        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView();
+        visualizarAtendimentoView.setVisible(true);
+    }//GEN-LAST:event_btVisualizarActionPerformed
+
+    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
         this.setVisible(false);
-    }//GEN-LAST:event_FecharActionPerformed
+    }//GEN-LAST:event_btFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -94,27 +118,29 @@ public class HistoricoAtendimentoView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HistoricoAtendimentoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaPedidosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HistoricoAtendimentoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaPedidosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HistoricoAtendimentoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaPedidosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HistoricoAtendimentoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaPedidosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HistoricoAtendimentoView().setVisible(true);
+                new ListaPedidosView().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Fechar;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea taHistorico;
+    private javax.swing.JButton btFechar;
+    private javax.swing.JButton btVisualizar;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JTable tbPedidos;
     // End of variables declaration//GEN-END:variables
 }

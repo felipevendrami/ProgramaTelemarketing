@@ -8,12 +8,12 @@ package View;
  *
  * @author felip
  */
-public class ListaAtendimentosView extends javax.swing.JFrame {
+public class VisualizarPedidoView extends javax.swing.JFrame {
 
     /**
-     * Creates new form ListaAtendimentosView
+     * Creates new form VisualizarAtendimentoView
      */
-    public ListaAtendimentosView() {
+    public VisualizarPedidoView() {
         initComponents();
     }
 
@@ -27,39 +27,22 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane = new javax.swing.JScrollPane();
-        tbAtendimentos = new javax.swing.JTable();
+        taVisualizaPedido = new javax.swing.JTextArea();
         btFechar = new javax.swing.JButton();
-        btVisualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Lista de Atendimentos");
-        setMaximumSize(new java.awt.Dimension(600, 410));
+        setTitle("Visualização do Pedido");
         setMinimumSize(new java.awt.Dimension(600, 410));
+        setResizable(false);
 
-        tbAtendimentos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane.setViewportView(tbAtendimentos);
+        taVisualizaPedido.setColumns(20);
+        taVisualizaPedido.setRows(5);
+        jScrollPane.setViewportView(taVisualizaPedido);
 
         btFechar.setText("Fechar");
         btFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btFecharActionPerformed(evt);
-            }
-        });
-
-        btVisualizar.setText("Visualizar");
-        btVisualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVisualizarActionPerformed(evt);
             }
         });
 
@@ -73,8 +56,6 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
                     .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btVisualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btFechar)))
                 .addContainerGap())
         );
@@ -84,19 +65,12 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btFechar)
-                    .addComponent(btVisualizar))
+                .addComponent(btFechar)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
-        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView();
-        visualizarAtendimentoView.setVisible(true);
-    }//GEN-LAST:event_btVisualizarActionPerformed
 
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
         this.setVisible(false);
@@ -119,28 +93,28 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListaAtendimentosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarPedidoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListaAtendimentosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarPedidoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListaAtendimentosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarPedidoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListaAtendimentosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarPedidoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListaAtendimentosView().setVisible(true);
+                new VisualizarPedidoView().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btFechar;
-    private javax.swing.JButton btVisualizar;
     private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JTable tbAtendimentos;
+    private javax.swing.JTextArea taVisualizaPedido;
     // End of variables declaration//GEN-END:variables
 }
