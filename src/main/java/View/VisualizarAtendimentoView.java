@@ -49,6 +49,11 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
         });
 
         btNovoTramite.setText("Novo Trâmite");
+        btNovoTramite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNovoTramiteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,6 +88,11 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btFecharActionPerformed
+
+    private void btNovoTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoTramiteActionPerformed
+        CadastroTramiteView cadastroTramiteView = new CadastroTramiteView();
+        cadastroTramiteView.setVisible(true);
+    }//GEN-LAST:event_btNovoTramiteActionPerformed
 
     /**
      * @param args the command line arguments

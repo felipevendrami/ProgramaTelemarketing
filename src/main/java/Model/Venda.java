@@ -16,7 +16,7 @@ public class Venda {
     
     private static int geradorIdVenda = 0;
     
-    private int id;
+    private int idVenda;
     private String dataVenda;
     private String cliente;
     private List<Produto> itens;
@@ -26,14 +26,14 @@ public class Venda {
     private double total;
 
     public Venda(String cliente) {
-        this.id = geradorIdVenda ++;
+        this.idVenda = geradorIdVenda ++;
         this.cliente = cliente;
         String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
         this.dataVenda = timeStamp;
     }
 
-    public int getId() {
-        return id;
+    public int getIdVenda() {
+        return idVenda;
     }
 
     public String getDataVenda() {

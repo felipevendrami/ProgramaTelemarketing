@@ -37,16 +37,34 @@ public class ListaPedidosView extends javax.swing.JFrame {
 
         tbPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "IdPedido", "Cliente", "Data/Hora", "Valor Total"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane.setViewportView(tbPedidos);
+        if (tbPedidos.getColumnModel().getColumnCount() > 0) {
+            tbPedidos.getColumnModel().getColumn(0).setResizable(false);
+            tbPedidos.getColumnModel().getColumn(1).setResizable(false);
+            tbPedidos.getColumnModel().getColumn(2).setResizable(false);
+            tbPedidos.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         btFechar.setText("Fechar");
         btFechar.addActionListener(new java.awt.event.ActionListener() {

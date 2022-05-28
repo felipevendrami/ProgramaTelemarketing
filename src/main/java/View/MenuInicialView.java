@@ -5,6 +5,7 @@
 package View;
 
 import Model.Atendimento;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,10 +13,13 @@ import Model.Atendimento;
  */
 public class MenuInicialView extends javax.swing.JFrame {
 
+    private ArrayList<Atendimento> atendimentos;
+    
     /**
      * Creates new form MenuInicialView
      */
     public MenuInicialView() {
+        this.atendimentos = new ArrayList<>();
         initComponents();
     }
 
@@ -115,6 +119,10 @@ public class MenuInicialView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public ArrayList<Atendimento> getAtendimentos(){
+        return this.atendimentos;
+    }
+    
     private void miNovoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoAtendimentoActionPerformed
         CadastroAtendimentoView novoAtendimentoView = new CadastroAtendimentoView();
         novoAtendimentoView.setVisible(true);

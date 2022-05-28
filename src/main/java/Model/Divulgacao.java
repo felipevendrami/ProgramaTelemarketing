@@ -10,13 +10,21 @@ package Model;
  */
 public class Divulgacao extends Atendimento{
 
-    public Divulgacao(String responsavel, String produto, String cliente, String descricaoTramite) {
-        super(responsavel, produto, cliente, descricaoTramite);
+    private String tipoContato;
+    private String contato;
+    private boolean conversao;
+
+    public Divulgacao(String tipoContato, String contato, String responsavel, String descricaoTramite, String empresa) {
+        super(responsavel, descricaoTramite, empresa);
+        this.tipoContato = tipoContato;
+        this.contato = contato;
     }
-    
+
     @Override
     public String toString() {
-        return super.toString() + " Tipo Atendimento: Divulgação";
+        return super.toString() + " Divulgacao{" + "tipoContato=" + tipoContato + ", contato=" + contato + ", conversao=" + conversao + '}';
     }
+    
+    
     
 }

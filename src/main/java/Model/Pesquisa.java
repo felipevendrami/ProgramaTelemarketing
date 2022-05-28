@@ -10,13 +10,22 @@ package Model;
  */
 public class Pesquisa extends Atendimento{
 
-    public Pesquisa(String responsavel, String produto, String cliente, String descricaoTramite) {
-        super(responsavel, produto, cliente, descricaoTramite);
+    private Venda venda;
+    private int satisfacaoProduto;
+    private int satisfacaoAtendimento;
+
+    public Pesquisa(Venda venda, int satisfacaoProduto, int satisfacaoAtendimento, String responsavel, String descricaoTramite, String empresa) {
+        super(responsavel, descricaoTramite, empresa);
+        this.venda = venda;
+        this.satisfacaoProduto = satisfacaoProduto;
+        this.satisfacaoAtendimento = satisfacaoAtendimento;
     }
-    
+
     @Override
     public String toString() {
-        return super.toString() + " Tipo Atendimento: Pesquisa";
+        return super.toString() + " Pesquisa{" + "venda=" + venda + ", satisfacaoProduto=" + satisfacaoProduto + ", satisfacaoAtendimento=" + satisfacaoAtendimento + '}';
     }
+    
+    
     
 }

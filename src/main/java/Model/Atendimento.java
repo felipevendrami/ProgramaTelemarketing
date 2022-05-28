@@ -18,34 +18,32 @@ public abstract class Atendimento {
     
     private static int geradorIdAtendimento = 0;
     
-    private int id;
+    //LocalDateTime para as datas, verificar implementação
+    private int idAtendimento;
     private String dataAbertura;
     private String dataFechamento;
-    private String setor;
     private String responsavel;
-    private String produto;
-    private String cliente;
     private int situacao;
     private List<Tramite> tramites;
+    private String empresa;
     
 //    Situações atendimento:
 //    1 = Aberto;
 //    2 = Em andamento;
 //    3 = Finalizada;
 
-    public Atendimento(String responsavel, String produto, String cliente, String descricaoTramite){
-        this.id = geradorIdAtendimento ++;
+    public Atendimento(String responsavel, String descricaoTramite, String empresa){
+        this.idAtendimento = geradorIdAtendimento ++;
         this.responsavel = responsavel;
-        this.produto = produto;
-        this.cliente = cliente;
         this.situacao = 1;
         this.dataAbertura = retornaTimestamp();
         this.tramites = new ArrayList<>();
+        this.empresa = empresa;
         criarTramite(descricaoTramite, 1);
     }
 
-    public int getId() {
-        return id;
+    public int getIdAtendimento() {
+        return idAtendimento;
     }
 
     public String getDataAbertura() {
@@ -55,37 +53,13 @@ public abstract class Atendimento {
     public String getDataFechamento() {
         return dataFechamento;
     }
-
-    public String getSetor() {
-        return setor;
-    }
-
+    
     public String getResponsavel() {
         return responsavel;
     }
 
-    public String getProduto() {
-        return produto;
-    }
-
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setSetor(String setor) {
-        this.setor = setor;
-    }
-
     public void setResponsavel(String responsavel) {
         this.responsavel = responsavel;
-    }
-
-    public void setProduto(String produto) {
-        this.produto = produto;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
     }
 
     public String retornaTimestamp(){
@@ -95,8 +69,9 @@ public abstract class Atendimento {
 
     @Override
     public String toString() {
-        return "Atendimento{" + "id=" + id + ", dataAbertura=" + dataAbertura + ", dataFechamento=" + dataFechamento + ", setor=" + setor + ", responsavel=" + responsavel + ", produto=" + produto + ", cliente=" + cliente + ", situacao=" + situacao + '}';
+        return "Atendimento{" + "idAtendimento=" + idAtendimento + ", dataAbertura=" + dataAbertura + ", dataFechamento=" + dataFechamento + ", responsavel=" + responsavel + ", situacao=" + situacao + ", tramites=" + tramites + '}';
     }
+
 
     public boolean criarTramite(String descricao, int tipoTramite){
         if(tipoTramite == 1 || tipoTramite == 2){

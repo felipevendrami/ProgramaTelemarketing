@@ -15,7 +15,7 @@ public class Tramite {
     
     private static int geradorIdTramite = 0;
     
-    private int id;
+    private int idTramite;
     private String dataTramite;
     private String descricao;
     private int tipoTramite;
@@ -26,15 +26,15 @@ public class Tramite {
 //    3 = Fechammento;
     
     public Tramite(String descricao, int tipoTramite) {
-        this.id = geradorIdTramite ++;
+        this.idTramite = geradorIdTramite ++;
         this.descricao = descricao;
         this.tipoTramite = tipoTramite;
         String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
         this.dataTramite = timeStamp;
     }
 
-    public int getId() {
-        return id;
+    public int getIdTramite() {
+        return idTramite;
     }
 
     public String getDataTramite() {
@@ -47,7 +47,7 @@ public class Tramite {
 
     @Override
     public String toString() {
-        String retorno = "Tramite{" + "id=" + id + ", dataTramite=" + dataTramite + ", descricao=" + descricao;
+        String retorno = "Tramite{" + "id=" + idTramite + ", dataTramite=" + dataTramite + ", descricao=" + descricao;
         if(this.tipoTramite == 1){
             retorno += ", tipoTramite=Abertura}";
         } if (this.tipoTramite == 2){

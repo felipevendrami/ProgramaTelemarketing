@@ -10,12 +10,18 @@ package Model;
  */
 public class Suporte extends Atendimento{
 
-    public Suporte(String responsavel, String produto, String cliente, String descricaoTramite) {
-        super(responsavel, produto, cliente, descricaoTramite);
+    private Venda venda;
+
+    public Suporte(Venda venda, String responsavel, String descricaoTramite, String empresa) {
+        super(responsavel, descricaoTramite, empresa);
+        this.venda = venda;
     }
-    
+
     @Override
     public String toString() {
-        return super.toString() + " Tipo Atendimento: Suporte";
+        return super.toString() + " Suporte{" + "venda=" + venda + '}';
     }
+    
+    
+    
 }
