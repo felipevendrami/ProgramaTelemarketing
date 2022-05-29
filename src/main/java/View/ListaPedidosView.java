@@ -10,10 +10,13 @@ package View;
  */
 public class ListaPedidosView extends javax.swing.JFrame {
 
+    private MenuInicialView menuView;
+    
     /**
      * Creates new form ListaAtendimentosView
      */
-    public ListaPedidosView() {
+    public ListaPedidosView(MenuInicialView menuView) {
+        this.menuView = menuView;
         initComponents();
     }
 
@@ -148,11 +151,11 @@ public class ListaPedidosView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ListaPedidosView().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ListaPedidosView().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

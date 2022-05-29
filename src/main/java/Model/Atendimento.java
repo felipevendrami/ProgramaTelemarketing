@@ -69,7 +69,20 @@ public abstract class Atendimento {
 
     @Override
     public String toString() {
-        return "Atendimento{" + "idAtendimento=" + idAtendimento + ", dataAbertura=" + dataAbertura + ", dataFechamento=" + dataFechamento + ", responsavel=" + responsavel + ", situacao=" + situacao + ", tramites=" + tramites + '}';
+        String retorno = "";
+        retorno = "Atendimento{" + "idAtendimento=" + idAtendimento + ", dataAbertura=" + dataAbertura + ", dataFechamento=" + dataFechamento + ", responsavel=" + responsavel + ", situacao=";
+        switch (this.situacao) {
+            case 1:
+                retorno += "Aberto}";
+                break;
+            case 2:
+                retorno += "Em andamento}";
+                break;
+            case 3:
+                retorno += "Finalizado}";
+                break;
+        }
+        return retorno;
     }
 
 
@@ -93,10 +106,12 @@ public abstract class Atendimento {
         this.situacao = 3;
     }
     
-    public void imprimeTramites(){
+    public String retornaTramites(){
+        String retorno = "";
         for(Tramite tramite : tramites){
-            System.out.println(tramite.toString());
+            retorno += tramite.toString() + "\n";
         }
+        return retorno;
     }
     
 }

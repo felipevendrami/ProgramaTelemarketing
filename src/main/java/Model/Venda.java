@@ -5,6 +5,7 @@
 package Model;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -21,17 +22,33 @@ public class Venda {
     private String cliente;
     private List<Produto> itens;
     private double subtotal;
-    private double acrescimo;
-    private double desconto;
     private double total;
+    private int situacao;
+    
+    //Situações pedido
+    //1 - Cancelado
+    //2 - Pendente
+    //3 - Confirmado
 
-    public Venda(String cliente) {
+    public Venda(String cliente, int situacao) {
         this.idVenda = geradorIdVenda ++;
+        this.itens = new ArrayList<>();
         this.cliente = cliente;
         String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
         this.dataVenda = timeStamp;
+        this.situacao = situacao;
+        this.subtotal = 0;
+        this.total = 0;
+    }
+    
+    public int getSituacao() {
+        return situacao;
     }
 
+    public void setSituacao(int situacao) {
+        this.situacao = situacao;
+    }
+    
     public int getIdVenda() {
         return idVenda;
     }
@@ -48,15 +65,15 @@ public class Venda {
         return subtotal;
     }
 
-    public double getDesconto() {
-        return desconto;
-    }
-
     public double getTotal() {
         return total;
     }
-
-    public double getAcrescimo() {
-        return acrescimo;
+    
+    public void addProduto(Produto produto){
+        this.itens.add(produto);
+    }
+    
+    public void removeProduto(Produto produto){
+        this.itens.remove(produto);
     }
 }

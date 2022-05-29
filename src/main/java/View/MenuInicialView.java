@@ -5,6 +5,7 @@
 package View;
 
 import Model.Atendimento;
+import Model.Venda;
 import java.util.ArrayList;
 
 /**
@@ -14,15 +15,25 @@ import java.util.ArrayList;
 public class MenuInicialView extends javax.swing.JFrame {
 
     private ArrayList<Atendimento> atendimentos;
+    private ArrayList<Venda> vendas;
     
     /**
      * Creates new form MenuInicialView
      */
     public MenuInicialView() {
         this.atendimentos = new ArrayList<>();
+        this.vendas = new ArrayList<>();
         initComponents();
     }
 
+    public ArrayList<Atendimento> getAtendimentos(){
+        return this.atendimentos;
+    }
+    
+    public ArrayList<Venda> getVendas(){
+        return this.vendas;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +50,6 @@ public class MenuInicialView extends javax.swing.JFrame {
         miNovoAtendimento = new javax.swing.JMenuItem();
         miListaAtendimentos = new javax.swing.JMenuItem();
         mnPedido = new javax.swing.JMenu();
-        miNovoPedido = new javax.swing.JMenuItem();
         miListaPedidos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,15 +93,6 @@ public class MenuInicialView extends javax.swing.JFrame {
         mnPedido.setText("Pedido");
         mnPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        miNovoPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        miNovoPedido.setText("Novo Pedido ...");
-        miNovoPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miNovoPedidoActionPerformed(evt);
-            }
-        });
-        mnPedido.add(miNovoPedido);
-
         miListaPedidos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miListaPedidos.setText("Lista Pedidos ...");
         miListaPedidos.addActionListener(new java.awt.event.ActionListener() {
@@ -119,27 +120,18 @@ public class MenuInicialView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public ArrayList<Atendimento> getAtendimentos(){
-        return this.atendimentos;
-    }
-    
     private void miNovoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoAtendimentoActionPerformed
-        CadastroAtendimentoView novoAtendimentoView = new CadastroAtendimentoView();
+        CadastroAtendimentoView novoAtendimentoView = new CadastroAtendimentoView(this);
         novoAtendimentoView.setVisible(true);
     }//GEN-LAST:event_miNovoAtendimentoActionPerformed
 
     private void miListaAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaAtendimentosActionPerformed
-        ListaAtendimentosView listaAtendimentosView = new ListaAtendimentosView();
+        ListaAtendimentosView listaAtendimentosView = new ListaAtendimentosView(this);
         listaAtendimentosView.setVisible(true);
     }//GEN-LAST:event_miListaAtendimentosActionPerformed
 
-    private void miNovoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoPedidoActionPerformed
-        CadastroPedidoView novoPedidoView = new CadastroPedidoView();
-        novoPedidoView.setVisible(true);
-    }//GEN-LAST:event_miNovoPedidoActionPerformed
-
     private void miListaPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaPedidosActionPerformed
-        ListaPedidosView listaPedidosView = new ListaPedidosView();
+        ListaPedidosView listaPedidosView = new ListaPedidosView(this);
         listaPedidosView.setVisible(true);
     }//GEN-LAST:event_miListaPedidosActionPerformed
 
@@ -183,7 +175,6 @@ public class MenuInicialView extends javax.swing.JFrame {
     private javax.swing.JMenuItem miListaAtendimentos;
     private javax.swing.JMenuItem miListaPedidos;
     private javax.swing.JMenuItem miNovoAtendimento;
-    private javax.swing.JMenuItem miNovoPedido;
     private javax.swing.JMenu mnAtendimento;
     private javax.swing.JMenu mnEntidades;
     private javax.swing.JMenu mnPedido;

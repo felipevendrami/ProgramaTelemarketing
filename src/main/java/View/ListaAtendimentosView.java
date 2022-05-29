@@ -10,10 +10,13 @@ package View;
  */
 public class ListaAtendimentosView extends javax.swing.JFrame {
 
+    private MenuInicialView menuView;
+    
     /**
      * Creates new form ListaAtendimentosView
      */
-    public ListaAtendimentosView() {
+    public ListaAtendimentosView(MenuInicialView menuView) {
+        this.menuView = menuView;
         initComponents();
     }
 
@@ -41,7 +44,7 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "IdAtendimento", "Tipo", "Cliente", "Situação", "Abertura", "Última Atualização"
+                "IdAtendimento", "Tipo", "Empresa", "Cliente", "Abertura", "Situação"
             }
         ) {
             Class[] types = new Class [] {
@@ -150,11 +153,11 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ListaAtendimentosView().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ListaAtendimentosView().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

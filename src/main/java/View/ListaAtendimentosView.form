@@ -71,10 +71,10 @@
               <Table columnCount="6" rowCount="0">
                 <Column editable="false" title="IdAtendimento" type="java.lang.Integer"/>
                 <Column editable="false" title="Tipo" type="java.lang.String"/>
+                <Column editable="false" title="Empresa" type="java.lang.String"/>
                 <Column editable="false" title="Cliente" type="java.lang.String"/>
-                <Column editable="false" title="Situa&#xe7;&#xe3;o" type="java.lang.String"/>
                 <Column editable="false" title="Abertura" type="java.lang.String"/>
-                <Column editable="false" title="&#xda;ltima Atualiza&#xe7;&#xe3;o" type="java.lang.String"/>
+                <Column editable="false" title="Situa&#xe7;&#xe3;o" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
