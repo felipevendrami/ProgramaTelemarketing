@@ -5,6 +5,8 @@
 package View;
 
 import Model.Atendimento;
+import Model.Venda;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,13 +14,26 @@ import Model.Atendimento;
  */
 public class MenuInicialView extends javax.swing.JFrame {
 
+    private ArrayList<Atendimento> atendimentos;
+    private ArrayList<Venda> vendas;
+    
     /**
      * Creates new form MenuInicialView
      */
     public MenuInicialView() {
+        this.atendimentos = new ArrayList<>();
+        this.vendas = new ArrayList<>();
         initComponents();
     }
 
+    public ArrayList<Atendimento> getAtendimentos(){
+        return this.atendimentos;
+    }
+    
+    public ArrayList<Venda> getVendas(){
+        return this.vendas;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,6 +49,8 @@ public class MenuInicialView extends javax.swing.JFrame {
         mnAtendimento = new javax.swing.JMenu();
         miNovoAtendimento = new javax.swing.JMenuItem();
         miListaAtendimentos = new javax.swing.JMenuItem();
+        mnPedido = new javax.swing.JMenu();
+        miListaPedidos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Telemarketing");
@@ -72,6 +89,21 @@ public class MenuInicialView extends javax.swing.JFrame {
 
         mbSistemaTelemarketing.add(mnAtendimento);
 
+        mnPedido.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mnPedido.setText("Pedido");
+        mnPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        miListaPedidos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        miListaPedidos.setText("Lista Pedidos ...");
+        miListaPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListaPedidosActionPerformed(evt);
+            }
+        });
+        mnPedido.add(miListaPedidos);
+
+        mbSistemaTelemarketing.add(mnPedido);
+
         setJMenuBar(mbSistemaTelemarketing);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -89,14 +121,19 @@ public class MenuInicialView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miNovoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoAtendimentoActionPerformed
-        NovoAtendimentoView novoAtendimentoView = new NovoAtendimentoView();
+        CadastroAtendimentoView novoAtendimentoView = new CadastroAtendimentoView(this);
         novoAtendimentoView.setVisible(true);
     }//GEN-LAST:event_miNovoAtendimentoActionPerformed
 
     private void miListaAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaAtendimentosActionPerformed
-        ListaAtendimentosView listaAtendimentosView = new ListaAtendimentosView();
+        ListaAtendimentosView listaAtendimentosView = new ListaAtendimentosView(this);
         listaAtendimentosView.setVisible(true);
     }//GEN-LAST:event_miListaAtendimentosActionPerformed
+
+    private void miListaPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaPedidosActionPerformed
+        ListaPedidosView listaPedidosView = new ListaPedidosView(this);
+        listaPedidosView.setVisible(true);
+    }//GEN-LAST:event_miListaPedidosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,9 +173,11 @@ public class MenuInicialView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar mbSistemaTelemarketing;
     private javax.swing.JMenuItem miListaAtendimentos;
+    private javax.swing.JMenuItem miListaPedidos;
     private javax.swing.JMenuItem miNovoAtendimento;
     private javax.swing.JMenu mnAtendimento;
     private javax.swing.JMenu mnEntidades;
+    private javax.swing.JMenu mnPedido;
     private javax.swing.JMenu mnProdutos;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,10 +10,13 @@ package View;
  */
 public class ListaAtendimentosView extends javax.swing.JFrame {
 
+    private MenuInicialView menuView;
+    
     /**
      * Creates new form ListaAtendimentosView
      */
-    public ListaAtendimentosView() {
+    public ListaAtendimentosView(MenuInicialView menuView) {
+        this.menuView = menuView;
         initComponents();
     }
 
@@ -29,27 +32,45 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
         jScrollPane = new javax.swing.JScrollPane();
         tbAtendimentos = new javax.swing.JTable();
         btFechar = new javax.swing.JButton();
-        btHistorico = new javax.swing.JButton();
-        btNovoTramite = new javax.swing.JButton();
+        btVisualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Atendimentos");
         setMaximumSize(new java.awt.Dimension(600, 410));
         setMinimumSize(new java.awt.Dimension(600, 410));
-        setPreferredSize(new java.awt.Dimension(600, 410));
 
         tbAtendimentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "IdAtendimento", "Tipo", "Empresa", "Cliente", "Abertura", "Situação"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane.setViewportView(tbAtendimentos);
+        if (tbAtendimentos.getColumnModel().getColumnCount() > 0) {
+            tbAtendimentos.getColumnModel().getColumn(0).setResizable(false);
+            tbAtendimentos.getColumnModel().getColumn(1).setResizable(false);
+            tbAtendimentos.getColumnModel().getColumn(2).setResizable(false);
+            tbAtendimentos.getColumnModel().getColumn(3).setResizable(false);
+            tbAtendimentos.getColumnModel().getColumn(4).setResizable(false);
+            tbAtendimentos.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         btFechar.setText("Fechar");
         btFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -58,17 +79,10 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
             }
         });
 
-        btHistorico.setText("Histórico");
-        btHistorico.addActionListener(new java.awt.event.ActionListener() {
+        btVisualizar.setText("Visualizar");
+        btVisualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btHistoricoActionPerformed(evt);
-            }
-        });
-
-        btNovoTramite.setText("Novo Trâmite");
-        btNovoTramite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btNovoTramiteActionPerformed(evt);
+                btVisualizarActionPerformed(evt);
             }
         });
 
@@ -82,9 +96,7 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
                     .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btNovoTramite)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btHistorico)
+                        .addComponent(btVisualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btFechar)))
                 .addContainerGap())
@@ -97,27 +109,21 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btFechar)
-                    .addComponent(btHistorico)
-                    .addComponent(btNovoTramite))
+                    .addComponent(btVisualizar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btNovoTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoTramiteActionPerformed
-        NovoTramiteView novoTramiteView = new NovoTramiteView();
-        novoTramiteView.setVisible(true);
-    }//GEN-LAST:event_btNovoTramiteActionPerformed
+    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
+        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView();
+        visualizarAtendimentoView.setVisible(true);
+    }//GEN-LAST:event_btVisualizarActionPerformed
 
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btFecharActionPerformed
-
-    private void btHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHistoricoActionPerformed
-        HistoricoAtendimentoView historicoAtendimentoView = new HistoricoAtendimentoView();
-        historicoAtendimentoView.setVisible(true);
-    }//GEN-LAST:event_btHistoricoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,17 +153,16 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ListaAtendimentosView().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ListaAtendimentosView().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btFechar;
-    private javax.swing.JButton btHistorico;
-    private javax.swing.JButton btNovoTramite;
+    private javax.swing.JButton btVisualizar;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable tbAtendimentos;
     // End of variables declaration//GEN-END:variables

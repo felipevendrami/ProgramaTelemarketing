@@ -8,12 +8,12 @@ package View;
  *
  * @author felip
  */
-public class SelecaoProdutoView extends javax.swing.JFrame {
+public class VisualizarVendaView extends javax.swing.JFrame {
 
     /**
-     * Creates new form SelecaoProduto
+     * Creates new form VisualizarAtendimentoView
      */
-    public SelecaoProdutoView() {
+    public VisualizarVendaView() {
         initComponents();
     }
 
@@ -27,46 +27,17 @@ public class SelecaoProdutoView extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane = new javax.swing.JScrollPane();
-        tbProdutos = new javax.swing.JTable();
+        taVisualizaPedido = new javax.swing.JTextArea();
         btFechar = new javax.swing.JButton();
-        btSelecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Selecao Produto");
-        setMaximumSize(new java.awt.Dimension(600, 300));
-        setMinimumSize(new java.awt.Dimension(600, 300));
-        setPreferredSize(new java.awt.Dimension(600, 300));
+        setTitle("Visualização do Pedido");
+        setMinimumSize(new java.awt.Dimension(600, 410));
         setResizable(false);
 
-        tbProdutos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "IdProduto", "Produto", "Valor"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane.setViewportView(tbProdutos);
-        if (tbProdutos.getColumnModel().getColumnCount() > 0) {
-            tbProdutos.getColumnModel().getColumn(0).setResizable(false);
-            tbProdutos.getColumnModel().getColumn(1).setResizable(false);
-            tbProdutos.getColumnModel().getColumn(2).setResizable(false);
-        }
+        taVisualizaPedido.setColumns(20);
+        taVisualizaPedido.setRows(5);
+        jScrollPane.setViewportView(taVisualizaPedido);
 
         btFechar.setText("Fechar");
         btFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -75,8 +46,6 @@ public class SelecaoProdutoView extends javax.swing.JFrame {
             }
         });
 
-        btSelecionar.setText("Selecionar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,23 +53,19 @@ public class SelecaoProdutoView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 432, Short.MAX_VALUE)
-                        .addComponent(btSelecionar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btFechar))
-                    .addComponent(jScrollPane))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btFechar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btFechar)
-                    .addComponent(btSelecionar))
+                .addComponent(btFechar)
                 .addContainerGap())
         );
 
@@ -128,29 +93,30 @@ public class SelecaoProdutoView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SelecaoProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarVendaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SelecaoProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarVendaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SelecaoProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarVendaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SelecaoProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarVendaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SelecaoProdutoView().setVisible(true);
+                new VisualizarVendaView().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btFechar;
-    private javax.swing.JButton btSelecionar;
     private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JTable tbProdutos;
+    private javax.swing.JTextArea taVisualizaPedido;
     // End of variables declaration//GEN-END:variables
 }

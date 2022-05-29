@@ -8,12 +8,15 @@ package View;
  *
  * @author felip
  */
-public class SelecaoProdutoView extends javax.swing.JFrame {
+public class ListaPedidosView extends javax.swing.JFrame {
 
+    private MenuInicialView menuView;
+    
     /**
-     * Creates new form SelecaoProduto
+     * Creates new form ListaAtendimentosView
      */
-    public SelecaoProdutoView() {
+    public ListaPedidosView(MenuInicialView menuView) {
+        this.menuView = menuView;
         initComponents();
     }
 
@@ -27,30 +30,27 @@ public class SelecaoProdutoView extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane = new javax.swing.JScrollPane();
-        tbProdutos = new javax.swing.JTable();
+        tbPedidos = new javax.swing.JTable();
         btFechar = new javax.swing.JButton();
-        btSelecionar = new javax.swing.JButton();
+        btVisualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Selecao Produto");
-        setMaximumSize(new java.awt.Dimension(600, 300));
-        setMinimumSize(new java.awt.Dimension(600, 300));
-        setPreferredSize(new java.awt.Dimension(600, 300));
-        setResizable(false);
+        setTitle("Lista de Pedidos");
+        setMinimumSize(new java.awt.Dimension(600, 410));
 
-        tbProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        tbPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "IdProduto", "Produto", "Valor"
+                "IdPedido", "Cliente", "Data/Hora", "Valor Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -61,11 +61,12 @@ public class SelecaoProdutoView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane.setViewportView(tbProdutos);
-        if (tbProdutos.getColumnModel().getColumnCount() > 0) {
-            tbProdutos.getColumnModel().getColumn(0).setResizable(false);
-            tbProdutos.getColumnModel().getColumn(1).setResizable(false);
-            tbProdutos.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane.setViewportView(tbPedidos);
+        if (tbPedidos.getColumnModel().getColumnCount() > 0) {
+            tbPedidos.getColumnModel().getColumn(0).setResizable(false);
+            tbPedidos.getColumnModel().getColumn(1).setResizable(false);
+            tbPedidos.getColumnModel().getColumn(2).setResizable(false);
+            tbPedidos.getColumnModel().getColumn(3).setResizable(false);
         }
 
         btFechar.setText("Fechar");
@@ -75,7 +76,12 @@ public class SelecaoProdutoView extends javax.swing.JFrame {
             }
         });
 
-        btSelecionar.setText("Selecionar");
+        btVisualizar.setText("Visualizar");
+        btVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVisualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,28 +90,33 @@ public class SelecaoProdutoView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 432, Short.MAX_VALUE)
-                        .addComponent(btSelecionar)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btVisualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btFechar))
-                    .addComponent(jScrollPane))
+                        .addComponent(btFechar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btFechar)
-                    .addComponent(btSelecionar))
+                    .addComponent(btVisualizar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
+        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView();
+        visualizarAtendimentoView.setVisible(true);
+    }//GEN-LAST:event_btVisualizarActionPerformed
 
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
         this.setVisible(false);
@@ -128,29 +139,29 @@ public class SelecaoProdutoView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SelecaoProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaPedidosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SelecaoProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaPedidosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SelecaoProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaPedidosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SelecaoProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaPedidosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SelecaoProdutoView().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ListaPedidosView().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btFechar;
-    private javax.swing.JButton btSelecionar;
+    private javax.swing.JButton btVisualizar;
     private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JTable tbProdutos;
+    private javax.swing.JTable tbPedidos;
     // End of variables declaration//GEN-END:variables
 }
