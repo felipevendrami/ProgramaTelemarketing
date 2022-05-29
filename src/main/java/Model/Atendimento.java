@@ -23,9 +23,10 @@ public abstract class Atendimento {
     private String dataAbertura;
     private String dataFechamento;
     private String responsavel;
-    private int situacao;
+    private String situacao;
     private List<Tramite> tramites;
     private String empresa;
+    private String tipo;
     
 //    Situações atendimento:
 //    1 = Aberto;
@@ -35,13 +36,26 @@ public abstract class Atendimento {
     public Atendimento(String responsavel, String descricaoTramite, String empresa){
         this.idAtendimento = geradorIdAtendimento ++;
         this.responsavel = responsavel;
-        this.situacao = 1;
+        this.situacao = "Aberto";
         this.dataAbertura = retornaTimestamp();
         this.tramites = new ArrayList<>();
         this.empresa = empresa;
-        criarTramite(descricaoTramite, 1);
+        defineTipoAtendimento();
+        criarTramite(descricaoTramite, "Abertura");
     }
 
+    public String getSituacao(){
+        return this.situacao;
+    }
+    
+    public String getTipo(){
+        return this.tipo;
+    }
+    
+    public String getEmpresa(){
+        return this.empresa;
+    }
+    
     public int getIdAtendimento() {
         return idAtendimento;
     }
@@ -69,29 +83,27 @@ public abstract class Atendimento {
 
     @Override
     public String toString() {
-        String retorno = "";
-        retorno = "Atendimento{" + "idAtendimento=" + idAtendimento + ", dataAbertura=" + dataAbertura + ", dataFechamento=" + dataFechamento + ", responsavel=" + responsavel + ", situacao=";
-        switch (this.situacao) {
-            case 1:
-                retorno += "Aberto}";
-                break;
-            case 2:
-                retorno += "Em andamento}";
-                break;
-            case 3:
-                retorno += "Finalizado}";
-                break;
+        return "Atendimento{" + "idAtendimento=" + idAtendimento + ", dataAbertura=" + dataAbertura + ", dataFechamento=" + dataFechamento + ", responsavel=" + responsavel + ", situacao=" + situacao;
+    }
+    
+    public String informacoesAtendimento(){
+        String retorno = "Id Atendimento: " + idAtendimento + "\nData Abertura: " + dataAbertura + "\nSituação: " + situacao + "\nResponsável: " + responsavel;
+        if(this.situacao.equalsIgnoreCase("Finalizado")){
+            retorno += "\nData Fechamento: " + dataFechamento;
+        }
+        for(Tramite tramite : this.tramites){
+            retorno += "\n============ Trâmite ============\n";
+            retorno += tramite.informacoesTramite();
         }
         return retorno;
     }
-
-
-    public boolean criarTramite(String descricao, int tipoTramite){
-        if(tipoTramite == 1 || tipoTramite == 2){
+    
+    public boolean criarTramite(String descricao, String tipoTramite){
+        if(tipoTramite.equals("Abertura") || tipoTramite.equals("Em Andamento")){
             Tramite tramite = new Tramite(descricao, tipoTramite);
             this.tramites.add(tramite);
             return true;
-        } if(tipoTramite == 3){
+        } if(tipoTramite == "Fechamento"){
             Tramite tramite = new Tramite(descricao, tipoTramite);
             this.tramites.add(tramite);
             finalizaAtendimento();
@@ -103,7 +115,7 @@ public abstract class Atendimento {
     
     public void finalizaAtendimento(){
         this.dataFechamento = retornaTimestamp();
-        this.situacao = 3;
+        this.situacao = "Finalizado";
     }
     
     public String retornaTramites(){
@@ -114,4 +126,13 @@ public abstract class Atendimento {
         return retorno;
     }
     
+    public void defineTipoAtendimento(){
+        if(this instanceof Divulgacao){
+            this.tipo = "Divulgacao";
+        } else if (this instanceof Suporte){
+            this.tipo = "Suporte";
+        } else if (this instanceof Pesquisa){
+            this.tipo = "Pesquisa";
+        }
+    }
 }

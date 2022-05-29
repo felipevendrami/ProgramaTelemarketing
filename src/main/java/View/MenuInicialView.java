@@ -6,7 +6,6 @@ package View;
 
 import Model.Atendimento;
 import Model.Venda;
-import java.util.ArrayList;
 
 /**
  *
@@ -14,26 +13,13 @@ import java.util.ArrayList;
  */
 public class MenuInicialView extends javax.swing.JFrame {
 
-    private ArrayList<Atendimento> atendimentos;
-    private ArrayList<Venda> vendas;
-    
     /**
      * Creates new form MenuInicialView
      */
     public MenuInicialView() {
-        this.atendimentos = new ArrayList<>();
-        this.vendas = new ArrayList<>();
         initComponents();
     }
 
-    public ArrayList<Atendimento> getAtendimentos(){
-        return this.atendimentos;
-    }
-    
-    public ArrayList<Venda> getVendas(){
-        return this.vendas;
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,12 +107,12 @@ public class MenuInicialView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miNovoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoAtendimentoActionPerformed
-        CadastroAtendimentoView novoAtendimentoView = new CadastroAtendimentoView(this);
+        CadastroAtendimentoView novoAtendimentoView = new CadastroAtendimentoView();
         novoAtendimentoView.setVisible(true);
     }//GEN-LAST:event_miNovoAtendimentoActionPerformed
 
     private void miListaAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaAtendimentosActionPerformed
-        ListaAtendimentosView listaAtendimentosView = new ListaAtendimentosView(this);
+        ListaAtendimentosView listaAtendimentosView = new ListaAtendimentosView();
         listaAtendimentosView.setVisible(true);
     }//GEN-LAST:event_miListaAtendimentosActionPerformed
 

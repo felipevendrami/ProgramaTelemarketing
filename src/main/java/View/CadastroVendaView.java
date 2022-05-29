@@ -4,12 +4,17 @@
  */
 package View;
 
+import Model.Venda;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author felip
  */
 public class CadastroVendaView extends javax.swing.JFrame {
 
+    private DefaultTableModel tabelaProdutos;
+    
     /**
      * Creates new form DivulgacaoVendaView
      */
@@ -17,6 +22,23 @@ public class CadastroVendaView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public Venda recuperarVenda(){
+        String cliente = tfCliente.getText();
+        String situacao = cbSituacaoVenda.getSelectedItem().toString();
+        
+        return null;
+    }
+    
+    public void cadastrarVenda(){
+        
+    }
+    
+    public void adicionarItemVenda(){
+        SelecaoProdutoView selecaoProdutoView = new SelecaoProdutoView();
+        selecaoProdutoView.setVisible(true);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,6 +85,11 @@ public class CadastroVendaView extends javax.swing.JFrame {
         jLabel4.setText("Itens:");
 
         btAdicionarProduto.setText("Adicionar");
+        btAdicionarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAdicionarProdutoActionPerformed(evt);
+            }
+        });
 
         btRemoverProduto.setText("Remover");
 
@@ -108,6 +135,11 @@ public class CadastroVendaView extends javax.swing.JFrame {
         });
 
         btConfirmar.setText("Confirmar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,6 +238,14 @@ public class CadastroVendaView extends javax.swing.JFrame {
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btCancelarActionPerformed
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+        
+    }//GEN-LAST:event_btConfirmarActionPerformed
+
+    private void btAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarProdutoActionPerformed
+        
+    }//GEN-LAST:event_btAdicionarProdutoActionPerformed
 
     /**
      * @param args the command line arguments

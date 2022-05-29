@@ -4,19 +4,41 @@
  */
 package View;
 
+import DAO.AtendimentoListDAO;
+import Model.Atendimento;
+import Repositorio.AtendimentoRepositorio;
+
 /**
  *
  * @author felip
  */
 public class VisualizarAtendimentoView extends javax.swing.JFrame {
 
+    private Atendimento atendimento;
+    
     /**
      * Creates new form VisualizarAtendimentoView
      */
-    public VisualizarAtendimentoView() {
+    public VisualizarAtendimentoView(int idAtendimento) {
+        this.atendimento = localizaAtendimento(idAtendimento);
         initComponents();
+        preencheInformacoesAtendimento();
     }
 
+    public Atendimento localizaAtendimento(int idAtendimento){
+        AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
+        for(Atendimento atendimento : atendimentoRepositorio.recuperarTodosAtendimentos()){
+            if(atendimento.getIdAtendimento() == idAtendimento){
+                return atendimento;
+            }
+        }
+        return null;
+    }
+    
+    public void preencheInformacoesAtendimento(){
+        taVisualizaAtendimento.append(this.atendimento.informacoesAtendimento());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,7 +112,7 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btFecharActionPerformed
 
     private void btNovoTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoTramiteActionPerformed
-        CadastroTramiteView cadastroTramiteView = new CadastroTramiteView();
+        CadastroTramiteView cadastroTramiteView = new CadastroTramiteView(this.atendimento);
         cadastroTramiteView.setVisible(true);
     }//GEN-LAST:event_btNovoTramiteActionPerformed
 
@@ -122,11 +144,11 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VisualizarAtendimentoView().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new VisualizarAtendimentoView().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

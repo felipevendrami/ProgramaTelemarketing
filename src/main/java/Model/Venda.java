@@ -23,14 +23,14 @@ public class Venda {
     private List<Produto> itens;
     private double subtotal;
     private double total;
-    private int situacao;
+    private String situacao;
     
     //Situações pedido
     //1 - Cancelado
     //2 - Pendente
     //3 - Confirmado
 
-    public Venda(String cliente, int situacao) {
+    public Venda(String cliente, String situacao) {
         this.idVenda = geradorIdVenda ++;
         this.itens = new ArrayList<>();
         this.cliente = cliente;
@@ -41,11 +41,11 @@ public class Venda {
         this.total = 0;
     }
     
-    public int getSituacao() {
+    public String getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(int situacao) {
+    public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
     

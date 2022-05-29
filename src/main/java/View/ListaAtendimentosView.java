@@ -4,22 +4,46 @@
  */
 package View;
 
+import DAO.AtendimentoListDAO;
+import Model.Atendimento;
+import Repositorio.AtendimentoRepositorio;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author felip
  */
 public class ListaAtendimentosView extends javax.swing.JFrame {
 
-    private MenuInicialView menuView;
     
     /**
      * Creates new form ListaAtendimentosView
      */
-    public ListaAtendimentosView(MenuInicialView menuView) {
-        this.menuView = menuView;
+    public ListaAtendimentosView() {
         initComponents();
+        preencheTabelaAtendimentos();
     }
 
+    
+    public void preencheTabelaAtendimentos(){
+        DefaultTableModel tabelaAtendimentos = (DefaultTableModel) tbAtendimentos.getModel();
+        AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
+        for(Atendimento atendimento : atendimentoRepositorio.recuperarTodosAtendimentos()){
+            tabelaAtendimentos.addRow(new Object[]{atendimento.getIdAtendimento(), atendimento.getTipo(), atendimento.getEmpresa(), "Teste", atendimento.getDataAbertura(), atendimento.getSituacao()});
+        }
+    }
+    
+    public int carregaAtendimentoSelecionado(){
+        int linha = tbAtendimentos.getSelectedRow();
+        int idAtendimento = Integer.parseInt(tbAtendimentos.getValueAt(linha, 0).toString());
+        return idAtendimento;
+    }
+    
+    public void abreVisualizacaoAtendimento(){
+        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView(carregaAtendimentoSelecionado());
+        visualizarAtendimentoView.setVisible(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,8 +141,7 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
-        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView();
-        visualizarAtendimentoView.setVisible(true);
+        abreVisualizacaoAtendimento();
     }//GEN-LAST:event_btVisualizarActionPerformed
 
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
@@ -153,11 +176,11 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ListaAtendimentosView().setVisible(true);
-//            }
-//        });
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ListaAtendimentosView().setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

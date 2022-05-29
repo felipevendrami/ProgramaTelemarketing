@@ -4,19 +4,49 @@
  */
 package View;
 
+import DAO.AtendimentoListDAO;
+import Model.Atendimento;
+import Model.Divulgacao;
+import Repositorio.AtendimentoRepositorio;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author felip
  */
 public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
 
+    private CadastroAtendimentoView cadAtendimentoView;
+    
     /**
      * Creates new form AtendimentoDivulgacaoView
      */
-    public AtendimentoDivulgacaoView() {
+    public AtendimentoDivulgacaoView(CadastroAtendimentoView cadAtendimentoView) {
+        this.cadAtendimentoView = cadAtendimentoView;
         initComponents();
     }
 
+    public void abrirAtendimentoDivulgacao(){
+        AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
+        Atendimento atendimento = recuperarAtendimentoDivulgacao();
+        atendimentoRepositorio.salvarAtendimento(atendimento);
+        JOptionPane.showMessageDialog(null, "Atendimento aberto com sucesso");
+    }
+    
+    public Atendimento recuperarAtendimentoDivulgacao(){
+        // Recuperamos as informações da tela
+        String empresa = cadAtendimentoView.getEmpresa();
+        String responsavel = cadAtendimentoView.getResponsavel();
+        String tipoContato = cbTipoContato.getSelectedItem().toString();
+        String contato = tfContato.getText();
+        String tramite = taTramite.getText();
+        
+        // Criamos o atendimento e retornamos
+        Atendimento atendimentoDivulgacao = new Divulgacao(tipoContato, contato, responsavel, tramite, empresa);
+        System.out.println(atendimentoDivulgacao.toString());
+        return atendimentoDivulgacao;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,7 +177,9 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        // TODO add your handling code here:
+        abrirAtendimentoDivulgacao();
+        cadAtendimentoView.limparTela();
+        this.setVisible(false);
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -187,11 +219,11 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AtendimentoDivulgacaoView().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new AtendimentoDivulgacaoView().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

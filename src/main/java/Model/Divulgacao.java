@@ -39,13 +39,12 @@ public class Divulgacao extends Atendimento{
         return conversao;
     }
     
-    public boolean gerarVenda(String cliente, int situacao){
+    public boolean gerarVenda(String cliente, String situacao){
         Venda venda = new Venda(cliente, situacao);
         this.venda = venda;
-        if(this.venda.getSituacao() == 3){
+        if(this.venda.getSituacao().equals("Confirmado")){
             this.conversao = true;
         }
         return true;
     }
-
 }

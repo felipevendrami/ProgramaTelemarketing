@@ -4,19 +4,46 @@
  */
 package View;
 
+import DAO.AtendimentoListDAO;
+import Model.Atendimento;
+import Model.Tramite;
+import Repositorio.AtendimentoRepositorio;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author felip
  */
 public class CadastroTramiteView extends javax.swing.JFrame {
 
+    private Atendimento atendimento;
+    
     /**
      * Creates new form NovoTramiteView
      */
-    public CadastroTramiteView() {
+    public CadastroTramiteView(Atendimento atendimento) {
+        this.atendimento = atendimento;
         initComponents();
     }
 
+    public void incluirTramite(){
+        // Recuperamos as informações da tela
+        String tipoTramite = cbTipoTramite.getSelectedItem().toString();
+        String descicaoTramite = taTramite.getText();
+        
+        // Criamos o trâmite
+        this.atendimento.criarTramite(descicaoTramite, tipoTramite);
+        JOptionPane.showMessageDialog(null, "Trâmite realizado com Sucesso");
+        
+        // Limparmos a tela
+        limparTela();
+    }
+    
+    public void limparTela(){
+        cbTipoTramite.setSelectedIndex(-1);
+        taTramite.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,6 +74,11 @@ public class CadastroTramiteView extends javax.swing.JFrame {
 
         cbTipoTramite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Em Andamento", "Fechamento" }));
         cbTipoTramite.setSelectedIndex(-1);
+        cbTipoTramite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoTramiteActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Trâmite:");
 
@@ -55,6 +87,11 @@ public class CadastroTramiteView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(taTramite);
 
         btConfirmar.setText("Confirmar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
 
         btCancelar.setText("Cancelar");
         btCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +166,14 @@ public class CadastroTramiteView extends javax.swing.JFrame {
         cadastroVendaView.setVisible(true);
     }//GEN-LAST:event_btNovaVendaActionPerformed
 
+    private void cbTipoTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoTramiteActionPerformed
+        
+    }//GEN-LAST:event_cbTipoTramiteActionPerformed
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+        incluirTramite();
+    }//GEN-LAST:event_btConfirmarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -158,11 +203,11 @@ public class CadastroTramiteView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadastroTramiteView().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CadastroTramiteView().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

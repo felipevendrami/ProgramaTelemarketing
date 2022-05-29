@@ -18,14 +18,14 @@ public class Tramite {
     private int idTramite;
     private String dataTramite;
     private String descricao;
-    private int tipoTramite;
+    private String tipoTramite;
 
 //    Tipos Tramite:
 //    1 = Abertura;
-//    2 = Em Atendimento;
+//    2 = Em Andamento;
 //    3 = Fechammento;
     
-    public Tramite(String descricao, int tipoTramite) {
+    public Tramite(String descricao, String tipoTramite) {
         this.idTramite = geradorIdTramite ++;
         this.descricao = descricao;
         this.tipoTramite = tipoTramite;
@@ -48,16 +48,18 @@ public class Tramite {
     @Override
     public String toString() {
         String retorno = "Tramite{" + "id=" + idTramite + ", dataTramite=" + dataTramite + ", descricao=" + descricao;
-        if(this.tipoTramite == 1){
+        if(this.tipoTramite.equals("Abertura")){
             retorno += ", tipoTramite=Abertura}";
-        } if (this.tipoTramite == 2){
+        } if (this.tipoTramite.equals("Em Andamento")){
             retorno += ", tipoTramite=Em Andamento}";
-        } if (this.tipoTramite == 3){
+        } if (this.tipoTramite.equals("Fechameto")){
             retorno += ", tipoTramite=Fechamento}";
         }
         return retorno;
     }
     
-    
+    public String informacoesTramite(){
+        return "Id Trâmite: " + idTramite + "\nData Trâmite: " + dataTramite + "\nTipo do Trâmite: " + tipoTramite + "\nDescrição do Trâmite: " + descricao;
+    }
     
 }
