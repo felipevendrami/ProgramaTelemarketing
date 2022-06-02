@@ -11,7 +11,7 @@ import java.util.Calendar;
  *
  * @author felip
  */
-public class Tramite {
+public class Tramite implements AtendimentoInterface{
     
     private static int geradorIdTramite = 0;
     
@@ -29,8 +29,7 @@ public class Tramite {
         this.idTramite = geradorIdTramite ++;
         this.descricao = descricao;
         this.tipoTramite = tipoTramite;
-        String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-        this.dataTramite = timeStamp;
+        this.dataTramite = retornaTimestamp();
     }
 
     public int getIdTramite() {
@@ -58,8 +57,13 @@ public class Tramite {
         return retorno;
     }
     
-    public String informacoesTramite(){
-        return "Id Trâmite: " + idTramite + "\nData Trâmite: " + dataTramite + "\nTipo do Trâmite: " + tipoTramite + "\nDescrição do Trâmite: " + descricao;
+    public String retornaInformacoes(){
+        return "Id Trâmite: " + idTramite + "\nData Trâmite: " + dataTramite + "\nTipo do Trâmite: " + tipoTramite + "\nDescrição do Trâmite: " + descricao + "\n";
     }
-    
+
+    @Override
+    public String retornaTimestamp() {
+        String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+        return timeStamp;
+    }
 }

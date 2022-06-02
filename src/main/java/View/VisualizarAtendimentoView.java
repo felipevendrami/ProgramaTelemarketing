@@ -6,6 +6,7 @@ package View;
 
 import DAO.AtendimentoListDAO;
 import Model.Atendimento;
+import Model.Tramite;
 import Repositorio.AtendimentoRepositorio;
 
 /**
@@ -23,6 +24,7 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
         this.atendimento = localizaAtendimento(idAtendimento);
         initComponents();
         preencheInformacoesAtendimento();
+        preencheInformacoesTramites();
     }
 
     public Atendimento localizaAtendimento(int idAtendimento){
@@ -36,7 +38,14 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
     }
     
     public void preencheInformacoesAtendimento(){
-        taVisualizaAtendimento.append(this.atendimento.informacoesAtendimento());
+        taVisualizaAtendimento.append(this.atendimento.retornaInformacoes());
+    }
+    
+    public void preencheInformacoesTramites(){
+        for(Tramite tramite : this.atendimento.getTramites()){
+            taVisualizaTramites.append("============ Trâmite ============\n");
+            taVisualizaTramites.append(tramite.retornaInformacoes());
+        }
     }
     
     /**
@@ -52,6 +61,10 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
         taVisualizaAtendimento = new javax.swing.JTextArea();
         btFechar = new javax.swing.JButton();
         btNovoTramite = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taVisualizaTramites = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Visualizar Atendimento");
@@ -59,6 +72,7 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(600, 410));
         setResizable(false);
 
+        taVisualizaAtendimento.setEditable(false);
         taVisualizaAtendimento.setColumns(20);
         taVisualizaAtendimento.setRows(5);
         jScrollPane.setViewportView(taVisualizaAtendimento);
@@ -77,27 +91,53 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Atendimento > Lista Atendimento > Atendimento > Informações do Atendimento");
+
+        jLabel4.setText("Atendimento > Lista Atendimento > Atendimento > Informações do Atendimento > Trâmites");
+
+        taVisualizaTramites.setEditable(false);
+        taVisualizaTramites.setColumns(20);
+        taVisualizaTramites.setRows(5);
+        jScrollPane1.setViewportView(taVisualizaTramites);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btNovoTramite)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btFechar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(btNovoTramite))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btFechar))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btFechar)
                     .addComponent(btNovoTramite))
@@ -154,7 +194,11 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btFechar;
     private javax.swing.JButton btNovoTramite;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea taVisualizaAtendimento;
+    private javax.swing.JTextArea taVisualizaTramites;
     // End of variables declaration//GEN-END:variables
 }

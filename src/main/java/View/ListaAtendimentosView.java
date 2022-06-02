@@ -87,14 +87,6 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
             }
         });
         jScrollPane.setViewportView(tbAtendimentos);
-        if (tbAtendimentos.getColumnModel().getColumnCount() > 0) {
-            tbAtendimentos.getColumnModel().getColumn(0).setResizable(false);
-            tbAtendimentos.getColumnModel().getColumn(1).setResizable(false);
-            tbAtendimentos.getColumnModel().getColumn(2).setResizable(false);
-            tbAtendimentos.getColumnModel().getColumn(3).setResizable(false);
-            tbAtendimentos.getColumnModel().getColumn(4).setResizable(false);
-            tbAtendimentos.getColumnModel().getColumn(5).setResizable(false);
-        }
 
         btFechar.setText("Fechar");
         btFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +109,7 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btVisualizar)

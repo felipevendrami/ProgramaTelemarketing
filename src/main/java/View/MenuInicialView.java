@@ -35,6 +35,7 @@ public class MenuInicialView extends javax.swing.JFrame {
         mnAtendimento = new javax.swing.JMenu();
         miNovoAtendimento = new javax.swing.JMenuItem();
         miListaAtendimentos = new javax.swing.JMenuItem();
+        miRelatorioAtedimento = new javax.swing.JMenuItem();
         mnPedido = new javax.swing.JMenu();
         miListaPedidos = new javax.swing.JMenuItem();
 
@@ -72,6 +73,15 @@ public class MenuInicialView extends javax.swing.JFrame {
             }
         });
         mnAtendimento.add(miListaAtendimentos);
+
+        miRelatorioAtedimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        miRelatorioAtedimento.setText("Relatório de Atendimentos ...");
+        miRelatorioAtedimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRelatorioAtedimentoActionPerformed(evt);
+            }
+        });
+        mnAtendimento.add(miRelatorioAtedimento);
 
         mbSistemaTelemarketing.add(mnAtendimento);
 
@@ -121,6 +131,11 @@ public class MenuInicialView extends javax.swing.JFrame {
         listaPedidosView.setVisible(true);
     }//GEN-LAST:event_miListaPedidosActionPerformed
 
+    private void miRelatorioAtedimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRelatorioAtedimentoActionPerformed
+        RelatorioAtendimentoView relatorioAtendimento = new RelatorioAtendimentoView();
+        relatorioAtendimento.setVisible(true);
+    }//GEN-LAST:event_miRelatorioAtedimentoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -161,6 +176,7 @@ public class MenuInicialView extends javax.swing.JFrame {
     private javax.swing.JMenuItem miListaAtendimentos;
     private javax.swing.JMenuItem miListaPedidos;
     private javax.swing.JMenuItem miNovoAtendimento;
+    private javax.swing.JMenuItem miRelatorioAtedimento;
     private javax.swing.JMenu mnAtendimento;
     private javax.swing.JMenu mnEntidades;
     private javax.swing.JMenu mnPedido;

@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author felip
  */
-public abstract class Atendimento {
+public abstract class Atendimento implements AtendimentoInterface{
     
     private static int geradorIdAtendimento = 0;
     
@@ -86,14 +86,14 @@ public abstract class Atendimento {
         return "Atendimento{" + "idAtendimento=" + idAtendimento + ", dataAbertura=" + dataAbertura + ", dataFechamento=" + dataFechamento + ", responsavel=" + responsavel + ", situacao=" + situacao;
     }
     
-    public String informacoesAtendimento(){
+    public List<Tramite> getTramites(){
+        return this.tramites;
+    }
+    
+    public String retornaInformacoes(){
         String retorno = "Id Atendimento: " + idAtendimento + "\nData Abertura: " + dataAbertura + "\nSituação: " + situacao + "\nResponsável: " + responsavel;
         if(this.situacao.equalsIgnoreCase("Finalizado")){
             retorno += "\nData Fechamento: " + dataFechamento;
-        }
-        for(Tramite tramite : this.tramites){
-            retorno += "\n============ Trâmite ============\n";
-            retorno += tramite.informacoesTramite();
         }
         return retorno;
     }
@@ -116,14 +116,6 @@ public abstract class Atendimento {
     public void finalizaAtendimento(){
         this.dataFechamento = retornaTimestamp();
         this.situacao = "Finalizado";
-    }
-    
-    public String retornaTramites(){
-        String retorno = "";
-        for(Tramite tramite : tramites){
-            retorno += tramite.toString() + "\n";
-        }
-        return retorno;
     }
     
     public void defineTipoAtendimento(){

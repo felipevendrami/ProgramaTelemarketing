@@ -114,8 +114,8 @@ public class ListaPedidosView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
-        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView();
-        visualizarAtendimentoView.setVisible(true);
+//        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView();
+//        visualizarAtendimentoView.setVisible(true);
     }//GEN-LAST:event_btVisualizarActionPerformed
 
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
