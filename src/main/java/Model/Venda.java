@@ -20,7 +20,7 @@ public class Venda {
     private int idVenda;
     private String dataVenda;
     private String cliente;
-    private List<Produto> itens;
+    private List<Item> itens;
     private double subtotal;
     private double total;
     private String situacao;
@@ -69,11 +69,11 @@ public class Venda {
         return total;
     }
     
-    public void addProduto(Produto produto){
+    public void addProduto(Item produto){
         this.itens.add(produto);
     }
     
-    public void removeProduto(Produto produto){
+    public void removeProduto(Item produto){
         this.itens.remove(produto);
     }
 }
