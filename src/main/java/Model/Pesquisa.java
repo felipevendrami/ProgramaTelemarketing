@@ -25,7 +25,5 @@ public class Pesquisa extends Atendimento{
     public String toString() {
         return super.toString() + " Pesquisa{" + "venda=" + venda + ", satisfacaoProduto=" + satisfacaoProduto + ", satisfacaoAtendimento=" + satisfacaoAtendimento + '}';
     }
-    
-    
-    
+     
 }

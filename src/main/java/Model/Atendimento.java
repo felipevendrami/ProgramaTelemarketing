@@ -18,14 +18,14 @@ public abstract class Atendimento implements AtendimentoInterface, Comparable<At
     private static int geradorIdAtendimento = 0;
     
     //LocalDateTime para as datas, verificar implementação
-    private int idAtendimento;
-    private LocalDateTime dataAbertura;
-    private LocalDateTime dataFechamento;
-    private String responsavel;
-    private String situacao;
-    private List<Tramite> tramites;
-    private String empresa;
-    private String tipo;
+    protected int idAtendimento;
+    protected LocalDateTime dataAbertura;
+    protected LocalDateTime dataFechamento;
+    protected String responsavel;
+    protected String situacao;
+    protected List<Tramite> tramites;
+    protected String empresa;
+    protected String tipo;
     
 //    Situações atendimento:
 //    1 = Aberto;
