@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author felip
  */
-public abstract class Atendimento implements AtendimentoInterface{
+public abstract class Atendimento implements AtendimentoInterface, Comparable<Atendimento>{
     
     private static int geradorIdAtendimento = 0;
     
@@ -81,6 +81,7 @@ public abstract class Atendimento implements AtendimentoInterface{
         return localDateTime;
     }
     
+    @Override
     public String getDataHoraFormatado(LocalDateTime dataHora){
         String dataHoraFormatado = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         return dataHoraFormatado;
@@ -88,7 +89,7 @@ public abstract class Atendimento implements AtendimentoInterface{
 
     @Override
     public String toString() {
-        return "Atendimento{" + "idAtendimento=" + idAtendimento + ", dataAbertura=" + dataAbertura + ", dataFechamento=" + dataFechamento + ", responsavel=" + responsavel + ", situacao=" + situacao;
+        return "Atendimento{" + "idAtendimento=" + idAtendimento + ", dataAbertura=" + getDataAbertura() + ", responsavel=" + responsavel + ", situacao=" + situacao;
     }
     
     public List<Tramite> getTramites(){
@@ -97,9 +98,9 @@ public abstract class Atendimento implements AtendimentoInterface{
     
     @Override
     public String retornaInformacoes(){
-        String retorno = "Id Atendimento: " + idAtendimento + "\nData Abertura: " + dataAbertura + "\nSituação: " + situacao + "\nResponsável: " + responsavel;
+        String retorno = "Id Atendimento: " + idAtendimento + "\nData Abertura: " + getDataAbertura() + "\nSituação: " + situacao + "\nResponsável: " + responsavel;
         if(this.situacao.equalsIgnoreCase("Finalizado")){
-            retorno += "\nData Fechamento: " + dataFechamento;
+            retorno += "\nData Fechamento: " + getDataFechamento();
         }
         return retorno;
     }
@@ -133,4 +134,15 @@ public abstract class Atendimento implements AtendimentoInterface{
             this.tipo = "Pesquisa";
         }
     }
+
+    @Override
+    public int compareTo(Atendimento o){
+        if(this.dataAbertura.isBefore(o.dataAbertura)){
+            return -1;
+        } else if (this.dataAbertura.isAfter(o.dataAbertura)){
+            return 1;
+        }
+        return 0;
+    }
+    
 }

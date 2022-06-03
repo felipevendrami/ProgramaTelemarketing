@@ -57,8 +57,9 @@ public class Tramite implements AtendimentoInterface{
         return retorno;
     }
     
+    @Override
     public String retornaInformacoes(){
-        return "Id Trâmite: " + idTramite + "\nData Trâmite: " + dataTramite + "\nTipo do Trâmite: " + tipoTramite + "\nDescrição do Trâmite: " + descricao + "\n";
+        return "Id Trâmite: " + idTramite + "\nData Trâmite: " + getDataTramite() + "\nTipo do Trâmite: " + tipoTramite + "\nDescrição do Trâmite: " + descricao + "\n";
     }
 
     @Override
