@@ -4,10 +4,9 @@
  */
 package Model;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,8 +19,8 @@ public abstract class Atendimento implements AtendimentoInterface{
     
     //LocalDateTime para as datas, verificar implementação
     private int idAtendimento;
-    private String dataAbertura;
-    private String dataFechamento;
+    private LocalDateTime dataAbertura;
+    private LocalDateTime dataFechamento;
     private String responsavel;
     private String situacao;
     private List<Tramite> tramites;
@@ -37,7 +36,7 @@ public abstract class Atendimento implements AtendimentoInterface{
         this.idAtendimento = geradorIdAtendimento ++;
         this.responsavel = responsavel;
         this.situacao = "Aberto";
-        this.dataAbertura = retornaTimestamp();
+        this.dataAbertura = getDataHoraAtual();
         this.tramites = new ArrayList<>();
         this.empresa = empresa;
         defineTipoAtendimento();
@@ -61,11 +60,11 @@ public abstract class Atendimento implements AtendimentoInterface{
     }
 
     public String getDataAbertura() {
-        return dataAbertura;
+        return getDataHoraFormatado(dataAbertura);
     }
 
     public String getDataFechamento() {
-        return dataFechamento;
+        return getDataHoraFormatado(dataFechamento);
     }
     
     public String getResponsavel() {
@@ -76,9 +75,15 @@ public abstract class Atendimento implements AtendimentoInterface{
         this.responsavel = responsavel;
     }
 
-    public String retornaTimestamp(){
-        String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-        return timeStamp;
+    @Override
+    public LocalDateTime getDataHoraAtual(){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        return localDateTime;
+    }
+    
+    public String getDataHoraFormatado(LocalDateTime dataHora){
+        String dataHoraFormatado = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        return dataHoraFormatado;
     }
 
     @Override
@@ -90,6 +95,7 @@ public abstract class Atendimento implements AtendimentoInterface{
         return this.tramites;
     }
     
+    @Override
     public String retornaInformacoes(){
         String retorno = "Id Atendimento: " + idAtendimento + "\nData Abertura: " + dataAbertura + "\nSituação: " + situacao + "\nResponsável: " + responsavel;
         if(this.situacao.equalsIgnoreCase("Finalizado")){
@@ -114,7 +120,7 @@ public abstract class Atendimento implements AtendimentoInterface{
     }
     
     public void finalizaAtendimento(){
-        this.dataFechamento = retornaTimestamp();
+        this.dataFechamento = getDataHoraAtual();
         this.situacao = "Finalizado";
     }
     

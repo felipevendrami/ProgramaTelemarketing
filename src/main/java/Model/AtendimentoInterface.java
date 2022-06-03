@@ -4,13 +4,16 @@
  */
 package Model;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author felip
  */
 public interface AtendimentoInterface {
     
-    public String retornaTimestamp();
+    public String getDataHoraFormatado(LocalDateTime dataHora);
+    public LocalDateTime getDataHoraAtual();
     public String retornaInformacoes();
     
 }
