@@ -8,6 +8,7 @@ import DAO.AtendimentoListDAO;
 import Model.Atendimento;
 import Model.Tramite;
 import Repositorio.AtendimentoRepositorio;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -152,8 +153,13 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btFecharActionPerformed
 
     private void btNovoTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoTramiteActionPerformed
-        CadastroTramiteView cadastroTramiteView = new CadastroTramiteView(this.atendimento);
-        cadastroTramiteView.setVisible(true);
+        try {
+            CadastroTramiteView cadastroTramiteView = new CadastroTramiteView(this.atendimento);
+            cadastroTramiteView.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
+        }
+
     }//GEN-LAST:event_btNovoTramiteActionPerformed
 
     /**

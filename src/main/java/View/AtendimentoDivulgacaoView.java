@@ -177,9 +177,14 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        abrirAtendimentoDivulgacao();
-        cadAtendimentoView.limparTela();
-        this.setVisible(false);
+        try {
+            abrirAtendimentoDivulgacao();
+            cadAtendimentoView.limparTela();
+            this.setVisible(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
+        }
+
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
