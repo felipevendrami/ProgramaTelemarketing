@@ -7,6 +7,11 @@ package View;
 import DAO.AtendimentoListDAO;
 import Model.Atendimento;
 import Repositorio.AtendimentoRepositorio;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -21,20 +26,41 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void montarRelatorioFiltroResponsavel(){
+    public List<Atendimento> montarListaFiltroResponsavel(){
+        List<Atendimento> atendimentosResponsavel = new ArrayList<>();
         String responsavel = tfResponsavel.getText();
         AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
         for(Atendimento atendimento : atendimentoRepositorio.recuperarTodosAtendimentos()){
             if(atendimento.getResponsavel().equals(responsavel)){
+                atendimentosResponsavel.add(atendimento);
+            }
+        }
+        return atendimentosResponsavel;
+    }
+    
+    public List<Atendimento> montaListaOrdenada(){
+        if(tfResponsavel.getText() == null || tfResponsavel.getText().trim().equals("")){
+            AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
+            List<Atendimento> atendimentosList = atendimentoRepositorio.recuperarTodosAtendimentos();
+            Collections.sort(atendimentosList);
+            return atendimentosList;
+        } else {
+            List<Atendimento> atendimentoListResponsavel = montarListaFiltroResponsavel();
+            Collections.sort(atendimentoListResponsavel);
+            return atendimentoListResponsavel;
+        }
+    }
+    
+    public void imprimeRelatorio(List<Atendimento> listaRelatorio){
+        for(Atendimento atendimento : listaRelatorio){
+            if(!atendimento.getSituacao().equals("Finalizado")){
                 taAtendimentos.append(atendimento.toString() + "\n");
             }
         }
     }
     
     public void limpaTextArea(){
-        if(taAtendimentos.getText() == null || taAtendimentos.getText().trim().equals("")){
-            taAtendimentos.setText("");
-        }
+        taAtendimentos.setText("");
     }
     
     /**
@@ -136,11 +162,12 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
 
     private void btOrdenarPrioridadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOrdenarPrioridadeActionPerformed
         limpaTextArea();
+        imprimeRelatorio(montaListaOrdenada());
     }//GEN-LAST:event_btOrdenarPrioridadeActionPerformed
 
     private void btFiltroResponsavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFiltroResponsavelActionPerformed
         limpaTextArea();
-        montarRelatorioFiltroResponsavel();
+        imprimeRelatorio(montarListaFiltroResponsavel());
     }//GEN-LAST:event_btFiltroResponsavelActionPerformed
 
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed

@@ -4,8 +4,8 @@
  */
 package Model;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -16,7 +16,7 @@ public class Tramite implements AtendimentoInterface{
     private static int geradorIdTramite = 0;
     
     private int idTramite;
-    private String dataTramite;
+    private LocalDateTime dataTramite;
     private String descricao;
     private String tipoTramite;
 
@@ -29,7 +29,7 @@ public class Tramite implements AtendimentoInterface{
         this.idTramite = geradorIdTramite ++;
         this.descricao = descricao;
         this.tipoTramite = tipoTramite;
-        this.dataTramite = retornaTimestamp();
+        this.dataTramite = getDataHoraAtual();
     }
 
     public int getIdTramite() {
@@ -37,7 +37,7 @@ public class Tramite implements AtendimentoInterface{
     }
 
     public String getDataTramite() {
-        return dataTramite;
+        return getDataHoraFormatado(dataTramite);
     }
 
     public String getDescricao() {
@@ -57,13 +57,20 @@ public class Tramite implements AtendimentoInterface{
         return retorno;
     }
     
+    @Override
     public String retornaInformacoes(){
-        return "Id Trâmite: " + idTramite + "\nData Trâmite: " + dataTramite + "\nTipo do Trâmite: " + tipoTramite + "\nDescrição do Trâmite: " + descricao + "\n";
+        return "Id Trâmite: " + idTramite + "\nData Trâmite: " + getDataTramite() + "\nTipo do Trâmite: " + tipoTramite + "\nDescrição do Trâmite: " + descricao + "\n";
     }
 
     @Override
-    public String retornaTimestamp() {
-        String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-        return timeStamp;
+    public LocalDateTime getDataHoraAtual(){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        return localDateTime;
+    }
+    
+    @Override
+    public String getDataHoraFormatado(LocalDateTime dataHora){
+        String dataHoraFormatado = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        return dataHoraFormatado;
     }
 }

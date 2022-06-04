@@ -4,29 +4,28 @@
  */
 package Model;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
  *
  * @author felip
  */
-public abstract class Atendimento implements AtendimentoInterface{
+public abstract class Atendimento implements AtendimentoInterface, Comparable<Atendimento>{
     
     private static int geradorIdAtendimento = 0;
     
     //LocalDateTime para as datas, verificar implementação
-    private int idAtendimento;
-    private String dataAbertura;
-    private String dataFechamento;
-    private String responsavel;
-    private String situacao;
-    private List<Tramite> tramites;
-    private String empresa;
-    private String tipo;
+    protected int idAtendimento;
+    protected LocalDateTime dataAbertura;
+    protected LocalDateTime dataFechamento;
+    protected String responsavel;
+    protected String situacao;
+    protected List<Tramite> tramites;
+    protected String empresa;
+    protected String tipo;
     
 //    Situações atendimento:
 //    1 = Aberto;
@@ -37,7 +36,7 @@ public abstract class Atendimento implements AtendimentoInterface{
         this.idAtendimento = geradorIdAtendimento ++;
         this.responsavel = responsavel;
         this.situacao = "Aberto";
-        this.dataAbertura = retornaTimestamp();
+        this.dataAbertura = getDataHoraAtual();
         this.tramites = new ArrayList<>();
         this.empresa = empresa;
         defineTipoAtendimento();
@@ -61,11 +60,11 @@ public abstract class Atendimento implements AtendimentoInterface{
     }
 
     public String getDataAbertura() {
-        return dataAbertura;
+        return getDataHoraFormatado(dataAbertura);
     }
 
     public String getDataFechamento() {
-        return dataFechamento;
+        return getDataHoraFormatado(dataFechamento);
     }
     
     public String getResponsavel() {
@@ -76,24 +75,32 @@ public abstract class Atendimento implements AtendimentoInterface{
         this.responsavel = responsavel;
     }
 
-    public String retornaTimestamp(){
-        String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-        return timeStamp;
+    @Override
+    public LocalDateTime getDataHoraAtual(){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        return localDateTime;
+    }
+    
+    @Override
+    public String getDataHoraFormatado(LocalDateTime dataHora){
+        String dataHoraFormatado = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        return dataHoraFormatado;
     }
 
     @Override
     public String toString() {
-        return "Atendimento{" + "idAtendimento=" + idAtendimento + ", dataAbertura=" + dataAbertura + ", dataFechamento=" + dataFechamento + ", responsavel=" + responsavel + ", situacao=" + situacao;
+        return "Atendimento{" + "idAtendimento=" + idAtendimento + ", dataAbertura=" + getDataAbertura() + ", responsavel=" + responsavel + ", situacao=" + situacao;
     }
     
     public List<Tramite> getTramites(){
         return this.tramites;
     }
     
+    @Override
     public String retornaInformacoes(){
-        String retorno = "Id Atendimento: " + idAtendimento + "\nData Abertura: " + dataAbertura + "\nSituação: " + situacao + "\nResponsável: " + responsavel;
+        String retorno = "Id Atendimento: " + idAtendimento + "\nData Abertura: " + getDataAbertura() + "\nSituação: " + situacao + "\nResponsável: " + responsavel;
         if(this.situacao.equalsIgnoreCase("Finalizado")){
-            retorno += "\nData Fechamento: " + dataFechamento;
+            retorno += "\nData Fechamento: " + getDataFechamento();
         }
         return retorno;
     }
@@ -114,7 +121,7 @@ public abstract class Atendimento implements AtendimentoInterface{
     }
     
     public void finalizaAtendimento(){
-        this.dataFechamento = retornaTimestamp();
+        this.dataFechamento = getDataHoraAtual();
         this.situacao = "Finalizado";
     }
     
@@ -127,4 +134,15 @@ public abstract class Atendimento implements AtendimentoInterface{
             this.tipo = "Pesquisa";
         }
     }
+
+    @Override
+    public int compareTo(Atendimento o){
+        if(this.dataAbertura.isBefore(o.dataAbertura)){
+            return -1;
+        } else if (this.dataAbertura.isAfter(o.dataAbertura)){
+            return 1;
+        }
+        return 0;
+    }
+    
 }

@@ -43,7 +43,6 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
         
         // Criamos o atendimento e retornamos
         Atendimento atendimentoDivulgacao = new Divulgacao(tipoContato, contato, responsavel, tramite, empresa);
-        System.out.println(atendimentoDivulgacao.toString());
         return atendimentoDivulgacao;
     }
     
