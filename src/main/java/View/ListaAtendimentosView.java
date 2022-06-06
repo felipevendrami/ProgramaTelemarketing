@@ -11,6 +11,7 @@ import Repositorio.AtendimentoRepositorio;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -143,7 +144,11 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
-        abreVisualizacaoAtendimento();
+        try {
+            abreVisualizacaoAtendimento();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao visualizar!");
+        }
     }//GEN-LAST:event_btVisualizarActionPerformed
 
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed

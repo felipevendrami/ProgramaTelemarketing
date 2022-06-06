@@ -175,8 +175,8 @@ public class CadastroItemView extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContinuarActionPerformed
-        String tipoAtendimento = cbTipoAtendimento.getSelectedItem().toString();
-        abrirTelaTipoAtendimento(tipoAtendimento);
+//        String tipoAtendimento = cbTipoAtendimento.getSelectedItem().toString();
+//        abrirTelaTipoAtendimento(tipoAtendimento);
     }//GEN-LAST:event_btContinuarActionPerformed
 
     private void btCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelar1ActionPerformed
@@ -184,8 +184,8 @@ public class CadastroItemView extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelar1ActionPerformed
 
     private void btContinuar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContinuar1ActionPerformed
-        String tipoAtendimento = cbTipoAtendimento.getSelectedItem().toString();
-        abrirTelaTipoAtendimento(tipoAtendimento);
+//        String tipoAtendimento = cbTipoAtendimento.getSelectedItem().toString();
+//        abrirTelaTipoAtendimento(tipoAtendimento);
     }//GEN-LAST:event_btContinuar1ActionPerformed
 
     /**

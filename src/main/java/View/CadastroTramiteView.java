@@ -173,7 +173,11 @@ public class CadastroTramiteView extends javax.swing.JFrame {
     }//GEN-LAST:event_cbTipoTramiteActionPerformed
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        incluirTramite();
+        try {
+            incluirTramite();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
+        }
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     /**

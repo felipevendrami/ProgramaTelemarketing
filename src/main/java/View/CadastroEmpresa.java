@@ -10,42 +10,14 @@ import javax.swing.JOptionPane;
  *
  * @author felip
  */
-public class CadastroAtendimentoView extends javax.swing.JFrame {
+public class CadastroEmpresa extends javax.swing.JFrame {
     
     /**
      * Creates new form NovoAtendimentoView
      */
-    public CadastroAtendimentoView() {
+    public CadastroEmpresa() {
         initComponents();
     }
-
-    public void abrirTelaTipoAtendimento(String tipoAtendimento){
-        if(tipoAtendimento.equals("Divulgação")){
-            AtendimentoDivulgacaoView atendimentoDivulgacao = new AtendimentoDivulgacaoView(this);
-            atendimentoDivulgacao.setVisible(true);
-        } if(tipoAtendimento.equals("Suporte")){
-            AtendimentoSuporteView atendimentoSuporteView = new AtendimentoSuporteView();
-            atendimentoSuporteView.setVisible(true);
-        } if(tipoAtendimento.equals("Pesquisa")){
-            AtendimentoPesquisaView atendimentoPesquisaView = new AtendimentoPesquisaView();
-            atendimentoPesquisaView.setVisible(true);
-        }
-    }
-    
-    public void limparTela(){
-        cbEmpresa.setSelectedIndex(-1);
-        cbResponsavel.setSelectedIndex(-1);
-        cbTipoAtendimento.setSelectedIndex(-1);
-    }
-    
-    public String getEmpresa(){
-        return cbEmpresa.getSelectedItem().toString();
-    }
-    
-    public String getResponsavel(){
-        return cbResponsavel.getSelectedItem().toString();
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,33 +28,21 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        cbResponsavel = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        cbTipoAtendimento = new javax.swing.JComboBox<>();
         btCancelar = new javax.swing.JButton();
         btContinuar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        cbEmpresa = new javax.swing.JComboBox<>();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novo Atendimento");
-        setMaximumSize(new java.awt.Dimension(600, 196));
         setMinimumSize(new java.awt.Dimension(600, 196));
-        setPreferredSize(new java.awt.Dimension(600, 245));
         setResizable(false);
 
-        jLabel3.setText("Atendimento > Novo Atendimento");
+        jLabel3.setText("Efetuar cadastro da empresa:");
 
-        jLabel2.setText("Responsável:");
-
-        cbResponsavel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teste" }));
-        cbResponsavel.setSelectedIndex(-1);
-
-        jLabel1.setText("Tipo de Atendimento:");
-
-        cbTipoAtendimento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Divulgação", "Suporte", "Pesquisa" }));
-        cbTipoAtendimento.setSelectedIndex(-1);
+        jLabel1.setText("CNPJ:");
 
         btCancelar.setText("Cancelar");
         btCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -100,8 +60,17 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
 
         jLabel4.setText("Empresa:");
 
-        cbEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teste" }));
-        cbEmpresa.setSelectedIndex(-1);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,14 +83,12 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbTipoAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbResponsavel, 0, 350, Short.MAX_VALUE)
-                            .addComponent(cbEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(65, Short.MAX_VALUE))
+                            .addComponent(jTextField1)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))))
+                .addContainerGap(106, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btContinuar)
@@ -137,24 +104,16 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(cbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(cbTipoAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(54, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btContinuar)
-                            .addComponent(btCancelar))
-                        .addContainerGap())))
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btCancelar)
+                    .addComponent(btContinuar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -166,13 +125,20 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
 
     private void btContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContinuarActionPerformed
         try {
-            String tipoAtendimento = cbTipoAtendimento.getSelectedItem().toString();
-            abrirTelaTipoAtendimento(tipoAtendimento);
+            // Cadastrar empresa
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao cadastrar atendimento!");
+            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao cadastrar empresa!");
         }
 
     }//GEN-LAST:event_btContinuarActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,21 +157,23 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroAtendimentoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroAtendimentoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroAtendimentoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroAtendimentoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEmpresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroAtendimentoView().setVisible(true);
+                new CadastroEmpresa().setVisible(true);
             }
         });
     }
@@ -213,12 +181,10 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btContinuar;
-    private javax.swing.JComboBox<String> cbEmpresa;
-    private javax.swing.JComboBox<String> cbResponsavel;
-    private javax.swing.JComboBox<String> cbTipoAtendimento;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

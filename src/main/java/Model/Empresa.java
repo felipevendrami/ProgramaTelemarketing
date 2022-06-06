@@ -4,8 +4,8 @@
  */
 package Model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -14,19 +14,19 @@ import java.util.List;
 public class Empresa extends Entidade{
     
     private String cnpj;
-    private List<Item> produtos;
+    private Set<Item> produtos;
             
     public Empresa(String nome, Endereco endereco, Contato contato, String cnpj) {
         super(nome, endereco, contato);
         this.cnpj = cnpj;
-        this.produtos = new ArrayList<>();
+        this.produtos = new HashSet<>();
     }
 
     public String getCnpj() {
         return cnpj;
     }
 
-    public List<Item> getProdutos() {
+    public Set<Item> getProdutos() {
         return produtos;
     }
     
