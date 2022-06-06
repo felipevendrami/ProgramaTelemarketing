@@ -6,7 +6,11 @@ package View;
 
 import DAO.AtendimentoListDAO;
 import Model.Atendimento;
+import Model.AtendimentoComparator;
 import Repositorio.AtendimentoRepositorio;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,11 +29,17 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
     }
 
     
+    public List<Atendimento> retornaListaOrdanada(){
+        AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
+        List<Atendimento> atendimentosOrdenados = atendimentoRepositorio.recuperarTodosAtendimentos();
+        Collections.sort(atendimentosOrdenados, new AtendimentoComparator());
+        return atendimentosOrdenados;
+    }
+    
     public void preencheTabelaAtendimentos(){
         DefaultTableModel tabelaAtendimentos = (DefaultTableModel) tbAtendimentos.getModel();
-        AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
-        for(Atendimento atendimento : atendimentoRepositorio.recuperarTodosAtendimentos()){
-            tabelaAtendimentos.addRow(new Object[]{atendimento.getIdAtendimento(), atendimento.getTipo(), atendimento.getEmpresa(), "Teste", atendimento.getDataAbertura(), atendimento.getSituacao()});
+        for(Atendimento atendimento : retornaListaOrdanada()){
+            tabelaAtendimentos.addRow(new Object[]{atendimento.getIdAtendimento(), atendimento.getTipo(), atendimento.getEmpresa(), "Teste", atendimento.getDataAbertura(), atendimento.getSituacao(), atendimento.retornarUltimoTramite().getDataTramite()});
         }
     }
     
@@ -68,14 +78,14 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "IdAtendimento", "Tipo", "Empresa", "Cliente", "Abertura", "Situação"
+                "IdAtendimento", "Tipo", "Empresa", "Cliente", "Abertura", "Situação", "Última Atualiz."
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -109,7 +119,7 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 959, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btVisualizar)

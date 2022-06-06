@@ -33,7 +33,7 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane" pref="698" max="32767" attributes="0"/>
+                  <Component id="jScrollPane" pref="959" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="btVisualizar" min="-2" max="-2" attributes="0"/>
@@ -68,17 +68,23 @@
         <Component class="javax.swing.JTable" name="tbAtendimentos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="0">
+              <Table columnCount="7" rowCount="0">
                 <Column editable="false" title="IdAtendimento" type="java.lang.Integer"/>
                 <Column editable="false" title="Tipo" type="java.lang.String"/>
                 <Column editable="false" title="Empresa" type="java.lang.String"/>
                 <Column editable="false" title="Cliente" type="java.lang.String"/>
                 <Column editable="false" title="Abertura" type="java.lang.String"/>
                 <Column editable="false" title="Situa&#xe7;&#xe3;o" type="java.lang.String"/>
+                <Column editable="false" title="&#xda;ltima Atualiz." type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>

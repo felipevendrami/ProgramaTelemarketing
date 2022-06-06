@@ -169,7 +169,7 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
                     .addComponent(btCancelar)
                     .addComponent(btConfirmar)
                     .addComponent(btNovaVenda))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

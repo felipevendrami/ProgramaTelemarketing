@@ -16,8 +16,6 @@ import java.util.List;
 public abstract class Atendimento implements AtendimentoInterface, Comparable<Atendimento>{
     
     private static int geradorIdAtendimento = 0;
-    
-    //LocalDateTime para as datas, verificar implementação
     protected int idAtendimento;
     protected LocalDateTime dataAbertura;
     protected LocalDateTime dataFechamento;
@@ -145,4 +143,8 @@ public abstract class Atendimento implements AtendimentoInterface, Comparable<At
         return 0;
     }
     
+    public Tramite retornarUltimoTramite(){
+        Tramite ultimoTramite = this.tramites.get(this.tramites.size()-1);
+        return ultimoTramite;
+    }
 }

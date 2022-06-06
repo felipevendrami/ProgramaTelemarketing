@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author felip
  */
-public class Tramite implements AtendimentoInterface{
+public class Tramite implements AtendimentoInterface, Comparable<Tramite>{
     
     private static int geradorIdTramite = 0;
     
@@ -38,6 +38,10 @@ public class Tramite implements AtendimentoInterface{
 
     public String getDataTramite() {
         return getDataHoraFormatado(dataTramite);
+    }
+    
+    public LocalDateTime getDataTramiteNaoFormadato(){
+        return dataTramite;
     }
 
     public String getDescricao() {
@@ -72,5 +76,17 @@ public class Tramite implements AtendimentoInterface{
     public String getDataHoraFormatado(LocalDateTime dataHora){
         String dataHoraFormatado = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         return dataHoraFormatado;
+    }
+
+    
+    
+    @Override
+    public int compareTo(Tramite o) {
+        if(this.dataTramite.isBefore(o.dataTramite)){
+            return -1;
+        } else if (this.dataTramite.isAfter(o.dataTramite)){
+            return 1;
+        }
+        return 0;
     }
 }

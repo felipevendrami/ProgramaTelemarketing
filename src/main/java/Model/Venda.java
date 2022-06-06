@@ -4,9 +4,9 @@
  */
 package Model;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -18,8 +18,8 @@ public class Venda {
     private static int geradorIdVenda = 0;
     
     private int idVenda;
-    private String dataVenda;
-    private String cliente;
+    private LocalDateTime dataVenda;
+    private Cliente cliente;
     private List<Item> itens;
     private double subtotal;
     private double total;
@@ -30,12 +30,11 @@ public class Venda {
     //2 - Pendente
     //3 - Confirmado
 
-    public Venda(String cliente, String situacao) {
+    public Venda(Cliente cliente, String situacao) {
         this.idVenda = geradorIdVenda ++;
         this.itens = new ArrayList<>();
         this.cliente = cliente;
-        String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-        this.dataVenda = timeStamp;
+        this.dataVenda = getDataHoraAtual();
         this.situacao = situacao;
         this.subtotal = 0;
         this.total = 0;
@@ -54,10 +53,10 @@ public class Venda {
     }
 
     public String getDataVenda() {
-        return dataVenda;
+        return getDataHoraFormatado(dataVenda);
     }
 
-    public String getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
@@ -75,5 +74,15 @@ public class Venda {
     
     public void removeProduto(Item produto){
         this.itens.remove(produto);
+    }
+    
+    public String getDataHoraFormatado(LocalDateTime dataHora){
+        String dataHoraFormatado = dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        return dataHoraFormatado;
+    }
+    
+    public LocalDateTime getDataHoraAtual(){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        return localDateTime;
     }
 }
