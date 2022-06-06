@@ -12,7 +12,7 @@ public class Suporte extends Atendimento{
 
     private Venda venda;
 
-    public Suporte(Venda venda, String responsavel, String descricaoTramite, String empresa) {
+    public Suporte(Venda venda, Colaborador responsavel, String descricaoTramite, Empresa empresa) {
         super(responsavel, descricaoTramite, empresa);
         this.venda = venda;
     }

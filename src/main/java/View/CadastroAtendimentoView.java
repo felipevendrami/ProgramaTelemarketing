@@ -4,6 +4,13 @@
  */
 package View;
 
+import DAO.ColaboradorListDAO;
+import DAO.EmpresaListDAO;
+import Model.Colaborador;
+import Model.Empresa;
+import Repositorio.ColaboradorRepositorio;
+import Repositorio.EmpresaRepositorio;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,8 +24,27 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
      */
     public CadastroAtendimentoView() {
         initComponents();
+        carregaComboboxEmpresa();
+        carregaComboboxColaborador();
+        limparTela();
     }
 
+    public void carregaComboboxEmpresa(){
+        EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
+        List<Empresa> empresas = empresaRepositorio.recuperarTodasEmpresas();
+        for(Empresa empresa : empresas){
+            cbEmpresa.addItem(empresa);
+        }
+    }
+    
+    public void carregaComboboxColaborador(){
+        ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
+        List<Colaborador> colaboradores = colaboradorRepositorio.recuperarTodosColaboradores();
+        for(Colaborador responsavel : colaboradores){
+            cbResponsavel.addItem(responsavel);
+        }
+    }
+    
     public void abrirTelaTipoAtendimento(String tipoAtendimento){
         if(tipoAtendimento.equals("Divulgação")){
             AtendimentoDivulgacaoView atendimentoDivulgacao = new AtendimentoDivulgacaoView(this);
@@ -38,12 +64,12 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
         cbTipoAtendimento.setSelectedIndex(-1);
     }
     
-    public String getEmpresa(){
-        return cbEmpresa.getSelectedItem().toString();
+    public Empresa getEmpresa(){
+        return cbEmpresa.getItemAt(cbEmpresa.getSelectedIndex());
     }
     
-    public String getResponsavel(){
-        return cbResponsavel.getSelectedItem().toString();
+    public Colaborador getResponsavel(){
+        return cbResponsavel.getItemAt(cbResponsavel.getSelectedIndex());
     }
     
     /**
@@ -76,9 +102,6 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
 
         jLabel2.setText("Responsável:");
 
-        cbResponsavel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teste" }));
-        cbResponsavel.setSelectedIndex(-1);
-
         jLabel1.setText("Tipo de Atendimento:");
 
         cbTipoAtendimento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Divulgação", "Suporte", "Pesquisa" }));
@@ -99,9 +122,6 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
         });
 
         jLabel4.setText("Empresa:");
-
-        cbEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teste" }));
-        cbEmpresa.setSelectedIndex(-1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -213,8 +233,8 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btContinuar;
-    private javax.swing.JComboBox<String> cbEmpresa;
-    private javax.swing.JComboBox<String> cbResponsavel;
+    private javax.swing.JComboBox<Empresa> cbEmpresa;
+    private javax.swing.JComboBox<Colaborador> cbResponsavel;
     private javax.swing.JComboBox<String> cbTipoAtendimento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

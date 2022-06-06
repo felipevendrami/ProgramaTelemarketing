@@ -14,7 +14,7 @@ public class Pesquisa extends Atendimento{
     private int satisfacaoProduto;
     private int satisfacaoAtendimento;
 
-    public Pesquisa(Venda venda, int satisfacaoProduto, int satisfacaoAtendimento, String responsavel, String descricaoTramite, String empresa) {
+    public Pesquisa(Venda venda, int satisfacaoProduto, int satisfacaoAtendimento, Colaborador responsavel, String descricaoTramite, Empresa empresa) {
         super(responsavel, descricaoTramite, empresa);
         this.venda = venda;
         this.satisfacaoProduto = satisfacaoProduto;

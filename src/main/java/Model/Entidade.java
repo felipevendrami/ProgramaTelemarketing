@@ -57,4 +57,9 @@ public abstract class Entidade {
             System.out.println(contato.toString());
         }
     }
+
+    @Override
+    public String toString() {
+        return "Entidade{" + "idEntidade=" + idEntidade + ", nome=" + nome + ", endereco=" + endereco + ", contatos=" + contatos + '}';
+    }
 }

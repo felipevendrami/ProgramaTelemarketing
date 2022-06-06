@@ -6,7 +6,9 @@ package View;
 
 import DAO.AtendimentoListDAO;
 import Model.Atendimento;
+import Model.Colaborador;
 import Model.Divulgacao;
+import Model.Empresa;
 import Repositorio.AtendimentoRepositorio;
 import javax.swing.JOptionPane;
 
@@ -35,8 +37,8 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
     
     public Atendimento recuperarAtendimentoDivulgacao(){
         // Recuperamos as informações da tela
-        String empresa = cadAtendimentoView.getEmpresa();
-        String responsavel = cadAtendimentoView.getResponsavel();
+        Empresa empresa = cadAtendimentoView.getEmpresa();
+        Colaborador responsavel = cadAtendimentoView.getResponsavel();
         String tipoContato = cbTipoContato.getSelectedItem().toString();
         String contato = tfContato.getText();
         String tramite = taTramite.getText();

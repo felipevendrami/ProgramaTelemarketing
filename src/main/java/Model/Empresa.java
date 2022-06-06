@@ -33,5 +33,9 @@ public class Empresa extends Entidade{
     public void addProduto(Item produto){
         this.produtos.add(produto);
     }    
-    
+
+    @Override
+    public String toString() {
+        return this.nome;
+    }
 }

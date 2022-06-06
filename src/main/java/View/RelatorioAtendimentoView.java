@@ -5,8 +5,11 @@
 package View;
 
 import DAO.AtendimentoListDAO;
+import DAO.ColaboradorListDAO;
 import Model.Atendimento;
+import Model.Colaborador;
 import Repositorio.AtendimentoRepositorio;
+import Repositorio.ColaboradorRepositorio;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,12 +29,24 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public Colaborador retornaResponsavel(){
+        ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
+        List<Colaborador> colaboradores = colaboradorRepositorio.recuperarTodosColaboradores();
+        String responsavelBusca = tfResponsavel.getText();
+        for(Colaborador responsavel : colaboradores){
+            if(responsavel.getNome().equals(responsavelBusca)){
+                return responsavel;
+            }
+        }
+        return null;
+    }
+    
     public List<Atendimento> montarListaFiltroResponsavel(){
         List<Atendimento> atendimentosResponsavel = new ArrayList<>();
-        String responsavel = tfResponsavel.getText();
+        Colaborador responsavel = retornaResponsavel();
         AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
         for(Atendimento atendimento : atendimentoRepositorio.recuperarTodosAtendimentos()){
-            if(atendimento.getResponsavel().equals(responsavel)){
+            if(atendimento.getResponsavel() == responsavel){
                 atendimentosResponsavel.add(atendimento);
             }
         }
