@@ -8,7 +8,6 @@ import DAO.AtendimentoListDAO;
 import Model.Atendimento;
 import Model.AtendimentoComparator;
 import Repositorio.AtendimentoRepositorio;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;

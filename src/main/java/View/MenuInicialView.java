@@ -31,6 +31,12 @@ public class MenuInicialView extends javax.swing.JFrame {
 
         mbSistemaTelemarketing = new javax.swing.JMenuBar();
         mnEntidades = new javax.swing.JMenu();
+        miNovoCliente = new javax.swing.JMenuItem();
+        miNovaEmpresa = new javax.swing.JMenuItem();
+        miNovoColaborador = new javax.swing.JMenuItem();
+        miListaClientes = new javax.swing.JMenuItem();
+        miListaEmpresas = new javax.swing.JMenuItem();
+        miListaColaboradores = new javax.swing.JMenuItem();
         mnProdutos = new javax.swing.JMenu();
         mnAtendimento = new javax.swing.JMenu();
         miNovoAtendimento = new javax.swing.JMenuItem();
@@ -45,6 +51,61 @@ public class MenuInicialView extends javax.swing.JFrame {
         mnEntidades.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         mnEntidades.setText("Entidade");
         mnEntidades.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        miNovoCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        miNovoCliente.setText("Novo Cliente ...");
+        miNovoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNovoClienteActionPerformed(evt);
+            }
+        });
+        mnEntidades.add(miNovoCliente);
+
+        miNovaEmpresa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        miNovaEmpresa.setText("Nova Empresa ...");
+        miNovaEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNovaEmpresaActionPerformed(evt);
+            }
+        });
+        mnEntidades.add(miNovaEmpresa);
+
+        miNovoColaborador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        miNovoColaborador.setText("Novo Colaborador ...");
+        miNovoColaborador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNovoColaboradorActionPerformed(evt);
+            }
+        });
+        mnEntidades.add(miNovoColaborador);
+
+        miListaClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        miListaClientes.setText("Lista Clientes ...");
+        miListaClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListaClientesActionPerformed(evt);
+            }
+        });
+        mnEntidades.add(miListaClientes);
+
+        miListaEmpresas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        miListaEmpresas.setText("Lista Empresas ...");
+        miListaEmpresas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListaEmpresasActionPerformed(evt);
+            }
+        });
+        mnEntidades.add(miListaEmpresas);
+
+        miListaColaboradores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        miListaColaboradores.setText("Lista Colaboradores ...");
+        miListaColaboradores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListaColaboradoresActionPerformed(evt);
+            }
+        });
+        mnEntidades.add(miListaColaboradores);
+
         mbSistemaTelemarketing.add(mnEntidades);
 
         mnProdutos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -136,6 +197,36 @@ public class MenuInicialView extends javax.swing.JFrame {
         relatorioAtendimento.setVisible(true);
     }//GEN-LAST:event_miRelatorioAtedimentoActionPerformed
 
+    private void miNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoClienteActionPerformed
+        CadastroClienteView cadastroCliente = new CadastroClienteView();
+        cadastroCliente.setVisible(true);
+    }//GEN-LAST:event_miNovoClienteActionPerformed
+
+    private void miNovaEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovaEmpresaActionPerformed
+        CadastroEmpresaView cadastroEmpresa = new CadastroEmpresaView();
+        cadastroEmpresa.setVisible(true);
+    }//GEN-LAST:event_miNovaEmpresaActionPerformed
+
+    private void miNovoColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoColaboradorActionPerformed
+        CadastroColaboradorView cadastroColaborador = new CadastroColaboradorView();
+        cadastroColaborador.setVisible(true);
+    }//GEN-LAST:event_miNovoColaboradorActionPerformed
+
+    private void miListaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaClientesActionPerformed
+        SelecaoClienteView selecaoCliente = new SelecaoClienteView();
+        selecaoCliente.setVisible(true);
+    }//GEN-LAST:event_miListaClientesActionPerformed
+
+    private void miListaColaboradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaColaboradoresActionPerformed
+        SelecaoColaboradorView selecaoColaboradorView = new SelecaoColaboradorView();
+        selecaoColaboradorView.setVisible(true);
+    }//GEN-LAST:event_miListaColaboradoresActionPerformed
+
+    private void miListaEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaEmpresasActionPerformed
+        SelecaoEmpresaView selecaoEmpresaView = new SelecaoEmpresaView();
+        selecaoEmpresaView.setVisible(true);
+    }//GEN-LAST:event_miListaEmpresasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -174,8 +265,14 @@ public class MenuInicialView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar mbSistemaTelemarketing;
     private javax.swing.JMenuItem miListaAtendimentos;
+    private javax.swing.JMenuItem miListaClientes;
+    private javax.swing.JMenuItem miListaColaboradores;
+    private javax.swing.JMenuItem miListaEmpresas;
     private javax.swing.JMenuItem miListaPedidos;
+    private javax.swing.JMenuItem miNovaEmpresa;
     private javax.swing.JMenuItem miNovoAtendimento;
+    private javax.swing.JMenuItem miNovoCliente;
+    private javax.swing.JMenuItem miNovoColaborador;
     private javax.swing.JMenuItem miRelatorioAtedimento;
     private javax.swing.JMenu mnAtendimento;
     private javax.swing.JMenu mnEntidades;
