@@ -4,35 +4,37 @@
  */
 package View;
 
-import DAO.ClienteListDAO;
-import Repositorio.ClienteRepositorio;
+
+import DAO.ColaboradorListDAO;
+import DAO.EmpresaListDAO;
 import javax.swing.table.DefaultTableModel;
-import Model.Cliente;
+import Model.Empresa;
+import Repositorio.EmpresaRepositorio;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author felip
  */
-public class SelecaoClienteView extends javax.swing.JFrame {
+public class SelecaoEmpresaView extends javax.swing.JFrame {
 
     /**
      * Creates new form SelecaoClienteView
      */
-    public SelecaoClienteView() {
+    public SelecaoEmpresaView() {
         initComponents();
-        preencheTabelaClientes();
+        preencheTabelaEmpresa();
     }
 
-    public void preencheTabelaClientes(){
+    public void preencheTabelaEmpresa(){
         try {
-            DefaultTableModel tabelaClientes = (DefaultTableModel) tbClientes.getModel();
-            ClienteRepositorio clienteRepositorio = new ClienteListDAO();
-            for(Cliente cliente : clienteRepositorio.recuperarTodosClientes()){
-                tabelaClientes.addRow(new Object[]{cliente.getIdEntidade(), cliente.getNome(), cliente.getEndereco().getCidade(), cliente.getEndereco().getEstado()});
+            DefaultTableModel tabelaEmpresa = (DefaultTableModel) tbEmpresa.getModel();
+            EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
+            for(Empresa empresa : empresaRepositorio.recuperarTodasEmpresas()){
+                tabelaEmpresa.addRow(new Object[]{empresa.getIdEntidade(), empresa.getNome(), empresa.getEndereco().getCidade(), empresa.getEndereco().getEstado()});
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Não foi possível recuperar dados dos clientes!");
+            JOptionPane.showMessageDialog(null, "Não foi possível recuperar dados das empresas!");
         }
 
     }
@@ -46,22 +48,21 @@ public class SelecaoClienteView extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane = new javax.swing.JScrollPane();
-        tbClientes = new javax.swing.JTable();
+        tbEmpresa = new javax.swing.JTable();
         btFechar = new javax.swing.JButton();
         btSelecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Selecionar Cliente");
-        setMaximumSize(new java.awt.Dimension(600, 300));
         setMinimumSize(new java.awt.Dimension(600, 300));
         setResizable(false);
 
-        tbClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tbEmpresa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "IdEntidade", "Nome Cliente", "Cidade", "UF"
+                "IdEntidade", "Nome Empresa", "Cidade", "UF"
             }
         ) {
             Class[] types = new Class [] {
@@ -79,12 +80,12 @@ public class SelecaoClienteView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane.setViewportView(tbClientes);
-        if (tbClientes.getColumnModel().getColumnCount() > 0) {
-            tbClientes.getColumnModel().getColumn(0).setResizable(false);
-            tbClientes.getColumnModel().getColumn(1).setResizable(false);
-            tbClientes.getColumnModel().getColumn(2).setResizable(false);
-            tbClientes.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane.setViewportView(tbEmpresa);
+        if (tbEmpresa.getColumnModel().getColumnCount() > 0) {
+            tbEmpresa.getColumnModel().getColumn(0).setResizable(false);
+            tbEmpresa.getColumnModel().getColumn(1).setResizable(false);
+            tbEmpresa.getColumnModel().getColumn(2).setResizable(false);
+            tbEmpresa.getColumnModel().getColumn(3).setResizable(false);
         }
 
         btFechar.setText("Fechar");
@@ -151,20 +152,27 @@ public class SelecaoClienteView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SelecaoClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelecaoEmpresaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SelecaoClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelecaoEmpresaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SelecaoClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelecaoEmpresaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SelecaoClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelecaoEmpresaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SelecaoClienteView().setVisible(true);
+                new SelecaoEmpresaView().setVisible(true);
             }
         });
     }
@@ -173,6 +181,6 @@ public class SelecaoClienteView extends javax.swing.JFrame {
     private javax.swing.JButton btFechar;
     private javax.swing.JButton btSelecionar;
     private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JTable tbClientes;
+    private javax.swing.JTable tbEmpresa;
     // End of variables declaration//GEN-END:variables
 }

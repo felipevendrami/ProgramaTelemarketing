@@ -4,35 +4,36 @@
  */
 package View;
 
-import DAO.ClienteListDAO;
-import Repositorio.ClienteRepositorio;
+
+import DAO.ColaboradorListDAO;
 import javax.swing.table.DefaultTableModel;
-import Model.Cliente;
+import Model.Colaborador;
+import Repositorio.ColaboradorRepositorio;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author felip
  */
-public class SelecaoClienteView extends javax.swing.JFrame {
+public class SelecaoColaboradorView extends javax.swing.JFrame {
 
     /**
      * Creates new form SelecaoClienteView
      */
-    public SelecaoClienteView() {
+    public SelecaoColaboradorView() {
         initComponents();
-        preencheTabelaClientes();
+        preencheTabelaColaborador();
     }
 
-    public void preencheTabelaClientes(){
+    public void preencheTabelaColaborador(){
         try {
-            DefaultTableModel tabelaClientes = (DefaultTableModel) tbClientes.getModel();
-            ClienteRepositorio clienteRepositorio = new ClienteListDAO();
-            for(Cliente cliente : clienteRepositorio.recuperarTodosClientes()){
-                tabelaClientes.addRow(new Object[]{cliente.getIdEntidade(), cliente.getNome(), cliente.getEndereco().getCidade(), cliente.getEndereco().getEstado()});
+            DefaultTableModel tabelaColaborador = (DefaultTableModel) tbColaborador.getModel();
+            ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
+            for(Colaborador colaborador : colaboradorRepositorio.recuperarTodosColaboradores()){
+                tabelaColaborador.addRow(new Object[]{colaborador.getIdEntidade(), colaborador.getNome(), colaborador.getEndereco().getCidade(), colaborador.getEndereco().getEstado()});
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Não foi possível recuperar dados dos clientes!");
+            JOptionPane.showMessageDialog(null, "Não foi possível recuperar dados dos colaboradores!");
         }
 
     }
@@ -46,22 +47,21 @@ public class SelecaoClienteView extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane = new javax.swing.JScrollPane();
-        tbClientes = new javax.swing.JTable();
+        tbColaborador = new javax.swing.JTable();
         btFechar = new javax.swing.JButton();
         btSelecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Selecionar Cliente");
-        setMaximumSize(new java.awt.Dimension(600, 300));
         setMinimumSize(new java.awt.Dimension(600, 300));
         setResizable(false);
 
-        tbClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tbColaborador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "IdEntidade", "Nome Cliente", "Cidade", "UF"
+                "IdEntidade", "Nome Colaborador", "Cidade", "UF"
             }
         ) {
             Class[] types = new Class [] {
@@ -79,12 +79,12 @@ public class SelecaoClienteView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane.setViewportView(tbClientes);
-        if (tbClientes.getColumnModel().getColumnCount() > 0) {
-            tbClientes.getColumnModel().getColumn(0).setResizable(false);
-            tbClientes.getColumnModel().getColumn(1).setResizable(false);
-            tbClientes.getColumnModel().getColumn(2).setResizable(false);
-            tbClientes.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane.setViewportView(tbColaborador);
+        if (tbColaborador.getColumnModel().getColumnCount() > 0) {
+            tbColaborador.getColumnModel().getColumn(0).setResizable(false);
+            tbColaborador.getColumnModel().getColumn(1).setResizable(false);
+            tbColaborador.getColumnModel().getColumn(2).setResizable(false);
+            tbColaborador.getColumnModel().getColumn(3).setResizable(false);
         }
 
         btFechar.setText("Fechar");
@@ -151,20 +151,23 @@ public class SelecaoClienteView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SelecaoClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelecaoColaboradorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SelecaoClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelecaoColaboradorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SelecaoClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelecaoColaboradorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SelecaoClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelecaoColaboradorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SelecaoClienteView().setVisible(true);
+                new SelecaoColaboradorView().setVisible(true);
             }
         });
     }
@@ -173,6 +176,6 @@ public class SelecaoClienteView extends javax.swing.JFrame {
     private javax.swing.JButton btFechar;
     private javax.swing.JButton btSelecionar;
     private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JTable tbClientes;
+    private javax.swing.JTable tbColaborador;
     // End of variables declaration//GEN-END:variables
 }
