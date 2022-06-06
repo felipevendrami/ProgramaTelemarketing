@@ -95,7 +95,7 @@ public class SelecaoEmpresaView extends javax.swing.JFrame {
             }
         });
 
-        btSelecionar.setText("Selecionar");
+        btSelecionar.setText("Visualizar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

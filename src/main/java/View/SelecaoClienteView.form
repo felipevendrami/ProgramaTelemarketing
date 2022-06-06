@@ -123,7 +123,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btSelecionar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Selecionar"/>
+        <Property name="text" type="java.lang.String" value="Visualizar"/>
       </Properties>
     </Component>
   </SubComponents>
