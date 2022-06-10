@@ -4,19 +4,51 @@
  */
 package View;
 
+import DAO.AtendimentoListDAO;
+import DAO.VendaListDAO;
+import Model.Atendimento;
+import Model.Colaborador;
+import Model.Empresa;
+import Model.Suporte;
+import Model.Venda;
+import Repositorio.AtendimentoRepositorio;
+import Repositorio.VendaRepositorio;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author felip
  */
 public class AtendimentoSuporteView extends javax.swing.JFrame {
-
+    
+    private CadastroAtendimentoView cadAtendimentoView;
+    private Venda venda;
+    
     /**
      * Creates new form AtendimentoSuporteView
      */
-    public AtendimentoSuporteView() {
+    public AtendimentoSuporteView(CadastroAtendimentoView cadAtendimentoView) {
+        this.cadAtendimentoView = cadAtendimentoView;
         initComponents();
     }
 
+    public void abrirAtendimentoSuporte(){
+        AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
+        Atendimento atendimento = recuperarAtendimentoSuporte();
+        atendimentoRepositorio.salvarAtendimento(atendimento);
+        JOptionPane.showMessageDialog(null, "Atendimento aberto com sucesso");
+    }
+    
+    public Atendimento recuperarAtendimentoSuporte(){
+        //Recuperamos as informações da tela
+        Venda venda =  this.venda;
+        Empresa empresa = cadAtendimentoView.getEmpresa();
+        Colaborador responsavel = cadAtendimentoView.getResponsavel();
+        String tramite = taTramite.getText();
+        //Criamos o atendimento e retornamos
+        Atendimento atendimentoSuporte = new Suporte(venda, responsavel, tramite, empresa);
+        return atendimentoSuporte;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,6 +78,11 @@ public class AtendimentoSuporteView extends javax.swing.JFrame {
         jLabel1.setText("Pedido:");
 
         btBuscarPedido.setText("Buscar");
+        btBuscarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarPedidoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Trâmite:");
 
@@ -130,8 +167,20 @@ public class AtendimentoSuporteView extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        // TODO add your handling code here:
+        try {
+            abrirAtendimentoSuporte();
+            cadAtendimentoView.limparTela();
+            this.setVisible(false);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
+        }
     }//GEN-LAST:event_btConfirmarActionPerformed
+
+    private void btBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoActionPerformed
+        ListaPedidosView listaPedidos = new ListaPedidosView();
+        listaPedidos.setVisible(true);
+        this.venda = listaPedidos.getVendaSelecionada();
+    }//GEN-LAST:event_btBuscarPedidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,11 +210,11 @@ public class AtendimentoSuporteView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AtendimentoSuporteView().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new AtendimentoSuporteView().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

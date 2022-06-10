@@ -185,7 +185,6 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
         }
-
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed

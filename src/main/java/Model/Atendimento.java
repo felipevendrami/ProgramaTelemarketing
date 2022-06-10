@@ -13,6 +13,7 @@ import java.util.List;
  *
  * @author felip
  */
+
 public abstract class Atendimento implements AtendimentoInterface, Comparable<Atendimento>{
     
     private static int geradorIdAtendimento = 0;
@@ -24,11 +25,6 @@ public abstract class Atendimento implements AtendimentoInterface, Comparable<At
     protected List<Tramite> tramites;
     protected Empresa empresa;
     protected String tipo;
-    
-//    Situações atendimento:
-//    1 = Aberto;
-//    2 = Em andamento;
-//    3 = Finalizada;
 
     public Atendimento(Colaborador responsavel, String descricaoTramite, Empresa empresa){
         this.idAtendimento = geradorIdAtendimento ++;

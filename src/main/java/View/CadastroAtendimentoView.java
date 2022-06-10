@@ -50,10 +50,10 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
             AtendimentoDivulgacaoView atendimentoDivulgacao = new AtendimentoDivulgacaoView(this);
             atendimentoDivulgacao.setVisible(true);
         } if(tipoAtendimento.equals("Suporte")){
-            AtendimentoSuporteView atendimentoSuporteView = new AtendimentoSuporteView();
+            AtendimentoSuporteView atendimentoSuporteView = new AtendimentoSuporteView(this);
             atendimentoSuporteView.setVisible(true);
         } if(tipoAtendimento.equals("Pesquisa")){
-            AtendimentoPesquisaView atendimentoPesquisaView = new AtendimentoPesquisaView();
+            AtendimentoPesquisaView atendimentoPesquisaView = new AtendimentoPesquisaView(this);
             atendimentoPesquisaView.setVisible(true);
         }
     }

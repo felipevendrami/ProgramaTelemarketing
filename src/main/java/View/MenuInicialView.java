@@ -188,7 +188,7 @@ public class MenuInicialView extends javax.swing.JFrame {
     }//GEN-LAST:event_miListaAtendimentosActionPerformed
 
     private void miListaPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaPedidosActionPerformed
-        ListaPedidosView listaPedidosView = new ListaPedidosView(this);
+        ListaPedidosView listaPedidosView = new ListaPedidosView();
         listaPedidosView.setVisible(true);
     }//GEN-LAST:event_miListaPedidosActionPerformed
 

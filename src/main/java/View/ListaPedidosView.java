@@ -4,22 +4,60 @@
  */
 package View;
 
+import DAO.VendaListDAO;
+import Model.Venda;
+import Repositorio.VendaRepositorio;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author felip
  */
 public class ListaPedidosView extends javax.swing.JFrame {
-
-    private MenuInicialView menuView;
+    
+    private Venda venda;
     
     /**
      * Creates new form ListaAtendimentosView
      */
-    public ListaPedidosView(MenuInicialView menuView) {
-        this.menuView = menuView;
+    public ListaPedidosView() {
         initComponents();
+        preencheTabelaVenda();
     }
 
+    public List<Venda> retornaListaVendas(){
+        VendaRepositorio vendaRepositorio = new VendaListDAO();
+        List<Venda> listaVenda = vendaRepositorio.recuperarTodasVendas();
+        return listaVenda;
+    }
+    
+    public void preencheTabelaVenda(){
+        DefaultTableModel tabelaVendas = (DefaultTableModel) tbPedidos.getModel();
+        for(Venda venda : retornaListaVendas()){
+            tabelaVendas.addRow(new Object[]{venda.getIdVenda(), venda.getCliente().getNome(), venda.getDataVenda(), venda.getTotal()});
+        }
+    }
+    
+    public int carregaVendaSelecionada(){
+        int linha = tbPedidos.getSelectedRow();
+        int idVenda = Integer.parseInt(tbPedidos.getValueAt(linha, 0).toString());
+        return idVenda;
+    }
+    
+    public void localizarVenda(){
+        VendaRepositorio vendaRepositorio = new VendaListDAO();
+        for(Venda venda : vendaRepositorio.recuperarTodasVendas()){
+            if(venda.getIdVenda() == carregaVendaSelecionada()){
+                this.venda = venda;
+            }
+        }
+    }
+    
+    public Venda getVendaSelecionada(){
+        return this.venda;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,8 +152,7 @@ public class ListaPedidosView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
-//        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView();
-//        visualizarAtendimentoView.setVisible(true);
+
     }//GEN-LAST:event_btVisualizarActionPerformed
 
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
