@@ -6,6 +6,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -43,4 +44,34 @@ public class Cliente extends Entidade{
     public void addAtendimento(Atendimento atendimento){
         this.atendimentos.add(atendimento);
     }    
+
+    @Override
+    public int hashCode() {
+        int hash = Objects.hashCode(this.cpf);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (!Objects.equals(this.cpf, other.cpf)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String retornaInformacoes() {
+        return "CPF: " + this.getCpf() + "\n" + super.retornaInformacoes();
+    }
+    
 }

@@ -61,8 +61,15 @@ public class Empresa extends Entidade{
     }
 
     @Override
+    public String retornaInformacoes() {
+        return "CNPJ: " + this.getCnpj() + "\n" + super.retornaInformacoes();
+    }
+    
+    
+
+    @Override
     public String toString() {
-        return "CNPJ: " + this.getCnpj() + "\n" + super.toString();
+        return this.nome;
     }
     
     

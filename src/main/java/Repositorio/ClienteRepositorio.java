@@ -5,14 +5,14 @@
 package Repositorio;
 
 import Model.Cliente;
-import java.util.List;
+import java.util.Set;
 /**
  *
  * @author julia
  */
 public interface ClienteRepositorio {
     
-    public void salvarCliente(Cliente cliente);
-    public List<Cliente> recuperarTodosClientes();
+    public boolean salvarCliente(Cliente cliente);
+    public Set<Cliente> recuperarTodosClientes();
     
 }

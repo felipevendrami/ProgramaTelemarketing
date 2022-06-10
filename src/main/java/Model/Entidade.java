@@ -59,17 +59,21 @@ public abstract class Entidade {
         }
     }
 
-    @Override
-    public String toString() {
+    public String retornaInformacoes() {
         String informacoes =  "ID da Entidade: " + this.getIdEntidade() + "\nNome: " + this.getNome() +
                 "\nEstado: " + this.getEndereco().getEstado() + " -- Cidade: " + this.getEndereco().getCidade() + " -- Bairro: " + 
                 this.getEndereco().getBairro() + " -- Rua: " + this.getEndereco().getRua();
         for (Contato contato : contatos) {
-            informacoes += "\nEmail: " + contato.getEmail() + " -- Telefone: " + contato.getTelefone();
+            if (contato != null) {
+                informacoes += "\nEmail: " + contato.getEmail() + " -- Telefone: " + contato.getTelefone();
+            }
         }
         
-        return informacoes;
+        return informacoes;        
     }
     
-    
+    @Override
+    public String toString() {
+        return "Entidade{" + "idEntidade=" + idEntidade + ", nome=" + nome + ", endereco=" + endereco + ", contatos=" + contatos + '}';
+    }
 }

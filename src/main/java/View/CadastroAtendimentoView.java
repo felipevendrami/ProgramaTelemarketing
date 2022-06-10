@@ -11,6 +11,7 @@ import Model.Empresa;
 import Repositorio.ColaboradorRepositorio;
 import Repositorio.EmpresaRepositorio;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,18 +31,26 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
     }
 
     public void carregaComboboxEmpresa(){
-        EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
-        List<Empresa> empresas = empresaRepositorio.recuperarTodasEmpresas();
-        for(Empresa empresa : empresas){
-            cbEmpresa.addItem(empresa);
+        try{
+            EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
+            Set<Empresa> empresas = empresaRepositorio.recuperarTodasEmpresas();
+            for(Empresa empresa : empresas){
+                cbEmpresa.addItem(empresa);
+            }
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Não existem empresas cadastradas!");
         }
     }
     
     public void carregaComboboxColaborador(){
-        ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
-        List<Colaborador> colaboradores = colaboradorRepositorio.recuperarTodosColaboradores();
-        for(Colaborador responsavel : colaboradores){
-            cbResponsavel.addItem(responsavel);
+        try {
+            ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
+            List<Colaborador> colaboradores = colaboradorRepositorio.recuperarTodosColaboradores();
+            for(Colaborador responsavel : colaboradores){
+                cbResponsavel.addItem(responsavel);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não existem colaboradores cadastrados!");
         }
     }
     

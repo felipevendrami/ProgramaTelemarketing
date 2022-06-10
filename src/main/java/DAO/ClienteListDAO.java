@@ -6,8 +6,8 @@ package DAO;
 
 import Model.Cliente;
 import Repositorio.ClienteRepositorio;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -15,15 +15,15 @@ import java.util.List;
  */
 public class ClienteListDAO implements ClienteRepositorio{
 
-    private static List<Cliente> clientes = new ArrayList<>();
+    private static Set<Cliente> clientes = new HashSet<>();
     
     @Override
-    public void salvarCliente(Cliente cliente) {
-        clientes.add(cliente);
+    public boolean salvarCliente(Cliente cliente) {
+        return clientes.add(cliente);
     }
 
     @Override
-    public List<Cliente> recuperarTodosClientes() {
+    public Set<Cliente> recuperarTodosClientes() {
         return this.clientes;
     }
     

@@ -60,6 +60,11 @@ public class SelecaoClienteView extends javax.swing.JFrame {
         cadVendaView.carregaCliente();
     }
     
+    public void abreVisualizacaoCliente(){
+        VisualizarClienteView visualizarClienteView = new VisualizarClienteView(carregaClienteSelecionado());
+        visualizarClienteView.setVisible(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -120,6 +125,11 @@ public class SelecaoClienteView extends javax.swing.JFrame {
         });
 
         btVisualizar.setText("Visualizar");
+        btVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVisualizarActionPerformed(evt);
+            }
+        });
 
         btSelecionar.setText("Selecionar");
         btSelecionar.addActionListener(new java.awt.event.ActionListener() {
@@ -177,6 +187,14 @@ public class SelecaoClienteView extends javax.swing.JFrame {
         setClienteSelecionado();
         this.setVisible(false);
     }//GEN-LAST:event_btSelecionarActionPerformed
+
+    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
+        try {
+            abreVisualizacaoCliente();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao visualizar!");
+        }
+    }//GEN-LAST:event_btVisualizarActionPerformed
 
     /**
      * @param args the command line arguments

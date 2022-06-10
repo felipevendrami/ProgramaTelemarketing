@@ -4,39 +4,39 @@
  */
 package View;
 
-import DAO.ColaboradorListDAO;
-import Model.Colaborador;
-import Repositorio.ColaboradorRepositorio;
+import DAO.ClienteListDAO;
+import Model.Cliente;
+import Repositorio.ClienteRepositorio;
 
 /**
  *
  * @author julia
  */
-public class VisualizarColaboradorView extends javax.swing.JFrame {
+public class VisualizarClienteView extends javax.swing.JFrame {
     
-    private Colaborador colaborador;
+    private Cliente cliente;
 
     /**
      * Creates new form VisualizarAtendimentoView
      */
-    public VisualizarColaboradorView(int idColaborador) {
-        this.colaborador = localizaColaborador(idColaborador);
+    public VisualizarClienteView(int idCliente) {
+        this.cliente = localizaCliente(idCliente);
         initComponents();
         preencheInformacoesColaborador();
     }
     
-    public Colaborador localizaColaborador(int idColaborador) {
-        ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
-        for (Colaborador colaborador : colaboradorRepositorio.recuperarTodosColaboradores()) {
-            if (colaborador.getIdEntidade() == idColaborador) {
-                return colaborador;
+    public Cliente localizaCliente(int idCliente) {
+        ClienteRepositorio clienteRepositorio = new ClienteListDAO();
+        for (Cliente cliente : clienteRepositorio.recuperarTodosClientes()) {
+            if (cliente.getIdEntidade() == idCliente) {
+                return cliente;
             } 
         }
         return null;
     }
     
     public void preencheInformacoesColaborador() {
-        taVisualizaColaborador.append(this.colaborador.retornaInformacoes());
+        taVisualizaCliente.append(this.cliente.retornaInformacoes());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,7 +48,7 @@ public class VisualizarColaboradorView extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane = new javax.swing.JScrollPane();
-        taVisualizaColaborador = new javax.swing.JTextArea();
+        taVisualizaCliente = new javax.swing.JTextArea();
         btFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -56,9 +56,9 @@ public class VisualizarColaboradorView extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(600, 410));
         setResizable(false);
 
-        taVisualizaColaborador.setColumns(20);
-        taVisualizaColaborador.setRows(5);
-        jScrollPane.setViewportView(taVisualizaColaborador);
+        taVisualizaCliente.setColumns(20);
+        taVisualizaCliente.setRows(5);
+        jScrollPane.setViewportView(taVisualizaCliente);
 
         btFechar.setText("Fechar");
         btFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,13 +114,13 @@ public class VisualizarColaboradorView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisualizarColaboradorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisualizarColaboradorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisualizarColaboradorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisualizarColaboradorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisualizarClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -137,12 +137,26 @@ public class VisualizarColaboradorView extends javax.swing.JFrame {
 //                new VisualizarColaboradorView().setVisible(true);
 //            }
 //        });
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btFechar;
     private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JTextArea taVisualizaColaborador;
+    private javax.swing.JTextArea taVisualizaCliente;
     // End of variables declaration//GEN-END:variables
 
     

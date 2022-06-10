@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author felip
+ * @author julia
  */
 public class CadastroClienteView extends javax.swing.JFrame {
     
@@ -250,9 +250,13 @@ public class CadastroClienteView extends javax.swing.JFrame {
         try {
             ClienteRepositorio clienteRepositorio = new ClienteListDAO();
             Cliente cliente = recuperarCliente();
-            clienteRepositorio.salvarCliente(cliente);
-            JOptionPane.showMessageDialog(null, "Cliente criado com sucesso!");
-            this.setVisible(false);
+            boolean cadastroOk = clienteRepositorio.salvarCliente(cliente);
+            if (cadastroOk) {
+                JOptionPane.showMessageDialog(null, "Cliente criado com sucesso!");
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "CPF já cadastrado!");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Um erro aconteceu ao cadastrar cliente!");
         }

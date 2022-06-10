@@ -36,7 +36,7 @@ public class VisualizarEmpresaView extends javax.swing.JFrame {
     }
     
     public void preencheInformacoesEmpresa() {
-        taVisualizaEmpresa.append(this.empresa.toString());
+        taVisualizaEmpresa.append(this.empresa.retornaInformacoes());
     }
     
     /**
