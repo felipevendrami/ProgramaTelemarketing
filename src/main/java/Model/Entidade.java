@@ -11,10 +11,11 @@ import java.util.List;
  *
  * @author julia
  */
+
 public abstract class Entidade {
     private static int geradorIdEntidade = 0;
     
-    protected int idEntidade;
+    private int idEntidade;
     protected String nome;
     protected Endereco endereco;
     protected List<Contato> contatos;

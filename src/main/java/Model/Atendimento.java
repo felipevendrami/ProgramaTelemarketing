@@ -13,24 +13,20 @@ import java.util.List;
  *
  * @author felip
  */
+
 public abstract class Atendimento implements AtendimentoInterface, Comparable<Atendimento>{
     
     private static int geradorIdAtendimento = 0;
     protected int idAtendimento;
     protected LocalDateTime dataAbertura;
     protected LocalDateTime dataFechamento;
-    protected String responsavel;
+    protected Colaborador responsavel;
     protected String situacao;
     protected List<Tramite> tramites;
-    protected String empresa;
+    protected Empresa empresa;
     protected String tipo;
-    
-//    Situações atendimento:
-//    1 = Aberto;
-//    2 = Em andamento;
-//    3 = Finalizada;
 
-    public Atendimento(String responsavel, String descricaoTramite, String empresa){
+    public Atendimento(Colaborador responsavel, String descricaoTramite, Empresa empresa){
         this.idAtendimento = geradorIdAtendimento ++;
         this.responsavel = responsavel;
         this.situacao = "Aberto";
@@ -49,7 +45,7 @@ public abstract class Atendimento implements AtendimentoInterface, Comparable<At
         return this.tipo;
     }
     
-    public String getEmpresa(){
+    public Empresa getEmpresa(){
         return this.empresa;
     }
     
@@ -65,11 +61,11 @@ public abstract class Atendimento implements AtendimentoInterface, Comparable<At
         return getDataHoraFormatado(dataFechamento);
     }
     
-    public String getResponsavel() {
+    public Colaborador getResponsavel() {
         return responsavel;
     }
 
-    public void setResponsavel(String responsavel) {
+    public void setResponsavel(Colaborador responsavel) {
         this.responsavel = responsavel;
     }
 
@@ -87,7 +83,7 @@ public abstract class Atendimento implements AtendimentoInterface, Comparable<At
 
     @Override
     public String toString() {
-        return "Atendimento{" + "idAtendimento=" + idAtendimento + ", dataAbertura=" + getDataAbertura() + ", responsavel=" + responsavel + ", situacao=" + situacao;
+        return "Id: " + idAtendimento + " | Data Abertura: " + getDataAbertura() + " | Responsável: " + responsavel + " | Situação: " + situacao;
     }
     
     public List<Tramite> getTramites(){

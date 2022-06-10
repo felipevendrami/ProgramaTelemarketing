@@ -4,9 +4,6 @@
  */
 package View;
 
-import Model.Atendimento;
-import Model.Venda;
-
 /**
  *
  * @author felip
@@ -34,7 +31,6 @@ public class MenuInicialView extends javax.swing.JFrame {
         miNovoCliente = new javax.swing.JMenuItem();
         miNovaEmpresa = new javax.swing.JMenuItem();
         miNovoColaborador = new javax.swing.JMenuItem();
-        miListaClientes = new javax.swing.JMenuItem();
         miListaEmpresas = new javax.swing.JMenuItem();
         miListaColaboradores = new javax.swing.JMenuItem();
         mnProdutos = new javax.swing.JMenu();
@@ -42,8 +38,6 @@ public class MenuInicialView extends javax.swing.JFrame {
         miNovoAtendimento = new javax.swing.JMenuItem();
         miListaAtendimentos = new javax.swing.JMenuItem();
         miRelatorioAtedimento = new javax.swing.JMenuItem();
-        mnPedido = new javax.swing.JMenu();
-        miListaPedidos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Telemarketing");
@@ -78,15 +72,6 @@ public class MenuInicialView extends javax.swing.JFrame {
             }
         });
         mnEntidades.add(miNovoColaborador);
-
-        miListaClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        miListaClientes.setText("Lista Clientes ...");
-        miListaClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miListaClientesActionPerformed(evt);
-            }
-        });
-        mnEntidades.add(miListaClientes);
 
         miListaEmpresas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miListaEmpresas.setText("Lista Empresas ...");
@@ -146,21 +131,6 @@ public class MenuInicialView extends javax.swing.JFrame {
 
         mbSistemaTelemarketing.add(mnAtendimento);
 
-        mnPedido.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mnPedido.setText("Pedido");
-        mnPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-
-        miListaPedidos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        miListaPedidos.setText("Lista Pedidos ...");
-        miListaPedidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miListaPedidosActionPerformed(evt);
-            }
-        });
-        mnPedido.add(miListaPedidos);
-
-        mbSistemaTelemarketing.add(mnPedido);
-
         setJMenuBar(mbSistemaTelemarketing);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,12 +156,7 @@ public class MenuInicialView extends javax.swing.JFrame {
         ListaAtendimentosView listaAtendimentosView = new ListaAtendimentosView();
         listaAtendimentosView.setVisible(true);
     }//GEN-LAST:event_miListaAtendimentosActionPerformed
-
-    private void miListaPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaPedidosActionPerformed
-        ListaPedidosView listaPedidosView = new ListaPedidosView(this);
-        listaPedidosView.setVisible(true);
-    }//GEN-LAST:event_miListaPedidosActionPerformed
-
+/**/
     private void miRelatorioAtedimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRelatorioAtedimentoActionPerformed
         RelatorioAtendimentoView relatorioAtendimento = new RelatorioAtendimentoView();
         relatorioAtendimento.setVisible(true);
@@ -211,12 +176,7 @@ public class MenuInicialView extends javax.swing.JFrame {
         CadastroColaboradorView cadastroColaborador = new CadastroColaboradorView();
         cadastroColaborador.setVisible(true);
     }//GEN-LAST:event_miNovoColaboradorActionPerformed
-
-    private void miListaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaClientesActionPerformed
-        SelecaoClienteView selecaoCliente = new SelecaoClienteView();
-        selecaoCliente.setVisible(true);
-    }//GEN-LAST:event_miListaClientesActionPerformed
-
+/**/
     private void miListaColaboradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaColaboradoresActionPerformed
         SelecaoColaboradorView selecaoColaboradorView = new SelecaoColaboradorView();
         selecaoColaboradorView.setVisible(true);
@@ -265,10 +225,8 @@ public class MenuInicialView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar mbSistemaTelemarketing;
     private javax.swing.JMenuItem miListaAtendimentos;
-    private javax.swing.JMenuItem miListaClientes;
     private javax.swing.JMenuItem miListaColaboradores;
     private javax.swing.JMenuItem miListaEmpresas;
-    private javax.swing.JMenuItem miListaPedidos;
     private javax.swing.JMenuItem miNovaEmpresa;
     private javax.swing.JMenuItem miNovoAtendimento;
     private javax.swing.JMenuItem miNovoCliente;
@@ -276,7 +234,6 @@ public class MenuInicialView extends javax.swing.JFrame {
     private javax.swing.JMenuItem miRelatorioAtedimento;
     private javax.swing.JMenu mnAtendimento;
     private javax.swing.JMenu mnEntidades;
-    private javax.swing.JMenu mnPedido;
     private javax.swing.JMenu mnProdutos;
     // End of variables declaration//GEN-END:variables
 }

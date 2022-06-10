@@ -6,7 +6,9 @@ package View;
 
 import DAO.AtendimentoListDAO;
 import Model.Atendimento;
+import Model.Colaborador;
 import Model.Divulgacao;
+import Model.Empresa;
 import Repositorio.AtendimentoRepositorio;
 import javax.swing.JOptionPane;
 
@@ -35,8 +37,8 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
     
     public Atendimento recuperarAtendimentoDivulgacao(){
         // Recuperamos as informações da tela
-        String empresa = cadAtendimentoView.getEmpresa();
-        String responsavel = cadAtendimentoView.getResponsavel();
+        Empresa empresa = cadAtendimentoView.getEmpresa();
+        Colaborador responsavel = cadAtendimentoView.getResponsavel();
         String tipoContato = cbTipoContato.getSelectedItem().toString();
         String contato = tfContato.getText();
         String tramite = taTramite.getText();
@@ -44,6 +46,12 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
         // Criamos o atendimento e retornamos
         Atendimento atendimentoDivulgacao = new Divulgacao(tipoContato, contato, responsavel, tramite, empresa);
         return atendimentoDivulgacao;
+    }
+    
+    public void processoAberturaAtendimento(){
+        abrirAtendimentoDivulgacao();
+        cadAtendimentoView.limparTela();
+        this.setVisible(false);
     }
     
     /**
@@ -177,13 +185,10 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
         try {
-            abrirAtendimentoDivulgacao();
-            cadAtendimentoView.limparTela();
-            this.setVisible(false);
+            processoAberturaAtendimento();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
         }
-
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -232,7 +237,7 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
-    private javax.swing.JButton btConfirmar;
+    public javax.swing.JButton btConfirmar;
     private javax.swing.JButton btNovaVenda;
     private javax.swing.JComboBox<String> cbTipoContato;
     private javax.swing.JLabel jLabel1;

@@ -16,10 +16,13 @@ import javax.swing.JOptionPane;
  */
 public class SelecaoClienteView extends javax.swing.JFrame {
 
+    private Cliente cliente;
+    private CadastroVendaView cadVendaView;
     /**
      * Creates new form SelecaoClienteView
      */
-    public SelecaoClienteView() {
+    public SelecaoClienteView(CadastroVendaView cadVendaView) {
+        this.cadVendaView = cadVendaView;
         initComponents();
         preencheTabelaClientes();
     }
@@ -34,8 +37,29 @@ public class SelecaoClienteView extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Não foi possível recuperar dados dos clientes!");
         }
-
     }
+    
+    public int carregaClienteSelecionado(){
+        int linha = tbClientes.getSelectedRow();
+        int idCliente = Integer.parseInt(tbClientes.getValueAt(linha, 0).toString());
+        return idCliente;
+    }
+    
+    public void localizarCliente(){
+        ClienteRepositorio clienteRepositorio = new ClienteListDAO();
+        int idCliente = carregaClienteSelecionado();
+        for(Cliente cliente : clienteRepositorio.recuperarTodosClientes()){
+            if(cliente.getIdEntidade() == idCliente){
+                this.cliente = cliente;
+            }
+        }
+    }
+    
+    public void setClienteSelecionado(){
+        cadVendaView.setCliente(this.cliente);
+        cadVendaView.carregaCliente();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,6 +72,7 @@ public class SelecaoClienteView extends javax.swing.JFrame {
         jScrollPane = new javax.swing.JScrollPane();
         tbClientes = new javax.swing.JTable();
         btFechar = new javax.swing.JButton();
+        btVisualizar = new javax.swing.JButton();
         btSelecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -94,13 +119,23 @@ public class SelecaoClienteView extends javax.swing.JFrame {
             }
         });
 
-        btSelecionar.setText("Visualizar");
+        btVisualizar.setText("Visualizar");
+
+        btSelecionar.setText("Selecionar");
+        btSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSelecionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 606, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(346, Short.MAX_VALUE)
+                .addComponent(btSelecionar)
+                .addGap(176, 176, 176))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -108,14 +143,17 @@ public class SelecaoClienteView extends javax.swing.JFrame {
                         .addComponent(jScrollPane)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGap(432, 432, 432)
-                            .addComponent(btSelecionar)
+                            .addComponent(btVisualizar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btFechar)))
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(272, Short.MAX_VALUE)
+                .addComponent(btSelecionar)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -123,7 +161,7 @@ public class SelecaoClienteView extends javax.swing.JFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btFechar)
-                        .addComponent(btSelecionar))
+                        .addComponent(btVisualizar))
                     .addContainerGap()))
         );
 
@@ -133,6 +171,12 @@ public class SelecaoClienteView extends javax.swing.JFrame {
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btFecharActionPerformed
+
+    private void btSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelecionarActionPerformed
+        localizarCliente();
+        setClienteSelecionado();
+        this.setVisible(false);
+    }//GEN-LAST:event_btSelecionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,16 +206,17 @@ public class SelecaoClienteView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SelecaoClienteView().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new SelecaoClienteView().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btFechar;
     private javax.swing.JButton btSelecionar;
+    private javax.swing.JButton btVisualizar;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable tbClientes;
     // End of variables declaration//GEN-END:variables

@@ -39,7 +39,7 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
     public void preencheTabelaAtendimentos(){
         DefaultTableModel tabelaAtendimentos = (DefaultTableModel) tbAtendimentos.getModel();
         for(Atendimento atendimento : retornaListaOrdanada()){
-            tabelaAtendimentos.addRow(new Object[]{atendimento.getIdAtendimento(), atendimento.getTipo(), atendimento.getEmpresa(), "Teste", atendimento.getDataAbertura(), atendimento.getSituacao(), atendimento.retornarUltimoTramite().getDataTramite()});
+            tabelaAtendimentos.addRow(new Object[]{atendimento.getIdAtendimento(), atendimento.getTipo(), atendimento.getEmpresa().getNome(), atendimento.getResponsavel().getNome(), atendimento.getDataAbertura(), atendimento.getSituacao(), atendimento.retornarUltimoTramite().getDataTramite()});
         }
     }
     

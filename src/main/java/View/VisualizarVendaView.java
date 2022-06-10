@@ -4,16 +4,21 @@
  */
 package View;
 
+import Model.Venda;
+
 /**
  *
  * @author felip
  */
 public class VisualizarVendaView extends javax.swing.JFrame {
 
+    private Venda venda;
+    
     /**
      * Creates new form VisualizarAtendimentoView
      */
-    public VisualizarVendaView() {
+    public VisualizarVendaView(Venda venda) {
+        this.venda = venda;
         initComponents();
     }
 
@@ -26,18 +31,24 @@ public class VisualizarVendaView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane = new javax.swing.JScrollPane();
-        taVisualizaPedido = new javax.swing.JTextArea();
+        taVisualizaInfoPedido = new javax.swing.JTextArea();
         btFechar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taVisualizaItendPedido = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Visualização do Pedido");
         setMinimumSize(new java.awt.Dimension(600, 410));
         setResizable(false);
 
-        taVisualizaPedido.setColumns(20);
-        taVisualizaPedido.setRows(5);
-        jScrollPane.setViewportView(taVisualizaPedido);
+        jLabel3.setText("Pedido > Lista Pedidos > Visualizar Informações do Pedido");
+
+        taVisualizaInfoPedido.setColumns(20);
+        taVisualizaInfoPedido.setRows(5);
+        jScrollPane.setViewportView(taVisualizaInfoPedido);
 
         btFechar.setText("Fechar");
         btFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -46,25 +57,48 @@ public class VisualizarVendaView extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Pedido > Lista Pedidos > Visualizar Itens do Pedido");
+
+        taVisualizaItendPedido.setColumns(20);
+        taVisualizaItendPedido.setRows(5);
+        jScrollPane1.setViewportView(taVisualizaItendPedido);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btFechar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btFechar)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btFechar)
                 .addContainerGap())
         );
@@ -107,16 +141,20 @@ public class VisualizarVendaView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VisualizarVendaView().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new VisualizarVendaView().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btFechar;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JTextArea taVisualizaPedido;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea taVisualizaInfoPedido;
+    private javax.swing.JTextArea taVisualizaItendPedido;
     // End of variables declaration//GEN-END:variables
 }

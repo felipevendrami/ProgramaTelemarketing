@@ -4,22 +4,68 @@
  */
 package View;
 
+import DAO.VendaListDAO;
+import Model.ISelecaoVendaView;
+import Model.Venda;
+import Repositorio.VendaRepositorio;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author felip
  */
 public class ListaPedidosView extends javax.swing.JFrame {
-
-    private MenuInicialView menuView;
+    
+    private Venda venda;
+    private ISelecaoVendaView atendimentoSelecaoVenda;
     
     /**
      * Creates new form ListaAtendimentosView
      */
-    public ListaPedidosView(MenuInicialView menuView) {
-        this.menuView = menuView;
+    public ListaPedidosView(ISelecaoVendaView atendimentoSelecaoVenda) {
+        this.atendimentoSelecaoVenda = atendimentoSelecaoVenda;
         initComponents();
+        preencheTabelaVenda();
     }
 
+    public List<Venda> retornaListaVendas(){
+        VendaRepositorio vendaRepositorio = new VendaListDAO();
+        List<Venda> listaVenda = vendaRepositorio.recuperarTodasVendas();
+        return listaVenda;
+    }
+    
+    public void preencheTabelaVenda(){
+        DefaultTableModel tabelaVendas = (DefaultTableModel) tbPedidos.getModel();
+        for(Venda venda : retornaListaVendas()){
+            tabelaVendas.addRow(new Object[]{venda.getIdVenda(), venda.getCliente().getNome(), venda.getDataVenda(), venda.getTotal()});
+        }
+    }
+    
+    public int carregaVendaSelecionada(){
+        int linha = tbPedidos.getSelectedRow();
+        int idVenda = Integer.parseInt(tbPedidos.getValueAt(linha, 0).toString());
+        return idVenda;
+    }
+    
+    public void localizarVenda(){
+        VendaRepositorio vendaRepositorio = new VendaListDAO();
+        for(Venda venda : vendaRepositorio.recuperarTodasVendas()){
+            if(venda.getIdVenda() == carregaVendaSelecionada()){
+                this.venda = venda;
+            }
+        }
+    }
+    
+    public Venda getVendaSelecionada(){
+        return this.venda;
+    }
+    
+    public void setVendaSelecionado(){
+        atendimentoSelecaoVenda.setVenda(venda);
+        atendimentoSelecaoVenda.carregaVenda();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,6 +79,7 @@ public class ListaPedidosView extends javax.swing.JFrame {
         tbPedidos = new javax.swing.JTable();
         btFechar = new javax.swing.JButton();
         btVisualizar = new javax.swing.JButton();
+        btSelecionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Pedidos");
@@ -83,6 +130,13 @@ public class ListaPedidosView extends javax.swing.JFrame {
             }
         });
 
+        btSelecionar.setText("Selecionar");
+        btSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSelecionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,6 +147,8 @@ public class ListaPedidosView extends javax.swing.JFrame {
                     .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btSelecionar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btVisualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btFechar)))
@@ -106,7 +162,8 @@ public class ListaPedidosView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btFechar)
-                    .addComponent(btVisualizar))
+                    .addComponent(btVisualizar)
+                    .addComponent(btSelecionar))
                 .addContainerGap())
         );
 
@@ -114,13 +171,19 @@ public class ListaPedidosView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
-//        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView();
-//        visualizarAtendimentoView.setVisible(true);
+        localizarVenda();
+        VisualizarVendaView visualizarVenda = new VisualizarVendaView(this.venda);
+        visualizarVenda.setVisible(true);
     }//GEN-LAST:event_btVisualizarActionPerformed
 
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btFecharActionPerformed
+
+    private void btSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelecionarActionPerformed
+        localizarVenda();
+        this.setVisible(false);
+    }//GEN-LAST:event_btSelecionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +223,7 @@ public class ListaPedidosView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btFechar;
+    private javax.swing.JButton btSelecionar;
     private javax.swing.JButton btVisualizar;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable tbPedidos;

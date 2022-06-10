@@ -4,19 +4,73 @@
  */
 package View;
 
+import DAO.AtendimentoListDAO;
+import Model.Atendimento;
+import Model.Colaborador;
+import Model.Empresa;
+import Model.ISelecaoVendaView;
+import Model.Pesquisa;
+import Model.Venda;
+import Repositorio.AtendimentoRepositorio;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author felip
  */
-public class AtendimentoPesquisaView extends javax.swing.JFrame {
+public class AtendimentoPesquisaView extends javax.swing.JFrame implements ISelecaoVendaView{
 
+    private CadastroAtendimentoView cadAtendimentoView;
+    private Venda venda;
+    
     /**
      * Creates new form AtendimentoPesquisaView
      */
-    public AtendimentoPesquisaView() {
+    public AtendimentoPesquisaView(CadastroAtendimentoView cadAtendimentoView) {
+        this.cadAtendimentoView = cadAtendimentoView;
         initComponents();
     }
 
+    public void abrirAtendimentoPesquisa(){
+        AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
+        Atendimento atendimento = recuperarAtendimentoPesquisa();
+        atendimentoRepositorio.salvarAtendimento(atendimento);
+        JOptionPane.showMessageDialog(null, "Atendimento aberto com sucesso");
+    }
+    
+    public Atendimento recuperarAtendimentoPesquisa(){
+        //Recuperamos as informações da tela
+        Venda venda = this.venda;
+        Empresa empresa = cadAtendimentoView.getEmpresa();
+        Colaborador responsavel = cadAtendimentoView.getResponsavel();
+        int satisfacaoProduto = Integer.parseInt(tfSatisfProdutos.getText());
+        int satisfacaoAtendimento = Integer.parseInt(tfSatisfAtendimento.getText());
+        String tramite = taTramite.getText();
+        //Criamos o atendimento e retornamos
+        Atendimento atendimentoPesquisa = new Pesquisa(venda, satisfacaoProduto, satisfacaoAtendimento, responsavel, tramite, empresa);
+        return atendimentoPesquisa;
+    }
+    
+    public boolean validaNiveisSatisfacao(){
+        int satisfacaoProduto = Integer.parseInt(tfSatisfProdutos.getText());
+        int satisfacaoAtendimento = Integer.parseInt(tfSatisfAtendimento.getText());
+        if((satisfacaoProduto >= 1 && satisfacaoProduto <= 3) && (satisfacaoAtendimento >= 1 && satisfacaoAtendimento <= 3)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    @Override
+    public void carregaVenda(){
+        String venda = this.venda.retornaInformacoesCurto();
+        tfPedido.setText(venda);
+    }
+    
+    @Override
+    public void setVenda(Venda venda){
+        this.venda = venda;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,7 +90,7 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         tfSatisfProdutos = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        taSatisfAtendimento = new javax.swing.JTextField();
+        tfSatisfAtendimento = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taTramite = new javax.swing.JTextArea();
@@ -50,6 +104,11 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame {
         jLabel1.setText("Pedido:");
 
         btBuscarPedido.setText("Buscar");
+        btBuscarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarPedidoActionPerformed(evt);
+            }
+        });
 
         taOrientacoes.setEditable(false);
         taOrientacoes.setColumns(20);
@@ -109,7 +168,7 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(taSatisfAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfSatisfAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(69, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -138,7 +197,7 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(tfSatisfProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(taSatisfAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfSatisfAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -160,8 +219,23 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        // TODO add your handling code here:
+        try {
+            if(validaNiveisSatisfacao() == true){
+                abrirAtendimentoPesquisa();
+                cadAtendimentoView.limparTela();
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "Verificar os níveis de satisfação");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
+        }
     }//GEN-LAST:event_btConfirmarActionPerformed
+
+    private void btBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoActionPerformed
+        ListaPedidosView listaPedidos = new ListaPedidosView(this);
+        listaPedidos.setVisible(true);
+    }//GEN-LAST:event_btBuscarPedidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,11 +265,11 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AtendimentoPesquisaView().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new AtendimentoPesquisaView().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -211,9 +285,9 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea taOrientacoes;
-    private javax.swing.JTextField taSatisfAtendimento;
     private javax.swing.JTextArea taTramite;
     private javax.swing.JTextField tfPedido;
+    private javax.swing.JTextField tfSatisfAtendimento;
     private javax.swing.JTextField tfSatisfProdutos;
     // End of variables declaration//GEN-END:variables
 }

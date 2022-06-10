@@ -4,33 +4,48 @@
  */
 package View;
 
+import DAO.VendaListDAO;
+import Model.Cliente;
 import Model.Venda;
-import javax.swing.table.DefaultTableModel;
+import Repositorio.VendaRepositorio;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author felip
  */
-public class CadastroVendaView extends javax.swing.JFrame {
+public class CadastroVendaView extends javax.swing.JFrame{
 
-    private DefaultTableModel tabelaProdutos;
+    private Cliente cliente;
+    private List<String> itensPedido;
+    private AtendimentoDivulgacaoView atendimentoDivulgacao;
     
     /**
      * Creates new form DivulgacaoVendaView
      */
     public CadastroVendaView() {
+        this.itensPedido = new ArrayList<>();
         initComponents();
     }
 
+    public void cadastrarPedidoVenda(){
+        VendaRepositorio vendaRepositorio = new VendaListDAO();
+        Venda venda = recuperarVenda();
+        vendaRepositorio.salvarVenda(venda);
+    }
+    
     public Venda recuperarVenda(){
-        String cliente = tfCliente.getText();
+        // Recuperamos as informações da tela
+        Cliente cliente = this.cliente;
         String situacao = cbSituacaoVenda.getSelectedItem().toString();
-        
-        return null;
+        Venda venda = new Venda(cliente, situacao);
+        return venda;
     }
     
     public void cadastrarVenda(){
-        
+        cadastrarPedidoVenda();
     }
     
     public void adicionarItemVenda(){
@@ -38,6 +53,15 @@ public class CadastroVendaView extends javax.swing.JFrame {
         selecaoProdutoView.setVisible(true);
     }
     
+    public void carregaCliente(){
+        this.cliente = cliente;
+        String cliente = this.cliente.getNome();
+        tfCliente.setText(cliente);
+    }
+    
+    public void setCliente(Cliente cliente){
+        this.cliente = cliente;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,14 +93,27 @@ public class CadastroVendaView extends javax.swing.JFrame {
         btConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Pedido de Venda");
 
         jLabel3.setText("Divulgação > Nova Venda");
 
         jLabel1.setText("Cliente:");
 
+        tfCliente.setEditable(false);
+
         btBuscarCliente.setText("Buscar");
+        btBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarClienteActionPerformed(evt);
+            }
+        });
 
         btCadastrarCliente.setText("Cadastrar");
+        btCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastrarClienteActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Situação:");
 
@@ -240,12 +277,27 @@ public class CadastroVendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        
+        try {
+            atendimentoDivulgacao.processoAberturaAtendimento();
+            this.setVisible(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
+        }
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarProdutoActionPerformed
         
     }//GEN-LAST:event_btAdicionarProdutoActionPerformed
+
+    private void btCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarClienteActionPerformed
+        CadastroClienteView cadastroCliente = new CadastroClienteView();
+        cadastroCliente.setVisible(true);
+    }//GEN-LAST:event_btCadastrarClienteActionPerformed
+
+    private void btBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarClienteActionPerformed
+        SelecaoClienteView selecaoCliente = new SelecaoClienteView(this);
+        selecaoCliente.setVisible(true);
+    }//GEN-LAST:event_btBuscarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,11 +328,11 @@ public class CadastroVendaView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadastroVendaView().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CadastroVendaView().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

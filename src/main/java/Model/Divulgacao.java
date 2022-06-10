@@ -15,7 +15,7 @@ public class Divulgacao extends Atendimento{
     private boolean conversao;
     private Venda venda;
 
-    public Divulgacao(String tipoContato, String contato, String responsavel, String descricaoTramite, String empresa) {
+    public Divulgacao(String tipoContato, String contato, Colaborador responsavel, String descricaoTramite, Empresa empresa) {
         super(responsavel, descricaoTramite, empresa);
         this.tipoContato = tipoContato;
         this.contato = contato;
@@ -24,7 +24,7 @@ public class Divulgacao extends Atendimento{
 
     @Override
     public String toString() {
-        return super.toString() + " Divulgacao{" + "tipoContato=" + tipoContato + ", contato=" + contato + ", conversao=" + conversao + '}';
+        return super.toString() + " |  Tipo: Divulgacao | Contato: " + contato + " | Conversão ? " + conversao;
     }
 
     public String getTipoContato() {
