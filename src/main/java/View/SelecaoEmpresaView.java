@@ -38,6 +38,18 @@ public class SelecaoEmpresaView extends javax.swing.JFrame {
         }
 
     }
+    
+    public int carregaEmpresaSelecionada(){
+        int linha = tbEmpresa.getSelectedRow();
+        int idEmpresa = Integer.parseInt(tbEmpresa.getValueAt(linha, 0).toString());
+        return idEmpresa;
+    }    
+    
+    public void abreVisualizacaoEmpresa(){
+        VisualizarEmpresaView visualizarEmpresaView = new VisualizarEmpresaView(carregaEmpresaSelecionada());
+        visualizarEmpresaView.setVisible(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,7 +62,7 @@ public class SelecaoEmpresaView extends javax.swing.JFrame {
         jScrollPane = new javax.swing.JScrollPane();
         tbEmpresa = new javax.swing.JTable();
         btFechar = new javax.swing.JButton();
-        btSelecionar = new javax.swing.JButton();
+        btVisualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Selecionar Cliente");
@@ -95,7 +107,12 @@ public class SelecaoEmpresaView extends javax.swing.JFrame {
             }
         });
 
-        btSelecionar.setText("Visualizar");
+        btVisualizar.setText("Visualizar");
+        btVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVisualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,7 +126,7 @@ public class SelecaoEmpresaView extends javax.swing.JFrame {
                         .addComponent(jScrollPane)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGap(432, 432, 432)
-                            .addComponent(btSelecionar)
+                            .addComponent(btVisualizar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btFechar)))
                     .addContainerGap()))
@@ -124,7 +141,7 @@ public class SelecaoEmpresaView extends javax.swing.JFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btFechar)
-                        .addComponent(btSelecionar))
+                        .addComponent(btVisualizar))
                     .addContainerGap()))
         );
 
@@ -134,6 +151,14 @@ public class SelecaoEmpresaView extends javax.swing.JFrame {
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btFecharActionPerformed
+
+    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
+        try {
+            abreVisualizacaoEmpresa();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao visualizar!");
+        }
+    }//GEN-LAST:event_btVisualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,7 +204,7 @@ public class SelecaoEmpresaView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btFechar;
-    private javax.swing.JButton btSelecionar;
+    private javax.swing.JButton btVisualizar;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable tbEmpresa;
     // End of variables declaration//GEN-END:variables

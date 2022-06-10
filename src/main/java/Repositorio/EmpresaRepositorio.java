@@ -4,7 +4,7 @@
  */
 package Repositorio;
 import Model.Empresa;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -12,6 +12,6 @@ import java.util.List;
  * @author julia
  */
 public interface EmpresaRepositorio {
-    public void salvarEmpresa(Empresa empresa);
-    public List<Empresa> recuperarTodasEmpresas();
+    public boolean salvarEmpresa(Empresa empresa);
+    public Set<Empresa> recuperarTodasEmpresas();
 }

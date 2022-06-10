@@ -13,7 +13,7 @@ import Model.Endereco;
 
 /**
  *
- * @author felip
+ * @author julia
  */
 public class CadastroEmpresaView extends javax.swing.JFrame {
     
@@ -246,9 +246,13 @@ public class CadastroEmpresaView extends javax.swing.JFrame {
         try {
             EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
             Empresa empresa = recuperarEmpresas();
-            empresaRepositorio.salvarEmpresa(empresa);
-            JOptionPane.showMessageDialog(null, "Empresa criado com sucesso!");
-            this.setVisible(false);
+            boolean cadastroOk = empresaRepositorio.salvarEmpresa(empresa);
+            if (cadastroOk) {
+                JOptionPane.showMessageDialog(null, "Empresa criado com sucesso!");
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "CNPJ já cadastrado!");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Um erro aconteceu ao cadastrar empresa!");
         }

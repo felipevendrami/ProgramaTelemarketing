@@ -57,4 +57,18 @@ public abstract class Entidade {
             System.out.println(contato.toString());
         }
     }
+
+    @Override
+    public String toString() {
+        String informacoes =  "ID da Entidade: " + this.getIdEntidade() + "\nNome: " + this.getNome() +
+                "\nEstado: " + this.getEndereco().getEstado() + " -- Cidade: " + this.getEndereco().getCidade() + " -- Bairro: " + 
+                this.getEndereco().getBairro() + " -- Rua: " + this.getEndereco().getRua();
+        for (Contato contato : contatos) {
+            informacoes += "\nEmail: " + contato.getEmail() + " -- Telefone: " + contato.getTelefone();
+        }
+        
+        return informacoes;
+    }
+    
+    
 }

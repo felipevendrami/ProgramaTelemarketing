@@ -34,6 +34,13 @@ public class Colaborador extends Entidade {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+
+    @Override
+    public String toString() {
+        return "Cargo: " + this.getCargo() + "\nSetor: " + this.getSetor() + "\n" + super.toString();
+    }
+    
+    
     
     
 }

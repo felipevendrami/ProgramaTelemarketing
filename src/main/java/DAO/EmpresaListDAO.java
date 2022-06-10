@@ -6,8 +6,8 @@ package DAO;
 
 import Model.Empresa;
 import Repositorio.EmpresaRepositorio;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -15,15 +15,15 @@ import java.util.List;
  */
 public class EmpresaListDAO implements EmpresaRepositorio{
 
-    private static List<Empresa> empresas = new ArrayList<>();
+    private static Set<Empresa> empresas = new HashSet<>();
     
     @Override
-    public void salvarEmpresa(Empresa empresa) {
-        empresas.add(empresa);
+    public boolean salvarEmpresa(Empresa empresa) {
+        return empresas.add(empresa);
     }
 
     @Override
-    public List<Empresa> recuperarTodasEmpresas() {
+    public Set<Empresa> recuperarTodasEmpresas() {
         return this.empresas;
     }
     
