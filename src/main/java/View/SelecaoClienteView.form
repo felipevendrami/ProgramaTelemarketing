@@ -31,7 +31,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="606" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="346" max="32767" attributes="0"/>
+              <Component id="btSelecionar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
+          </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
@@ -39,7 +43,7 @@
                       <Component id="jScrollPane" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="432" pref="432" max="-2" attributes="0"/>
-                          <Component id="btSelecionar" min="-2" max="-2" attributes="0"/>
+                          <Component id="btVisualizar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btFechar" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -51,7 +55,11 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="272" max="32767" attributes="0"/>
+              <Component id="btSelecionar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
@@ -59,7 +67,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btFechar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btSelecionar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btVisualizar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -121,10 +129,18 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btFecharActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btSelecionar">
+    <Component class="javax.swing.JButton" name="btVisualizar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Visualizar"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btSelecionar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Selecionar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSelecionarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

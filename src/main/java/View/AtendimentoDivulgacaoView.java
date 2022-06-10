@@ -48,6 +48,12 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
         return atendimentoDivulgacao;
     }
     
+    public void processoAberturaAtendimento(){
+        abrirAtendimentoDivulgacao();
+        cadAtendimentoView.limparTela();
+        this.setVisible(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -179,9 +185,7 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
         try {
-            abrirAtendimentoDivulgacao();
-            cadAtendimentoView.limparTela();
-            this.setVisible(false);
+            processoAberturaAtendimento();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
         }
@@ -233,7 +237,7 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
-    private javax.swing.JButton btConfirmar;
+    public javax.swing.JButton btConfirmar;
     private javax.swing.JButton btNovaVenda;
     private javax.swing.JComboBox<String> cbTipoContato;
     private javax.swing.JLabel jLabel1;

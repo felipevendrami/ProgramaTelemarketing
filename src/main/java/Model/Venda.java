@@ -85,4 +85,9 @@ public class Venda {
         LocalDateTime localDateTime = LocalDateTime.now();
         return localDateTime;
     }
+    
+    public String retornaInformacoesCurto(){
+        String retorno = "Id: " + idVenda + " | Cliente: " + cliente.getNome() + " | Total: " + total;
+        return retorno;
+    }
 }

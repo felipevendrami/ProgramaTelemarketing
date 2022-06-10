@@ -8,6 +8,7 @@ import DAO.AtendimentoListDAO;
 import Model.Atendimento;
 import Model.Colaborador;
 import Model.Empresa;
+import Model.ISelecaoVendaView;
 import Model.Pesquisa;
 import Model.Venda;
 import Repositorio.AtendimentoRepositorio;
@@ -17,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author felip
  */
-public class AtendimentoPesquisaView extends javax.swing.JFrame {
+public class AtendimentoPesquisaView extends javax.swing.JFrame implements ISelecaoVendaView{
 
     private CadastroAtendimentoView cadAtendimentoView;
     private Venda venda;
@@ -58,6 +59,17 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame {
         } else {
             return false;
         }
+    }
+    
+    @Override
+    public void carregaVenda(){
+        String venda = this.venda.retornaInformacoesCurto();
+        tfPedido.setText(venda);
+    }
+    
+    @Override
+    public void setVenda(Venda venda){
+        this.venda = venda;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -221,9 +233,8 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoActionPerformed
-        ListaPedidosView listaPedidos = new ListaPedidosView();
+        ListaPedidosView listaPedidos = new ListaPedidosView(this);
         listaPedidos.setVisible(true);
-        this.venda = listaPedidos.getVendaSelecionada();
     }//GEN-LAST:event_btBuscarPedidoActionPerformed
 
     /**
