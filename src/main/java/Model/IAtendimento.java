@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  *
  * @author felip
  */
-public interface AtendimentoInterface {
+public interface IAtendimento {
     
     public String getDataHoraFormatado(LocalDateTime dataHora);
     public LocalDateTime getDataHoraAtual();

@@ -14,7 +14,7 @@ import java.util.List;
  * @author felip
  */
 
-public abstract class Atendimento implements AtendimentoInterface, Comparable<Atendimento>{
+public abstract class Atendimento implements IAtendimento, Comparable<Atendimento>{
     
     private static int geradorIdAtendimento = 0;
     protected int idAtendimento;

@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author felip
  */
-public class Tramite implements AtendimentoInterface, Comparable<Tramite>{
+public class Tramite implements IAtendimento, Comparable<Tramite>{
     
     private static int geradorIdTramite = 0;
     

@@ -28,15 +28,29 @@ public class App {
         EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
         
         Endereco endereco = new Endereco("Rua do Teste", "Testinho", "Ibirama", "SC");
+        Endereco endereco2 = new Endereco("Rua do Seu Chico", "Centro", "Ibirama", "SC");
+        Endereco endereco3 = new Endereco("Rua Testinho", "Bela Vista", "Ibirama", "SC");
         
-        Cliente cliente = new Cliente("Paulo", endereco, null, "123.456");
+        Cliente cliente = new Cliente("Paulo", endereco, null, "123.456.120-66");
+        Cliente cliente2 = new Cliente("Paulo", endereco2, null, "774.669.889-99");
+        Cliente cliente3 = new Cliente("Paulo", endereco3, null, "123.456.741-95");
         clienteRepositorio.salvarCliente(cliente);
+        clienteRepositorio.salvarCliente(cliente2);
+        clienteRepositorio.salvarCliente(cliente3);
         
-        Colaborador colaborador = new Colaborador("Felipe", endereco, null, "SAC", "Divugação");
+        Colaborador colaborador = new Colaborador("Felipe Diniz", endereco, null, "SAC", "Divugação");
+        Colaborador colaborador2 = new Colaborador("Julia Sales", endereco2, null, "SAC", "Suporte");
+        Colaborador colaborador3 = new Colaborador("Nicoly Cuch", endereco3, null, "SAC", "Pesquisa");
         colaboradorRepositorio.salvarColaborador(colaborador);
+        colaboradorRepositorio.salvarColaborador(colaborador2);
+        colaboradorRepositorio.salvarColaborador(colaborador3);
         
-        Empresa empresa = new Empresa("Empresa 1", endereco, null, "445.669");
+        Empresa empresa = new Empresa("SuperLoja LTDA", endereco, null, "09.979.940/0001-49");
+        Empresa empresa2 = new Empresa("Eletro Marques LTDA", endereco2, null, "76.629.591/0001-22");
+        Empresa empresa3 = new Empresa("Celulares Alves", endereco3, null, "08.855.496/0001-97");
         empresaRepositorio.salvarEmpresa(empresa);
+        empresaRepositorio.salvarEmpresa(empresa2);
+        empresaRepositorio.salvarEmpresa(empresa3);
         
         MenuInicialView menuInicial = new MenuInicialView();
         menuInicial.setVisible(true);
