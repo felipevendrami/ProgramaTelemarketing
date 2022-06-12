@@ -11,6 +11,7 @@ import Repositorio.VendaRepositorio;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import Model.IAtendimentoDivulgacao;
 
 /**
  *
@@ -20,12 +21,13 @@ public class CadastroVendaView extends javax.swing.JFrame{
 
     private Cliente cliente;
     private List<String> itensPedido;
-    private AtendimentoDivulgacaoView atendimentoDivulgacao;
+    private IAtendimentoDivulgacao atendimentoDivulgacao;
     
     /**
      * Creates new form DivulgacaoVendaView
      */
-    public CadastroVendaView() {
+    public CadastroVendaView(IAtendimentoDivulgacao atendimentoDivulgacao) {
+        this.atendimentoDivulgacao = atendimentoDivulgacao;
         this.itensPedido = new ArrayList<>();
         initComponents();
     }
@@ -34,18 +36,20 @@ public class CadastroVendaView extends javax.swing.JFrame{
         VendaRepositorio vendaRepositorio = new VendaListDAO();
         Venda venda = recuperarVenda();
         vendaRepositorio.salvarVenda(venda);
+        JOptionPane.showMessageDialog(null, "Venda aberta com sucesso !");
     }
     
     public Venda recuperarVenda(){
         // Recuperamos as informações da tela
         Cliente cliente = this.cliente;
-        String situacao = cbSituacaoVenda.getSelectedItem().toString();
+        String situacao = getSituacaoVenda();
         Venda venda = new Venda(cliente, situacao);
         return venda;
     }
     
-    public void cadastrarVenda(){
-        cadastrarPedidoVenda();
+    public String getSituacaoVenda(){
+        String situacao = cbSituacaoVenda.getSelectedItem().toString();
+        return situacao;
     }
     
     public void adicionarItemVenda(){
@@ -129,6 +133,11 @@ public class CadastroVendaView extends javax.swing.JFrame{
         });
 
         btRemoverProduto.setText("Remover");
+        btRemoverProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRemoverProdutoActionPerformed(evt);
+            }
+        });
 
         tbItens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -278,7 +287,8 @@ public class CadastroVendaView extends javax.swing.JFrame{
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
         try {
-            atendimentoDivulgacao.processoAberturaAtendimento();
+            this.atendimentoDivulgacao.setConversaoDivulgacao(getSituacaoVenda());
+            cadastrarPedidoVenda();
             this.setVisible(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
@@ -298,6 +308,10 @@ public class CadastroVendaView extends javax.swing.JFrame{
         SelecaoClienteView selecaoCliente = new SelecaoClienteView(this);
         selecaoCliente.setVisible(true);
     }//GEN-LAST:event_btBuscarClienteActionPerformed
+
+    private void btRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverProdutoActionPerformed
+        
+    }//GEN-LAST:event_btRemoverProdutoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -28,12 +28,12 @@ public class App {
         EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
         
         Endereco endereco = new Endereco("Rua do Teste", "Testinho", "Ibirama", "SC");
-        Endereco endereco2 = new Endereco("Rua do Seu Chico", "Centro", "Ibirama", "SC");
-        Endereco endereco3 = new Endereco("Rua Testinho", "Bela Vista", "Ibirama", "SC");
+        Endereco endereco2 = new Endereco("Rua do Seu Chico", "Centro", "Rio do Sul", "SC");
+        Endereco endereco3 = new Endereco("Rua Testinho", "Bela Vista", "Blumenau", "SC");
         
-        Cliente cliente = new Cliente("Paulo", endereco, null, "123.456.120-66");
-        Cliente cliente2 = new Cliente("Paulo", endereco2, null, "774.669.889-99");
-        Cliente cliente3 = new Cliente("Paulo", endereco3, null, "123.456.741-95");
+        Cliente cliente = new Cliente("Paulo Assis", endereco, null, "123.456.120-66");
+        Cliente cliente2 = new Cliente("João Silva", endereco2, null, "774.669.889-99");
+        Cliente cliente3 = new Cliente("Jonas Santos", endereco3, null, "123.456.741-95");
         clienteRepositorio.salvarCliente(cliente);
         clienteRepositorio.salvarCliente(cliente2);
         clienteRepositorio.salvarCliente(cliente3);

@@ -11,14 +11,16 @@ import Model.Divulgacao;
 import Model.Empresa;
 import Repositorio.AtendimentoRepositorio;
 import javax.swing.JOptionPane;
+import Model.IAtendimentoDivulgacao;
 
 /**
  *
  * @author felip
  */
-public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
+public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAtendimentoDivulgacao {
 
     private CadastroAtendimentoView cadAtendimentoView;
+    private boolean conversaoVenda;
     
     /**
      * Creates new form AtendimentoDivulgacaoView
@@ -44,7 +46,7 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
         String tramite = taTramite.getText();
         
         // Criamos o atendimento e retornamos
-        Atendimento atendimentoDivulgacao = new Divulgacao(tipoContato, contato, responsavel, tramite, empresa);
+        Atendimento atendimentoDivulgacao = new Divulgacao(tipoContato, contato, responsavel, tramite, empresa, this.conversaoVenda);
         return atendimentoDivulgacao;
     }
     
@@ -53,6 +55,8 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
         cadAtendimentoView.limparTela();
         this.setVisible(false);
     }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -196,7 +200,7 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btNovaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovaVendaActionPerformed
-        CadastroVendaView cadastroVendaView = new CadastroVendaView();
+        CadastroVendaView cadastroVendaView = new CadastroVendaView(this);
         cadastroVendaView.setVisible(true);
     }//GEN-LAST:event_btNovaVendaActionPerformed
 
@@ -249,4 +253,13 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame {
     private javax.swing.JTextArea taTramite;
     private javax.swing.JTextField tfContato;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setConversaoDivulgacao(String situacaoVenda) {
+        if(situacaoVenda.equals("Pendente")){
+            this.conversaoVenda = false;
+        } else {
+            this.conversaoVenda = true;
+        }
+    }
 }

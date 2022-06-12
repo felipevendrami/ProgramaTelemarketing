@@ -15,18 +15,18 @@ public class Divulgacao extends Atendimento{
     private boolean conversao;
     private Venda venda;
 
-    public Divulgacao(String tipoContato, String contato, Colaborador responsavel, String descricaoTramite, Empresa empresa) {
+    public Divulgacao(String tipoContato, String contato, Colaborador responsavel, String descricaoTramite, Empresa empresa, boolean conversao) {
         super(responsavel, descricaoTramite, empresa);
         this.tipoContato = tipoContato;
         this.contato = contato;
-        this.conversao = false;
+        this.conversao = conversao;
     }
 
     @Override
     public String toString() {
         return super.toString() + " |  Tipo: Divulgacao | Contato: " + contato + " | Conversão ? " + conversao;
     }
-
+ 
     public String getTipoContato() {
         return tipoContato;
     }
@@ -34,17 +34,12 @@ public class Divulgacao extends Atendimento{
     public String getContato() {
         return contato;
     }
-
+    
+    public void setConversao(boolean conversao){
+        this.conversao = conversao;
+    }
+    
     public boolean isConversao() {
         return conversao;
-    }    
-    
-    public boolean gerarVenda(Cliente cliente, String situacao){
-        Venda venda = new Venda(cliente, situacao);
-        this.venda = venda;
-        if(this.venda.getSituacao().equals("Confirmado")){
-            this.conversao = true;
-        }
-        return true;
     }
 }

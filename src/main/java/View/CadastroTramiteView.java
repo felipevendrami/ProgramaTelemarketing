@@ -6,17 +6,20 @@ package View;
 
 import DAO.AtendimentoListDAO;
 import Model.Atendimento;
+import Model.Divulgacao;
 import Model.Tramite;
 import Repositorio.AtendimentoRepositorio;
 import javax.swing.JOptionPane;
+import Model.IAtendimentoDivulgacao;
 
 /**
  *
  * @author felip
  */
-public class CadastroTramiteView extends javax.swing.JFrame {
+public class CadastroTramiteView extends javax.swing.JFrame implements IAtendimentoDivulgacao {
 
     private Atendimento atendimento;
+    private boolean conversaoVenda;
     
     /**
      * Creates new form NovoTramiteView
@@ -164,7 +167,7 @@ public class CadastroTramiteView extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btNovaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovaVendaActionPerformed
-        CadastroVendaView cadastroVendaView = new CadastroVendaView();
+        CadastroVendaView cadastroVendaView = new CadastroVendaView(this);
         cadastroVendaView.setVisible(true);
     }//GEN-LAST:event_btNovaVendaActionPerformed
 
@@ -227,4 +230,14 @@ public class CadastroTramiteView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea taTramite;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setConversaoDivulgacao(String situacaoVenda) {
+        Divulgacao divulgacao = (Divulgacao) this.atendimento;
+        if(situacaoVenda.equals("Pendente")){
+            divulgacao.setConversao(false);
+        } else {
+            divulgacao.setConversao(false);
+        }
+    }
 }
