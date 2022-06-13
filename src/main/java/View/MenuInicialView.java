@@ -34,6 +34,7 @@ public class MenuInicialView extends javax.swing.JFrame {
         miListaEmpresas = new javax.swing.JMenuItem();
         miListaColaboradores = new javax.swing.JMenuItem();
         mnProdutos = new javax.swing.JMenu();
+        miNovoProduto = new javax.swing.JMenuItem();
         mnAtendimento = new javax.swing.JMenu();
         miNovoAtendimento = new javax.swing.JMenuItem();
         miListaAtendimentos = new javax.swing.JMenuItem();
@@ -96,6 +97,16 @@ public class MenuInicialView extends javax.swing.JFrame {
         mnProdutos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         mnProdutos.setText("Produto");
         mnProdutos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        miNovoProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        miNovoProduto.setText("Novo Produto ...");
+        miNovoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNovoProdutoActionPerformed(evt);
+            }
+        });
+        mnProdutos.add(miNovoProduto);
+
         mbSistemaTelemarketing.add(mnProdutos);
 
         mnAtendimento.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -187,6 +198,11 @@ public class MenuInicialView extends javax.swing.JFrame {
         selecaoEmpresaView.setVisible(true);
     }//GEN-LAST:event_miListaEmpresasActionPerformed
 
+    private void miNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoProdutoActionPerformed
+        CadastroProdutoView cadastroProdutoView = new CadastroProdutoView();
+        cadastroProdutoView.setVisible(true);
+    }//GEN-LAST:event_miNovoProdutoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -231,6 +247,7 @@ public class MenuInicialView extends javax.swing.JFrame {
     private javax.swing.JMenuItem miNovoAtendimento;
     private javax.swing.JMenuItem miNovoCliente;
     private javax.swing.JMenuItem miNovoColaborador;
+    private javax.swing.JMenuItem miNovoProduto;
     private javax.swing.JMenuItem miRelatorioAtedimento;
     private javax.swing.JMenu mnAtendimento;
     private javax.swing.JMenu mnEntidades;

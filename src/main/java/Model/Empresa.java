@@ -16,7 +16,7 @@ import java.util.Set;
 public class Empresa extends Entidade{
     
     private String cnpj;
-    private List<Item> produtos;
+    private List<Produto> produtos;
             
     public Empresa(String nome, Endereco endereco, Contato contato, String cnpj) {
         super(nome, endereco, contato);
@@ -28,11 +28,11 @@ public class Empresa extends Entidade{
         return cnpj;
     }
 
-    public List<Item> getProdutos() {
+    public List<Produto> getProdutos() {
         return produtos;
     }
     
-    public void addProduto(Item produto){
+    public void addProduto(Produto produto){
         this.produtos.add(produto);
     }    
 
