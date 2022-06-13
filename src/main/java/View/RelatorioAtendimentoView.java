@@ -27,18 +27,20 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
      */
     public RelatorioAtendimentoView() {
         initComponents();
+        carregaComboboxColaborador();
     }
 
-    public Colaborador retornaResponsavel(){
+    public void carregaComboboxColaborador(){
         ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
-        List<Colaborador> colaboradores = colaboradorRepositorio.recuperarTodosColaboradores();
-        String responsavelBusca = tfResponsavel.getText();
-        for(Colaborador responsavel : colaboradores){
-            if(responsavel.getNome().equals(responsavelBusca)){
-                return responsavel;
-            }
+        List<Colaborador> responsaveis = colaboradorRepositorio.recuperarTodosColaboradores();
+        for(Colaborador responsavel : responsaveis){
+            cbResponsavel.addItem(responsavel);
         }
-        return null;
+    }
+    
+    public Colaborador retornaResponsavel(){
+        Colaborador responsavel = cbResponsavel.getItemAt(cbResponsavel.getSelectedIndex());
+        return responsavel;
     }
     
     public List<Atendimento> montarListaFiltroResponsavel(){
@@ -54,7 +56,7 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
     }
     
     public List<Atendimento> montaListaOrdenada(){
-        if(tfResponsavel.getText() == null || tfResponsavel.getText().trim().equals("")){
+        if(cbResponsavel.getSelectedIndex() != (-1)){
             AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
             List<Atendimento> atendimentosList = atendimentoRepositorio.recuperarTodosAtendimentos();
             Collections.sort(atendimentosList);
@@ -89,12 +91,12 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
 
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        tfResponsavel = new javax.swing.JTextField();
         btFiltroResponsavel = new javax.swing.JButton();
         btOrdenarPrioridade = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         taAtendimentos = new javax.swing.JTextArea();
         btFechar = new javax.swing.JButton();
+        cbResponsavel = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatório de Atendimentos");
@@ -146,8 +148,8 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btFiltroResponsavel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -163,8 +165,8 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btOrdenarPrioridade)
                     .addComponent(jLabel1)
-                    .addComponent(tfResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btFiltroResponsavel))
+                    .addComponent(btFiltroResponsavel)
+                    .addComponent(cbResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -228,10 +230,10 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
     private javax.swing.JButton btFechar;
     private javax.swing.JButton btFiltroResponsavel;
     private javax.swing.JButton btOrdenarPrioridade;
+    private javax.swing.JComboBox<Colaborador> cbResponsavel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea taAtendimentos;
-    private javax.swing.JTextField tfResponsavel;
     // End of variables declaration//GEN-END:variables
 }

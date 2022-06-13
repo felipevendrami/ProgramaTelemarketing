@@ -39,8 +39,8 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="tfResponsavel" min="-2" pref="211" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cbResponsavel" min="-2" pref="223" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btFiltroResponsavel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
@@ -60,8 +60,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btOrdenarPrioridade" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfResponsavel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btFiltroResponsavel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbResponsavel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="248" max="-2" attributes="0"/>
@@ -82,8 +82,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Respons&#xe1;vel:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfResponsavel">
     </Component>
     <Component class="javax.swing.JButton" name="btFiltroResponsavel">
       <Properties>
@@ -124,6 +122,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btFecharActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbResponsavel">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Colaborador&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
