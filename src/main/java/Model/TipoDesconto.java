@@ -16,8 +16,10 @@ public class TipoDesconto {
     private int codigo;
     private String nome;
     private String descricao;
+    private HashMap<String, String> tipodesconto;
 
     public TipoDesconto(int codigo, String nome, String descricao) {
+        this.tipodesconto = new HashMap();
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
@@ -47,15 +49,16 @@ public class TipoDesconto {
         this.descricao = descricao;
     }
     
-      public static void main(String[] args) {
-    // Create a HashMap object called capitalCities
-    HashMap<String, String> tipoDesconto = new HashMap<String, String>();
+    public void setMapTipoDesconto(){
+        HashMap<String, String> tipoDesconto = new HashMap<String, String>();
 
-    // Add keys and values (Country, City)
-    tipoDesconto.put("Validade" , "Produto proximo da validade final");
-    tipoDesconto.put("Oferta Relampago" , "Produto com uma super oferta");
-    tipoDesconto.put("Oferta Limitada" , "Produto com ofertas limitadas");
-    System.out.println(tipoDesconto);
-  }
+        tipoDesconto.put("Validade" , "Produto proximo da validade final");
+        tipoDesconto.put("Oferta Relampago" , "Produto com uma super oferta");
+        tipoDesconto.put("Oferta Limitada" , "Produto com ofertas limitadas");
+    }
     
+    public HashMap getTipoDesconto(){
+        return this.tipodesconto;
+    }
 }
+

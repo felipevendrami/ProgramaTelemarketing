@@ -19,6 +19,10 @@ public class CadastroDescontoProdutoView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void carregaComboboxTipoAtendimento(){
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,6 +49,11 @@ public class CadastroDescontoProdutoView extends javax.swing.JFrame {
         jLabel1.setText("Desconto (%):");
 
         btFechar.setText("Fechar");
+        btFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFecharActionPerformed(evt);
+            }
+        });
 
         btConfirmar.setText("Confirmar");
 
@@ -95,6 +104,10 @@ public class CadastroDescontoProdutoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btFecharActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -133,7 +146,7 @@ public class CadastroDescontoProdutoView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btFechar;
-    private javax.swing.JComboBox<TipoDesconto> cbTipoDesconto;
+    private javax.swing.JComboBox<String> cbTipoDesconto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

@@ -59,6 +59,11 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         jLabel6.setText("R$");
 
         btCancelar.setText("Cancelar");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelarActionPerformed(evt);
+            }
+        });
 
         btConfirmar.setText("Confirmar");
 
@@ -121,6 +126,10 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     private void tfNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomeProdutoActionPerformed
 
     }//GEN-LAST:event_tfNomeProdutoActionPerformed
+
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btCancelarActionPerformed
 
     /**
      * @param args the command line arguments
