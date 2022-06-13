@@ -5,6 +5,7 @@
 package View;
 
 import DAO.AtendimentoListDAO;
+import Exception.CadastroAtendimentoException;
 import Model.Atendimento;
 import Model.Colaborador;
 import Model.Divulgacao;
@@ -59,6 +60,16 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
         this.setVisible(false);
     }
     
+    public void identificaExcecao() throws CadastroAtendimentoException{
+        if(cbTipoContato.getSelectedItem() == null){
+            throw new CadastroAtendimentoException("Tipo de Contato não selecionado.");
+        } else if (tfContato.getText().isBlank()){
+            throw new CadastroAtendimentoException("Campo 'Contato' não informado.");
+        } else if (taTramite.getText().isBlank()){
+            throw new CadastroAtendimentoException("Campo 'Trâmite' não pode ficar vazio.");
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,7 +93,7 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
         btCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Novo Tramite");
+        setTitle("Novo Atendimento");
         setMaximumSize(new java.awt.Dimension(600, 355));
         setMinimumSize(new java.awt.Dimension(600, 355));
         setResizable(false);
@@ -190,9 +201,10 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
         try {
+            identificaExcecao();
             processoAtendimento();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
+        } catch (CadastroAtendimentoException ex) {
+            exibirMensagem(ex.getMessage());
         }
     }//GEN-LAST:event_btConfirmarActionPerformed
 
@@ -201,10 +213,19 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btNovaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovaVendaActionPerformed
-        CadastroVendaView cadastroVendaView = new CadastroVendaView(this);
-        cadastroVendaView.setVisible(true);
+        try {
+            identificaExcecao();
+            CadastroVendaView cadastroVendaView = new CadastroVendaView(this);
+            cadastroVendaView.setVisible(true);
+        } catch (CadastroAtendimentoException ex) {
+            exibirMensagem(ex.getMessage());
+        }
     }//GEN-LAST:event_btNovaVendaActionPerformed
 
+    public void exibirMensagem(String menssagem){
+        JOptionPane.showMessageDialog(null, menssagem);
+    }
+    
     /**
      * @param args the command line arguments
      */

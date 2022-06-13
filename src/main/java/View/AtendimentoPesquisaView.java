@@ -5,6 +5,7 @@
 package View;
 
 import DAO.AtendimentoListDAO;
+import Exception.CadastroAtendimentoException;
 import Model.Atendimento;
 import Model.Colaborador;
 import Model.Empresa;
@@ -35,7 +36,7 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame implements ISele
         AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
         Atendimento atendimento = recuperarAtendimentoPesquisa();
         atendimentoRepositorio.salvarAtendimento(atendimento);
-        JOptionPane.showMessageDialog(null, "Atendimento aberto com sucesso");
+        JOptionPane.showMessageDialog(null, "Atendimento aberto com sucesso !");
     }
     
     public Atendimento recuperarAtendimentoPesquisa(){
@@ -71,6 +72,17 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame implements ISele
     public void setVenda(Venda venda){
         this.venda = venda;
     }
+    
+    public void identificaExcecao() throws CadastroAtendimentoException{
+        if(this.venda == null){
+            throw new CadastroAtendimentoException("É necessário selecionar uma venda.");
+        } else if(tfSatisfAtendimento.getText().isBlank() || tfSatisfProdutos.getText().isBlank() || (validaNiveisSatisfacao() == false)){
+            throw new CadastroAtendimentoException("Verificar os níveis de satisfação.");
+        } else if(taTramite.getText().isBlank()){
+            throw new CadastroAtendimentoException("Campo 'Trâmite' não pode ficar vazio.");
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,11 +109,14 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame implements ISele
         btCancelar = new javax.swing.JButton();
         btConfirmar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Novo Atendimento");
 
         jLabel3.setText("Atendimento > Novo Atendimento > Pesquisa");
 
         jLabel1.setText("Pedido:");
+
+        tfPedido.setEditable(false);
 
         btBuscarPedido.setText("Buscar");
         btBuscarPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +217,7 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame implements ISele
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -220,15 +235,12 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame implements ISele
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
         try {
-            if(validaNiveisSatisfacao() == true){
-                abrirAtendimentoPesquisa();
-                cadAtendimentoView.limparTela();
-                this.setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(null, "Verificar os níveis de satisfação");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
+            identificaExcecao();
+            abrirAtendimentoPesquisa();
+            cadAtendimentoView.limparTela();
+            this.setVisible(false);
+        } catch (CadastroAtendimentoException ex) {
+            exibirMensagem(ex.getMessage());
         }
     }//GEN-LAST:event_btConfirmarActionPerformed
 
@@ -237,6 +249,9 @@ public class AtendimentoPesquisaView extends javax.swing.JFrame implements ISele
         listaPedidos.setVisible(true);
     }//GEN-LAST:event_btBuscarPedidoActionPerformed
 
+    public void exibirMensagem(String menssagem){
+        JOptionPane.showMessageDialog(null, menssagem);
+    }    
     /**
      * @param args the command line arguments
      */

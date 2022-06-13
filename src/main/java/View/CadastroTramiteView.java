@@ -4,11 +4,9 @@
  */
 package View;
 
-import DAO.AtendimentoListDAO;
+import Exception.AtendimentoTramiteException;
 import Model.Atendimento;
 import Model.Divulgacao;
-import Model.Tramite;
-import Repositorio.AtendimentoRepositorio;
 import javax.swing.JOptionPane;
 import Model.IAtendimentoDivulgacao;
 import Model.Venda;
@@ -49,6 +47,20 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
         incluirTramite();
         limparTela();
         this.setVisible(false);
+    }  
+    public void identificaExcecao() throws AtendimentoTramiteException{
+        if(cbTipoTramite.getSelectedItem() == null){
+            throw new AtendimentoTramiteException("Tipo do Trâmite não selecionado.");
+        } else if(taTramite.getText().isBlank()){
+            throw new AtendimentoTramiteException("Campo 'Trâmite' não pode ficar vazio.");
+        }
+    }
+    
+    public void existeVenda()throws AtendimentoTramiteException{
+        Divulgacao divulgacao = (Divulgacao) this.atendimento;
+        if(divulgacao.existeVenda()){
+            throw new AtendimentoTramiteException("O atendimento já possui uma venda.");
+        }
     }
     
     /**
@@ -171,8 +183,14 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btNovaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovaVendaActionPerformed
-        CadastroVendaView cadastroVendaView = new CadastroVendaView(this);
-        cadastroVendaView.setVisible(true);
+        try {
+            identificaExcecao();
+            existeVenda();
+            CadastroVendaView cadastroVendaView = new CadastroVendaView(this);
+            cadastroVendaView.setVisible(true);
+        } catch (AtendimentoTramiteException ex) {
+            exibirMensagem(ex.getMessage());
+        }
     }//GEN-LAST:event_btNovaVendaActionPerformed
 
     private void cbTipoTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoTramiteActionPerformed
@@ -181,12 +199,16 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
         try {
+            identificaExcecao();
             processoAtendimento();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
+        } catch (AtendimentoTramiteException ex) {
+            exibirMensagem(ex.getMessage());
         }
     }//GEN-LAST:event_btConfirmarActionPerformed
-
+   
+    public void exibirMensagem(String menssagem){
+        JOptionPane.showMessageDialog(null, menssagem);
+    }
     /**
      * @param args the command line arguments
      */

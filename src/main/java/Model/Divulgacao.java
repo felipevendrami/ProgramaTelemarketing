@@ -47,4 +47,12 @@ public class Divulgacao extends Atendimento{
     public void setVenda(Venda venda){
         this.venda = venda;
     }
+    
+    public boolean existeVenda(){
+        if(this.venda == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

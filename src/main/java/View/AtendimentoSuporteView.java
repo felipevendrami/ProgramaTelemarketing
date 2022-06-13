@@ -6,6 +6,7 @@ package View;
 
 import DAO.AtendimentoListDAO;
 import DAO.VendaListDAO;
+import Exception.CadastroAtendimentoException;
 import Model.Atendimento;
 import Model.Colaborador;
 import Model.Empresa;
@@ -62,6 +63,14 @@ public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelec
         this.venda = venda;
     }
     
+    public void identificaExcecao() throws CadastroAtendimentoException{
+        if(this.venda == null){
+            throw new CadastroAtendimentoException("É necessário selecionar uma venda.");
+        } else if(taTramite.getText().isBlank()){
+            throw new CadastroAtendimentoException("Campo 'Trâmite' não pode ficar vazio.");
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,6 +98,8 @@ public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelec
         jLabel3.setText("Atendimento > Novo Atendimento > Suporte");
 
         jLabel1.setText("Pedido:");
+
+        tfPedido.setEditable(false);
 
         btBuscarPedido.setText("Buscar");
         btBuscarPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -181,11 +192,12 @@ public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelec
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
         try {
+            identificaExcecao();
             abrirAtendimentoSuporte();
             cadAtendimentoView.limparTela();
             this.setVisible(false);
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
+        } catch (CadastroAtendimentoException ex){
+            exibirMensagem(ex.getMessage());
         }
     }//GEN-LAST:event_btConfirmarActionPerformed
 
@@ -194,6 +206,10 @@ public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelec
         listaPedidos.setVisible(true);
     }//GEN-LAST:event_btBuscarPedidoActionPerformed
 
+    public void exibirMensagem(String menssagem){
+        JOptionPane.showMessageDialog(null, menssagem);
+    } 
+    
     /**
      * @param args the command line arguments
      */

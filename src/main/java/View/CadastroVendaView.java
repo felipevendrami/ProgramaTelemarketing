@@ -171,7 +171,11 @@ public class CadastroVendaView extends javax.swing.JFrame{
 
         jLabel5.setText("Subtotal:");
 
+        tfSubtotal.setEditable(false);
+
         jLabel6.setText("Total:");
+
+        tfTotal.setEditable(false);
 
         btCancelar.setText("Cancelar");
         btCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -288,6 +292,7 @@ public class CadastroVendaView extends javax.swing.JFrame{
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
         try {
             cadastrarPedidoVenda();
+            this.atendimentoDivulgacao.setVenda(recuperarVenda());
             this.atendimentoDivulgacao.setConversaoDivulgacao(getSituacaoVenda());
             atendimentoDivulgacao.processoAtendimento();
             this.setVisible(false);

@@ -254,6 +254,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfSubtotal">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -261,6 +264,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfTotal">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btCancelar">
       <Properties>

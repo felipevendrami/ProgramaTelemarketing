@@ -62,7 +62,7 @@ public class ListaPedidosView extends javax.swing.JFrame {
     }
     
     public void setVendaSelecionado(){
-        atendimentoSelecaoVenda.setVenda(venda);
+        atendimentoSelecaoVenda.setVenda(this.venda);
         atendimentoSelecaoVenda.carregaVenda();
     }
     
@@ -182,6 +182,7 @@ public class ListaPedidosView extends javax.swing.JFrame {
 
     private void btSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelecionarActionPerformed
         localizarVenda();
+        setVendaSelecionado();
         this.setVisible(false);
     }//GEN-LAST:event_btSelecionarActionPerformed
 

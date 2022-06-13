@@ -6,12 +6,15 @@ package View;
 
 import DAO.ColaboradorListDAO;
 import DAO.EmpresaListDAO;
+import Exception.CadastroAtendimentoException;
 import Model.Colaborador;
 import Model.Empresa;
 import Repositorio.ColaboradorRepositorio;
 import Repositorio.EmpresaRepositorio;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -79,6 +82,19 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
     
     public Colaborador getResponsavel(){
         return cbResponsavel.getItemAt(cbResponsavel.getSelectedIndex());
+    }
+    
+    public void identificaTipoAtendimento() throws CadastroAtendimentoException{
+        if(cbEmpresa.getSelectedItem() == null){
+            throw new CadastroAtendimentoException("Empresa não selecionada.");
+        } else if(cbResponsavel.getSelectedItem() == null){
+            throw new CadastroAtendimentoException("Responsável não selecionado.");
+        } else if(cbTipoAtendimento.getSelectedItem() == null){
+            throw new CadastroAtendimentoException("Tipo de atendimento não selecionado.");
+        } else {
+            String tipoAtendimento = cbTipoAtendimento.getSelectedItem().toString();
+            abrirTelaTipoAtendimento(tipoAtendimento);
+        }
     }
     
     /**
@@ -195,14 +211,16 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
 
     private void btContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContinuarActionPerformed
         try {
-            String tipoAtendimento = cbTipoAtendimento.getSelectedItem().toString();
-            abrirTelaTipoAtendimento(tipoAtendimento);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao cadastrar atendimento!");
+            identificaTipoAtendimento();
+        } catch (CadastroAtendimentoException ex) {
+            exibirMensagem(ex.getMessage());
         }
-
     }//GEN-LAST:event_btContinuarActionPerformed
 
+    public void exibirMensagem(String menssagem){
+        JOptionPane.showMessageDialog(null, menssagem);
+    }
+    
     /**
      * @param args the command line arguments
      */
