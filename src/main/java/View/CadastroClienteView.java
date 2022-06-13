@@ -10,6 +10,7 @@ import Model.Cliente;
 import Model.Endereco;
 import Model.Contato;
 import javax.swing.JOptionPane;
+import Exception.CadastroClienteException;
 
 /**
  *
@@ -43,9 +44,45 @@ public class CadastroClienteView extends javax.swing.JFrame {
         Endereco endereco = new Endereco(rua, bairro, cidade, estado);
         
         Cliente novoCliente = new Cliente(cliente, endereco, contato, cpf);
-        return novoCliente;
-        
-        
+        return novoCliente;   
+    }
+    
+    public void identificaExcecao() throws CadastroClienteException{
+        if(tfCliente.getText().isBlank()){
+            throw new CadastroClienteException("Campo 'Cliente' não informado.");
+        } else if (tfCpf.getText().isBlank()){
+            throw new CadastroClienteException("Campo 'CPF' não informado.");
+        } else if (tfRua.getText().isBlank()){
+            throw new CadastroClienteException("Campo 'Rua' não informado.");
+        } else if (tfBairro.getText().isBlank()){
+            throw new CadastroClienteException("Campo 'Bairro' não informado.");
+        } else if (tfCidade.getText().isBlank()){
+            throw new CadastroClienteException("Campo 'Cidade' não informado.");
+        } else if (tfEstado.getText().isBlank()){
+            throw new CadastroClienteException("Campo 'Estado' não informado.");
+        } else if (tfNome.getText().isBlank()){
+            throw new CadastroClienteException("Campo 'Nome' não informado.");
+        } else if (tfEmail.getText().isBlank()){
+            throw new CadastroClienteException("Campo 'Email' não informado.");
+        } else if (tfTelefone.getText().isBlank()){
+            throw new CadastroClienteException("Campo 'Telefone' não informado.");
+        }
+    }
+    
+    public void criaCliente() throws CadastroClienteException{
+        ClienteRepositorio clienteRepositorio = new ClienteListDAO();
+        Cliente cliente = recuperarCliente();
+        boolean cadastroOk = clienteRepositorio.salvarCliente(cliente);
+        if (cadastroOk) {
+            exibirMensagem("Cliente criado com sucesso!");
+            this.setVisible(false);
+        } else {
+            throw new CadastroClienteException("CPF já cadastrado. Insira um CPF válido!");
+        }
+    }
+    
+    public void exibirMensagem(String menssagem){
+        JOptionPane.showMessageDialog(null, menssagem);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -248,17 +285,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
     private void btContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContinuarActionPerformed
         try {
-            ClienteRepositorio clienteRepositorio = new ClienteListDAO();
-            Cliente cliente = recuperarCliente();
-            boolean cadastroOk = clienteRepositorio.salvarCliente(cliente);
-            if (cadastroOk) {
-                JOptionPane.showMessageDialog(null, "Cliente criado com sucesso!");
-                this.setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(null, "CPF já cadastrado!");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao cadastrar cliente!");
+            identificaExcecao();
+            criaCliente();
+        } catch (CadastroClienteException ex) {
+            exibirMensagem(ex.getMessage());
         }
 
     }//GEN-LAST:event_btContinuarActionPerformed

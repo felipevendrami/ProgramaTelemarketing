@@ -61,11 +61,11 @@ public abstract class Entidade {
 
     public String retornaInformacoes() {
         String informacoes =  "ID da Entidade: " + this.getIdEntidade() + "\nNome: " + this.getNome() +
-                "\nEstado: " + this.getEndereco().getEstado() + " -- Cidade: " + this.getEndereco().getCidade() + " -- Bairro: " + 
-                this.getEndereco().getBairro() + " -- Rua: " + this.getEndereco().getRua();
+                "\nEstado: " + this.getEndereco().getEstado() + "\nCidade: " + this.getEndereco().getCidade() + "\nBairro: " + 
+                this.getEndereco().getBairro() + "\nRua: " + this.getEndereco().getRua();
         for (Contato contato : contatos) {
             if (contato != null) {
-                informacoes += "\nEmail: " + contato.getEmail() + " -- Telefone: " + contato.getTelefone();
+                informacoes += "\nEmail: " + contato.getEmail() + "\nTelefone: " + contato.getTelefone();
             }
         }
         

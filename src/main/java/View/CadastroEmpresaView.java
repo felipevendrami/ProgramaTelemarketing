@@ -10,6 +10,7 @@ import Repositorio.EmpresaRepositorio;
 import javax.swing.JOptionPane;
 import Model.Empresa;
 import Model.Endereco;
+import Exception.CadastroEmpresaException;
 
 /**
  *
@@ -24,7 +25,7 @@ public class CadastroEmpresaView extends javax.swing.JFrame {
         initComponents();
     }    
     
-    public Empresa recuperarEmpresas() {
+    public Empresa recuperarEmpresa() {
         String empresa = tfEmpresa.getText();
         String cnpj = tfCnpj.getText();
         
@@ -44,6 +45,41 @@ public class CadastroEmpresaView extends javax.swing.JFrame {
         Empresa novaEmpresa = new Empresa(empresa, endereco, contato, cnpj);
         return novaEmpresa;
     }
+    
+    public void identificaExcecao() throws CadastroEmpresaException{
+        if(tfEmpresa.getText().isBlank()){
+            throw new CadastroEmpresaException("Campo 'Empresa' não informado.");
+        } else if (tfCnpj.getText().isBlank()){
+            throw new CadastroEmpresaException("Campo 'CNPJ' não informado.");
+        } else if (tfRua.getText().isBlank()){
+            throw new CadastroEmpresaException("Campo 'Rua' não informado.");
+        } else if (tfBairro.getText().isBlank()){
+            throw new CadastroEmpresaException("Campo 'Bairro' não informado.");
+        } else if (tfCidade.getText().isBlank()){
+            throw new CadastroEmpresaException("Campo 'Cidade' não informado.");
+        } else if (tfEstado.getText().isBlank()){
+            throw new CadastroEmpresaException("Campo 'Estado' não informado.");
+        } else if (tfNome.getText().isBlank()){
+            throw new CadastroEmpresaException("Campo 'Nome' não informado.");
+        } else if (tfEmail.getText().isBlank()){
+            throw new CadastroEmpresaException("Campo 'Email' não informado.");
+        } else if (tfTelefone.getText().isBlank()){
+            throw new CadastroEmpresaException("Campo 'Telefone' não informado.");
+        }
+    }
+    
+    public void criaEmpresa() throws CadastroEmpresaException{
+        EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
+        Empresa empresa = recuperarEmpresa();
+        boolean cadastroOk = empresaRepositorio.salvarEmpresa(empresa);
+        if (cadastroOk) {
+            exibirMensagem("Empresa criada com sucesso!");
+            this.setVisible(false);
+        } else {
+            throw new CadastroEmpresaException("CNPJ já cadastrado. Insira um CNPJ válido!");
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -244,21 +280,17 @@ public class CadastroEmpresaView extends javax.swing.JFrame {
 
     private void btContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContinuarActionPerformed
         try {
-            EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
-            Empresa empresa = recuperarEmpresas();
-            boolean cadastroOk = empresaRepositorio.salvarEmpresa(empresa);
-            if (cadastroOk) {
-                JOptionPane.showMessageDialog(null, "Empresa criado com sucesso!");
-                this.setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(null, "CNPJ já cadastrado!");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao cadastrar empresa!");
+            identificaExcecao();
+            criaEmpresa();
+        } catch (CadastroEmpresaException ex) {
+            exibirMensagem(ex.getMessage());
         }
-
     }//GEN-LAST:event_btContinuarActionPerformed
 
+    
+    public void exibirMensagem(String menssagem){
+        JOptionPane.showMessageDialog(null, menssagem);
+    }
     /**
      * @param args the command line arguments
      */
