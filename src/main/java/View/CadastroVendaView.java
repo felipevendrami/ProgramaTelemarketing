@@ -287,8 +287,9 @@ public class CadastroVendaView extends javax.swing.JFrame{
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
         try {
-            this.atendimentoDivulgacao.setConversaoDivulgacao(getSituacaoVenda());
             cadastrarPedidoVenda();
+            this.atendimentoDivulgacao.setConversaoDivulgacao(getSituacaoVenda());
+            atendimentoDivulgacao.processoAtendimento();
             this.setVisible(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Um erro aconteceu!");

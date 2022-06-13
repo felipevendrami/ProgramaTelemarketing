@@ -11,4 +11,6 @@ package Model;
 public interface IAtendimentoDivulgacao {
     
     public void setConversaoDivulgacao(String situacaoVenda);
+    public void processoAtendimento();
+    public void setVenda(Venda venda);
 }

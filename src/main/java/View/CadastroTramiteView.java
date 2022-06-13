@@ -11,6 +11,7 @@ import Model.Tramite;
 import Repositorio.AtendimentoRepositorio;
 import javax.swing.JOptionPane;
 import Model.IAtendimentoDivulgacao;
+import Model.Venda;
 
 /**
  *
@@ -19,7 +20,6 @@ import Model.IAtendimentoDivulgacao;
 public class CadastroTramiteView extends javax.swing.JFrame implements IAtendimentoDivulgacao {
 
     private Atendimento atendimento;
-    private boolean conversaoVenda;
     
     /**
      * Creates new form NovoTramiteView
@@ -36,15 +36,19 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
         
         // Criamos o trâmite
         this.atendimento.criarTramite(descicaoTramite, tipoTramite);
-        JOptionPane.showMessageDialog(null, "Trâmite realizado com Sucesso");
-        
-        // Limparmos a tela
-        limparTela();
+        JOptionPane.showMessageDialog(null, "Trâmite realizado com sucesso !");
     }
     
     public void limparTela(){
         cbTipoTramite.setSelectedIndex(-1);
         taTramite.setText("");
+    }
+    
+    @Override
+    public void processoAtendimento(){
+        incluirTramite();
+        limparTela();
+        this.setVisible(false);
     }
     
     /**
@@ -177,7 +181,7 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
         try {
-            incluirTramite();
+            processoAtendimento();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
         }
@@ -237,7 +241,13 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
         if(situacaoVenda.equals("Pendente")){
             divulgacao.setConversao(false);
         } else {
-            divulgacao.setConversao(false);
+            divulgacao.setConversao(true);
         }
+    }
+
+    @Override
+    public void setVenda(Venda venda) {
+        Divulgacao divulgacao = (Divulgacao) this.atendimento;
+        divulgacao.setVenda(venda);
     }
 }

@@ -12,6 +12,7 @@ import Model.Empresa;
 import Repositorio.AtendimentoRepositorio;
 import javax.swing.JOptionPane;
 import Model.IAtendimentoDivulgacao;
+import Model.Venda;
 
 /**
  *
@@ -20,6 +21,7 @@ import Model.IAtendimentoDivulgacao;
 public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAtendimentoDivulgacao {
 
     private CadastroAtendimentoView cadAtendimentoView;
+    private Venda venda;
     private boolean conversaoVenda;
     
     /**
@@ -34,7 +36,7 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
         AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
         Atendimento atendimento = recuperarAtendimentoDivulgacao();
         atendimentoRepositorio.salvarAtendimento(atendimento);
-        JOptionPane.showMessageDialog(null, "Atendimento aberto com sucesso");
+        JOptionPane.showMessageDialog(null, "Atendimento aberto com sucesso !");
     }
     
     public Atendimento recuperarAtendimentoDivulgacao(){
@@ -46,17 +48,16 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
         String tramite = taTramite.getText();
         
         // Criamos o atendimento e retornamos
-        Atendimento atendimentoDivulgacao = new Divulgacao(tipoContato, contato, responsavel, tramite, empresa, this.conversaoVenda);
+        Atendimento atendimentoDivulgacao = new Divulgacao(tipoContato, contato, responsavel, tramite, empresa, this.conversaoVenda, this.venda);
         return atendimentoDivulgacao;
     }
     
-    public void processoAberturaAtendimento(){
+    @Override
+    public void processoAtendimento(){
         abrirAtendimentoDivulgacao();
         cadAtendimentoView.limparTela();
         this.setVisible(false);
     }
-    
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -189,7 +190,7 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
         try {
-            processoAberturaAtendimento();
+            processoAtendimento();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
         }
@@ -261,5 +262,10 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
         } else {
             this.conversaoVenda = true;
         }
+    }
+
+    @Override
+    public void setVenda(Venda venda) {
+        this.venda = venda;
     }
 }

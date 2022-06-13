@@ -16,9 +16,9 @@ public class AtendimentoComparator implements Comparator<Atendimento>{
 
     @Override
     public int compare(Atendimento o1, Atendimento o2) {
-        if(o1.retornarUltimoTramite().getDataTramiteNaoFormadato().isBefore(o2.retornarUltimoTramite().getDataTramiteNaoFormadato())){
+        if(o1.retornarUltimoTramite().getDataTramiteNaoFormadato().isBefore(o2.retornarUltimoTramite().getDataTramiteNaoFormadato()) || o1.getSituacao().equals("Aberto")){
             return -1;
-        } else if (o1.retornarUltimoTramite().getDataTramiteNaoFormadato().isAfter(o2.retornarUltimoTramite().getDataTramiteNaoFormadato())){
+        } else if (o1.retornarUltimoTramite().getDataTramiteNaoFormadato().isAfter(o2.retornarUltimoTramite().getDataTramiteNaoFormadato()) || o1.getSituacao().equals("Finalizado")){
             return 1;
         }
         return 0;

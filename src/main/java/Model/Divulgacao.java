@@ -15,11 +15,12 @@ public class Divulgacao extends Atendimento{
     private boolean conversao;
     private Venda venda;
 
-    public Divulgacao(String tipoContato, String contato, Colaborador responsavel, String descricaoTramite, Empresa empresa, boolean conversao) {
+    public Divulgacao(String tipoContato, String contato, Colaborador responsavel, String descricaoTramite, Empresa empresa, boolean conversao, Venda venda) {
         super(responsavel, descricaoTramite, empresa);
         this.tipoContato = tipoContato;
         this.contato = contato;
         this.conversao = conversao;
+        this.venda = venda;
     }
 
     @Override
@@ -41,5 +42,9 @@ public class Divulgacao extends Atendimento{
     
     public boolean isConversao() {
         return conversao;
+    }
+    
+    public void setVenda(Venda venda){
+        this.venda = venda;
     }
 }

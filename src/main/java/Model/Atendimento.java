@@ -26,6 +26,12 @@ public abstract class Atendimento implements IAtendimento, Comparable<Atendiment
     protected Empresa empresa;
     protected String tipo;
 
+    /*
+    Situações:
+        Aberto
+        Finalizado
+    */
+    
     public Atendimento(Colaborador responsavel, String descricaoTramite, Empresa empresa){
         this.idAtendimento = geradorIdAtendimento ++;
         this.responsavel = responsavel;
