@@ -191,6 +191,10 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btFecharActionPerformed
 
+    public void exibirTelaRelatorioAtendimento(){
+        setVisible(true);
+    }
+    
     /**
      * @param args the command line arguments
      */

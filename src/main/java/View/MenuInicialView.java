@@ -4,6 +4,9 @@
  */
 package View;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author felip
@@ -115,29 +118,14 @@ public class MenuInicialView extends javax.swing.JFrame {
 
         miNovoAtendimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miNovoAtendimento.setText("Novo Atendimento ...");
-        miNovoAtendimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miNovoAtendimentoActionPerformed(evt);
-            }
-        });
         mnAtendimento.add(miNovoAtendimento);
 
         miListaAtendimentos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miListaAtendimentos.setText("Lista Atendimentos ...");
-        miListaAtendimentos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miListaAtendimentosActionPerformed(evt);
-            }
-        });
         mnAtendimento.add(miListaAtendimentos);
 
         miRelatorioAtedimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miRelatorioAtedimento.setText("Relatório de Atendimentos ...");
-        miRelatorioAtedimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miRelatorioAtedimentoActionPerformed(evt);
-            }
-        });
         mnAtendimento.add(miRelatorioAtedimento);
 
         mbSistemaTelemarketing.add(mnAtendimento);
@@ -157,21 +145,6 @@ public class MenuInicialView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void miNovoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoAtendimentoActionPerformed
-        CadastroAtendimentoView novoAtendimentoView = new CadastroAtendimentoView();
-        novoAtendimentoView.setVisible(true);
-    }//GEN-LAST:event_miNovoAtendimentoActionPerformed
-
-    private void miListaAtendimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaAtendimentosActionPerformed
-        ListaAtendimentosView listaAtendimentosView = new ListaAtendimentosView();
-        listaAtendimentosView.setVisible(true);
-    }//GEN-LAST:event_miListaAtendimentosActionPerformed
-/**/
-    private void miRelatorioAtedimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRelatorioAtedimentoActionPerformed
-        RelatorioAtendimentoView relatorioAtendimento = new RelatorioAtendimentoView();
-        relatorioAtendimento.setVisible(true);
-    }//GEN-LAST:event_miRelatorioAtedimentoActionPerformed
 
     private void miNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoClienteActionPerformed
         CadastroClienteView cadastroCliente = new CadastroClienteView();
@@ -203,6 +176,23 @@ public class MenuInicialView extends javax.swing.JFrame {
         cadastroProdutoView.setVisible(true);
     }//GEN-LAST:event_miNovoProdutoActionPerformed
 
+    public void exibirTelaMenuInicial(){
+        setVisible(true);
+    }
+    
+    public void adicionarAcaoNovoAtendimento(ActionListener acao){
+        miNovoAtendimento.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoListaAtendimentos(ActionListener acao){
+        miListaAtendimentos.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoRelatorioAtendimentos(ActionListener acao){
+        miRelatorioAtedimento.addActionListener(acao);
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

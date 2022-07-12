@@ -13,8 +13,6 @@ import Repositorio.ColaboradorRepositorio;
 import Repositorio.EmpresaRepositorio;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -219,6 +217,10 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
 
     public void exibirMensagem(String menssagem){
         JOptionPane.showMessageDialog(null, menssagem);
+    }
+    
+    public void exibirTelaCadastroAtendimento(){
+        setVisible(true);
     }
     
     /**

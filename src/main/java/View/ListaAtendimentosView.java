@@ -154,6 +154,10 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btFecharActionPerformed
 
+    public void exibirTelaListaAtendimentos(){
+        setVisible(true);
+    }
+    
     /**
      * @param args the command line arguments
      */
