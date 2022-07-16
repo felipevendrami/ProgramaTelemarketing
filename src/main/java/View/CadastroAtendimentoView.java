@@ -11,6 +11,7 @@ import Model.Colaborador;
 import Model.Empresa;
 import Repositorio.ColaboradorRepositorio;
 import Repositorio.EmpresaRepositorio;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JOptionPane;
@@ -26,12 +27,23 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
      */
     public CadastroAtendimentoView() {
         initComponents();
-        carregaComboboxEmpresa();
-        carregaComboboxColaborador();
-        limparTela();
+        //carregaComboboxColaborador();
+        //limparTela();
     }
 
-    public void carregaComboboxEmpresa(){
+    public void carregaComboboxEmpresa(Set<Empresa> empresas){
+        for(Empresa empresa : empresas){
+            cbEmpresa.addItem(empresa);
+        }
+    }
+    
+    public void carregaComboboxColaborador(List<Colaborador> colaboradores){
+        for(Colaborador colaborador : colaboradores){
+            cbResponsavel.addItem(colaborador);
+        }
+    }
+    
+    /*public void carregaComboboxEmpresa(){
         try{
             EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
             Set<Empresa> empresas = empresaRepositorio.recuperarTodasEmpresas();
@@ -41,9 +53,9 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Não existem empresas cadastradas!");
         }
-    }
+    }*/
     
-    public void carregaComboboxColaborador(){
+    /*public void carregaComboboxColaborador(){
         try {
             ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
             List<Colaborador> colaboradores = colaboradorRepositorio.recuperarTodosColaboradores();
@@ -53,9 +65,9 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Não existem colaboradores cadastrados!");
         }
-    }
+    }*/
     
-    public void abrirTelaTipoAtendimento(String tipoAtendimento){
+    /*public void abrirTelaTipoAtendimento(String tipoAtendimento){
         if(tipoAtendimento.equals("Divulgação")){
             AtendimentoDivulgacaoView atendimentoDivulgacao = new AtendimentoDivulgacaoView(this);
             atendimentoDivulgacao.setVisible(true);
@@ -66,7 +78,7 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
             AtendimentoPesquisaView atendimentoPesquisaView = new AtendimentoPesquisaView(this);
             atendimentoPesquisaView.setVisible(true);
         }
-    }
+    }*/
     
     public void limparTela(){
         cbEmpresa.setSelectedIndex(-1);
@@ -82,7 +94,11 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
         return cbResponsavel.getItemAt(cbResponsavel.getSelectedIndex());
     }
     
-    public void identificaTipoAtendimento() throws CadastroAtendimentoException{
+    public String getTipoAtendimento(){
+        return cbTipoAtendimento.getItemAt(cbTipoAtendimento.getSelectedIndex());
+    }
+    
+   /*public void identificaTipoAtendimento() throws CadastroAtendimentoException{
         if(cbEmpresa.getSelectedItem() == null){
             throw new CadastroAtendimentoException("Empresa não selecionada.");
         } else if(cbResponsavel.getSelectedItem() == null){
@@ -93,7 +109,28 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
             String tipoAtendimento = cbTipoAtendimento.getSelectedItem().toString();
             abrirTelaTipoAtendimento(tipoAtendimento);
         }
+    }*/
+    
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
     }
+    
+    public void exibirTelaCadastroAtendimento(){
+        setVisible(true);
+    }
+    
+    public void adicionarAcaoConfirmar(ActionListener acao){
+        btContinuar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoCancelar(ActionListener acao){
+        btCancelar.addActionListener(acao);
+    }
+    
+    public void fecharTela(){
+        setVisible(false);
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,18 +168,8 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
         cbTipoAtendimento.setSelectedIndex(-1);
 
         btCancelar.setText("Cancelar");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
 
         btContinuar.setText("Continuar");
-        btContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btContinuarActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Empresa:");
 
@@ -203,26 +230,6 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btCancelarActionPerformed
-
-    private void btContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContinuarActionPerformed
-        try {
-            identificaTipoAtendimento();
-        } catch (CadastroAtendimentoException ex) {
-            exibirMensagem(ex.getMessage());
-        }
-    }//GEN-LAST:event_btContinuarActionPerformed
-
-    public void exibirMensagem(String menssagem){
-        JOptionPane.showMessageDialog(null, menssagem);
-    }
-    
-    public void exibirTelaCadastroAtendimento(){
-        setVisible(true);
-    }
-    
     /**
      * @param args the command line arguments
      */

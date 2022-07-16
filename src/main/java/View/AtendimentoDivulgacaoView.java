@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.CadastroAtendimentoController;
 import DAO.AtendimentoListDAO;
 import Exception.CadastroAtendimentoException;
 import Model.Atendimento;
@@ -14,6 +15,7 @@ import Repositorio.AtendimentoRepositorio;
 import javax.swing.JOptionPane;
 import Model.IAtendimentoDivulgacao;
 import Model.Venda;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -21,26 +23,26 @@ import Model.Venda;
  */
 public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAtendimentoDivulgacao {
 
-    private CadastroAtendimentoView cadAtendimentoView;
+    //private CadastroAtendimentoController cadastroAtendimento;
+    //private CadastroAtendimentoView cadAtendimentoView;
     private Venda venda;
     private boolean conversaoVenda;
     
     /**
      * Creates new form AtendimentoDivulgacaoView
      */
-    public AtendimentoDivulgacaoView(CadastroAtendimentoView cadAtendimentoView) {
-        this.cadAtendimentoView = cadAtendimentoView;
+    public AtendimentoDivulgacaoView() {
         initComponents();
     }
 
-    public void abrirAtendimentoDivulgacao(){
+    /*public void abrirAtendimentoDivulgacao(){
         AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
         Atendimento atendimento = recuperarAtendimentoDivulgacao();
         atendimentoRepositorio.salvarAtendimento(atendimento);
         JOptionPane.showMessageDialog(null, "Atendimento aberto com sucesso !");
-    }
+    }*/
     
-    public Atendimento recuperarAtendimentoDivulgacao(){
+    /*public Atendimento recuperarAtendimentoDivulgacao(){
         // Recuperamos as informações da tela
         Empresa empresa = cadAtendimentoView.getEmpresa();
         Colaborador responsavel = cadAtendimentoView.getResponsavel();
@@ -51,16 +53,16 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
         // Criamos o atendimento e retornamos
         Atendimento atendimentoDivulgacao = new Divulgacao(tipoContato, contato, responsavel, tramite, empresa, this.conversaoVenda, this.venda);
         return atendimentoDivulgacao;
-    }
+    }*/
     
     @Override
     public void processoAtendimento(){
-        abrirAtendimentoDivulgacao();
+        /*abrirAtendimentoDivulgacao();
         cadAtendimentoView.limparTela();
-        this.setVisible(false);
+        this.setVisible(false);*/
     }
     
-    public void identificaExcecao() throws CadastroAtendimentoException{
+    /*public void identificaExcecao() throws CadastroAtendimentoException{
         if(cbTipoContato.getSelectedItem() == null){
             throw new CadastroAtendimentoException("Tipo de Contato não selecionado.");
         } else if (tfContato.getText().isBlank()){
@@ -68,8 +70,35 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
         } else if (taTramite.getText().isBlank()){
             throw new CadastroAtendimentoException("Campo 'Trâmite' não pode ficar vazio.");
         }
+    }*/
+    
+    public void adicionarAcaoCancelar(ActionListener acao){
+        btCancelar.addActionListener(acao);
     }
     
+    public void adicionarAcaoConfirmar(ActionListener acao){
+        btConfirmar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoNovaVenda(ActionListener acao){
+        btNovaVenda.addActionListener(acao);
+    }
+    
+    public void fecharTela(){
+        setVisible(false);
+    }
+    
+    public String getTipoContato(){
+        return cbTipoContato.getItemAt(cbTipoContato.getSelectedIndex());
+    }
+    
+    public String getContato(){
+        return tfContato.getText();
+    }
+    
+    public String getTramite(){
+        return taTramite.getText();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,18 +150,8 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
         });
 
         btConfirmar.setText("Confirmar");
-        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btConfirmarActionPerformed(evt);
-            }
-        });
 
         btCancelar.setText("Cancelar");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,31 +218,22 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        try {
-            identificaExcecao();
-            processoAtendimento();
-        } catch (CadastroAtendimentoException ex) {
-            exibirMensagem(ex.getMessage());
-        }
-    }//GEN-LAST:event_btConfirmarActionPerformed
-
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btCancelarActionPerformed
-
     private void btNovaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovaVendaActionPerformed
-        try {
+        /*try {
             identificaExcecao();
             CadastroVendaView cadastroVendaView = new CadastroVendaView(this);
             cadastroVendaView.setVisible(true);
         } catch (CadastroAtendimentoException ex) {
             exibirMensagem(ex.getMessage());
-        }
+        }*/
     }//GEN-LAST:event_btNovaVendaActionPerformed
 
-    public void exibirMensagem(String menssagem){
-        JOptionPane.showMessageDialog(null, menssagem);
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
+    
+    public void exibirTelaAtendimentoDivulgacao(){
+        setVisible(true);
     }
     
     /**

@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.CadastroAtendimentoController;
 import DAO.AtendimentoListDAO;
 import DAO.VendaListDAO;
 import Exception.CadastroAtendimentoException;
@@ -15,6 +16,7 @@ import Model.Suporte;
 import Model.Venda;
 import Repositorio.AtendimentoRepositorio;
 import Repositorio.VendaRepositorio;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,25 +25,25 @@ import javax.swing.JOptionPane;
  */
 public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelecaoVendaView{
     
-    private CadastroAtendimentoView cadAtendimentoView;
+    private CadastroAtendimentoController cadastroAtendimento;
+    //private CadastroAtendimentoView cadAtendimentoView;
     private Venda venda;
     
     /**
      * Creates new form AtendimentoSuporteView
      */
-    public AtendimentoSuporteView(CadastroAtendimentoView cadAtendimentoView) {
-        this.cadAtendimentoView = cadAtendimentoView;
+    public AtendimentoSuporteView() {
         initComponents();
     }
 
-    public void abrirAtendimentoSuporte(){
+    /*public void abrirAtendimentoSuporte(){
         AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
         Atendimento atendimento = recuperarAtendimentoSuporte();
         atendimentoRepositorio.salvarAtendimento(atendimento);
         JOptionPane.showMessageDialog(null, "Atendimento aberto com sucesso");
-    }
+    }*/
     
-    public Atendimento recuperarAtendimentoSuporte(){
+    /*public Atendimento recuperarAtendimentoSuporte(){
         //Recuperamos as informações da tela
         Venda venda =  this.venda;
         Empresa empresa = cadAtendimentoView.getEmpresa();
@@ -50,7 +52,7 @@ public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelec
         //Criamos o atendimento e retornamos
         Atendimento atendimentoSuporte = new Suporte(venda, responsavel, tramite, empresa);
         return atendimentoSuporte;
-    }
+    }*/
     
     @Override
     public void carregaVenda(){
@@ -63,13 +65,13 @@ public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelec
         this.venda = venda;
     }
     
-    public void identificaExcecao() throws CadastroAtendimentoException{
+    /*public void identificaExcecao() throws CadastroAtendimentoException{
         if(this.venda == null){
             throw new CadastroAtendimentoException("É necessário selecionar uma venda.");
         } else if(taTramite.getText().isBlank()){
             throw new CadastroAtendimentoException("Campo 'Trâmite' não pode ficar vazio.");
         }
-    }
+    }*/
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -115,18 +117,8 @@ public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelec
         jScrollPane1.setViewportView(taTramite);
 
         btCancelar.setText("Cancelar");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
 
         btConfirmar.setText("Confirmar");
-        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btConfirmarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,29 +178,42 @@ public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelec
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btCancelarActionPerformed
-
-    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        try {
-            identificaExcecao();
-            abrirAtendimentoSuporte();
-            cadAtendimentoView.limparTela();
-            this.setVisible(false);
-        } catch (CadastroAtendimentoException ex){
-            exibirMensagem(ex.getMessage());
-        }
-    }//GEN-LAST:event_btConfirmarActionPerformed
-
     private void btBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoActionPerformed
         ListaPedidosView listaPedidos = new ListaPedidosView(this);
         listaPedidos.setVisible(true);
     }//GEN-LAST:event_btBuscarPedidoActionPerformed
 
-    public void exibirMensagem(String menssagem){
-        JOptionPane.showMessageDialog(null, menssagem);
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
     } 
+    
+    public void exibirTelaAtendimentoSuporte(){
+        setVisible(true);
+    }
+    
+    public void adicionarAcaoCancelar(ActionListener acao){
+        btCancelar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoConfirmar(ActionListener acao){
+        btConfirmar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoBuscar(ActionListener acao){
+        btBuscarPedido.addActionListener(acao);
+    }
+    
+    public void fecharTela(){
+        setVisible(false);
+    }
+    
+    public String getTramite(){
+        return taTramite.getText();
+    }
+    
+    public Venda getVenda(){
+        return venda;
+    }
     
     /**
      * @param args the command line arguments
