@@ -76,7 +76,6 @@ public class CadastroAtendimentoController {
         for(Colaborador colaborador : colaboradores){
             cadastroAtendimento.carregaComboboxColaborador(colaborador);
         }
-        
     }
     
     /*public void limparTelaCadatroAtendimento(){

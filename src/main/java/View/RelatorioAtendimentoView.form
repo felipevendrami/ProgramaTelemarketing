@@ -87,17 +87,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Filtrar Respons&#xe1;vel"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btFiltroResponsavelActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btOrdenarPrioridade">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ordenar por Prioridade"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btOrdenarPrioridadeActionPerformed"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -119,15 +113,13 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Fechar"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btFecharActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbResponsavel">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Colaborador&gt;"/>

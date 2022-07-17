@@ -10,6 +10,7 @@ import Model.Atendimento;
 import Model.Colaborador;
 import Repositorio.AtendimentoRepositorio;
 import Repositorio.ColaboradorRepositorio;
+import java.awt.event.ActionListener;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,23 +28,22 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
      */
     public RelatorioAtendimentoView() {
         initComponents();
-        carregaComboboxColaborador();
     }
 
-    public void carregaComboboxColaborador(){
+    /*public void carregaComboboxColaborador(){
         ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
         List<Colaborador> responsaveis = colaboradorRepositorio.recuperarTodosColaboradores();
         for(Colaborador responsavel : responsaveis){
             cbResponsavel.addItem(responsavel);
         }
-    }
+    }*/
     
-    public Colaborador retornaResponsavel(){
+    /*public Colaborador retornaResponsavel(){
         Colaborador responsavel = cbResponsavel.getItemAt(cbResponsavel.getSelectedIndex());
         return responsavel;
-    }
+    }*/
     
-    public List<Atendimento> montarListaFiltroResponsavel(){
+    /*public List<Atendimento> montarListaFiltroResponsavel(){
         List<Atendimento> atendimentosResponsavel = new ArrayList<>();
         Colaborador responsavel = retornaResponsavel();
         AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
@@ -53,9 +53,9 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
             }
         }
         return atendimentosResponsavel;
-    }
+    }*/
     
-    public List<Atendimento> montaListaOrdenada(){
+    /*public List<Atendimento> montaListaOrdenada(){
         if(cbResponsavel.getSelectedIndex() != (-1)){
             AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
             List<Atendimento> atendimentosList = atendimentoRepositorio.recuperarTodosAtendimentos();
@@ -66,18 +66,46 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
             Collections.sort(atendimentoListResponsavel);
             return atendimentoListResponsavel;
         }
-    }
+    }*/
     
-    public void imprimeRelatorio(List<Atendimento> listaRelatorio){
+    /*public void imprimeRelatorio(List<Atendimento> listaRelatorio){
         for(Atendimento atendimento : listaRelatorio){
             if(!atendimento.getSituacao().equals("Finalizado")){
                 taAtendimentos.append(atendimento.toString() + "\n");
             }
         }
+    }*/
+    
+    public void preencheRelatorio(String informacao){
+        taAtendimentos.append(informacao);
     }
     
     public void limpaTextArea(){
         taAtendimentos.setText("");
+    }
+    
+    public void adicionarAcaoFechar(ActionListener acao){
+        btFechar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoOrdenarPrioridade(ActionListener acao){
+        btOrdenarPrioridade.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoFiltroResponsavel(ActionListener acao){
+        btFiltroResponsavel.addActionListener(acao);
+    }
+    
+    public void fecharTela(){
+        setVisible(false);
+    }
+    
+    public void carregaComboboxColaborador(Colaborador colaborador){
+        cbResponsavel.addItem(colaborador);
+    }
+    
+    public Colaborador getResponsavel(){
+        return cbResponsavel.getItemAt(cbResponsavel.getSelectedIndex());
     }
     
     /**
@@ -106,18 +134,8 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
         jLabel1.setText("Responsável:");
 
         btFiltroResponsavel.setText("Filtrar Responsável");
-        btFiltroResponsavel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFiltroResponsavelActionPerformed(evt);
-            }
-        });
 
         btOrdenarPrioridade.setText("Ordenar por Prioridade");
-        btOrdenarPrioridade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btOrdenarPrioridadeActionPerformed(evt);
-            }
-        });
 
         taAtendimentos.setEditable(false);
         taAtendimentos.setColumns(20);
@@ -125,11 +143,8 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(taAtendimentos);
 
         btFechar.setText("Fechar");
-        btFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFecharActionPerformed(evt);
-            }
-        });
+
+        cbResponsavel.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,20 +191,6 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btOrdenarPrioridadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOrdenarPrioridadeActionPerformed
-        limpaTextArea();
-        imprimeRelatorio(montaListaOrdenada());
-    }//GEN-LAST:event_btOrdenarPrioridadeActionPerformed
-
-    private void btFiltroResponsavelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFiltroResponsavelActionPerformed
-        limpaTextArea();
-        imprimeRelatorio(montarListaFiltroResponsavel());
-    }//GEN-LAST:event_btFiltroResponsavelActionPerformed
-
-    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btFecharActionPerformed
 
     public void exibirTelaRelatorioAtendimento(){
         setVisible(true);
