@@ -30,7 +30,7 @@ public class MenuInicialController {
     //Controllers Atendimento
     private CadastroAtendimentoController cadastroAtendimento;
     private RelatorioAtendimentoController relatorioAtendimento;
-    private ListaAtendimentoController listaAtendimento;
+    private ListaAtendimentosController listaAtendimento;
 
     public MenuInicialController(MenuInicialView menuInicial) {
         this.menuInicial = menuInicial;
@@ -70,7 +70,7 @@ public class MenuInicialController {
     }
     
     public void inicializaTelaListaAtendimento(){
-        listaAtendimento = new ListaAtendimentoController(new ListaAtendimentosView());
+        listaAtendimento = new ListaAtendimentosController(new ListaAtendimentosView());
     }
     
     public void inicializarTelaRelatorioAtendimento(){

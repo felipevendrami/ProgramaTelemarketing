@@ -8,6 +8,8 @@ import DAO.AtendimentoListDAO;
 import Model.Atendimento;
 import Model.AtendimentoComparator;
 import Repositorio.AtendimentoRepositorio;
+import TableModel.ListaAtendimentosTableModel;
+import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -25,7 +27,7 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
      */
     public ListaAtendimentosView() {
         initComponents();
-        preencheTabelaAtendimentos();
+        //preencheTabelaAtendimentos();
     }
 
     
@@ -36,12 +38,12 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
         return atendimentosOrdenados;
     }
     
-    public void preencheTabelaAtendimentos(){
+    /*public void preencheTabelaAtendimentos(){
         DefaultTableModel tabelaAtendimentos = (DefaultTableModel) tbAtendimentos.getModel();
         for(Atendimento atendimento : retornaListaOrdanada()){
             tabelaAtendimentos.addRow(new Object[]{atendimento.getIdAtendimento(), atendimento.getTipo(), atendimento.getEmpresa().getNome(), atendimento.getResponsavel().getNome(), atendimento.getDataAbertura(), atendimento.getSituacao(), atendimento.retornarUltimoTramite().getDataTramite()});
         }
-    }
+    }*/
     
     public int carregaAtendimentoSelecionado(){
         int linha = tbAtendimentos.getSelectedRow();
@@ -49,10 +51,10 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
         return idAtendimento;
     }
     
-    public void abreVisualizacaoAtendimento(){
-        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView(carregaAtendimentoSelecionado());
+    /*public void abreVisualizacaoAtendimento(){
+        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView();
         visualizarAtendimentoView.setVisible(true);
-    }
+    }*/
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,39 +80,14 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "IdAtendimento", "Tipo", "Empresa", "Cliente", "Abertura", "Situação", "Última Atualiz."
+                "Title 1"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane.setViewportView(tbAtendimentos);
 
         btFechar.setText("Fechar");
-        btFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFecharActionPerformed(evt);
-            }
-        });
 
         btVisualizar.setText("Visualizar");
-        btVisualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVisualizarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,20 +119,36 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
-        try {
-            abreVisualizacaoAtendimento();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao visualizar!");
-        }
-    }//GEN-LAST:event_btVisualizarActionPerformed
-
-    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btFecharActionPerformed
-
     public void exibirTelaListaAtendimentos(){
         setVisible(true);
+    }
+    
+    public void fecharTela(){
+        setVisible(false);
+    }
+    
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
+    
+    public void adicionarAcaoFechar(ActionListener acao){
+        btFechar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoVisualizar(ActionListener acao){
+        btVisualizar.addActionListener(acao);
+    }
+    
+    public void setTableModel(ListaAtendimentosTableModel listaAtendimentosTableModel){
+        tbAtendimentos.setModel(listaAtendimentosTableModel);
+    }
+    
+    public String getAtendimentoSelecionado(){
+        if(tbAtendimentos.getSelectedRow() == -1){
+            return null;
+        }
+        //Retorna o Id da primeira coluna da linha selecionada
+        return tbAtendimentos.getModel().getValueAt(tbAtendimentos.getSelectedRow(), 0).toString();
     }
     
     /**

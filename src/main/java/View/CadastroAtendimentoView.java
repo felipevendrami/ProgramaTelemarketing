@@ -27,20 +27,14 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
      */
     public CadastroAtendimentoView() {
         initComponents();
-        //carregaComboboxColaborador();
-        //limparTela();
     }
 
-    public void carregaComboboxEmpresa(Set<Empresa> empresas){
-        for(Empresa empresa : empresas){
-            cbEmpresa.addItem(empresa);
-        }
+    public void carregaComboboxEmpresa(Empresa empresa){
+        cbEmpresa.addItem(empresa);
     }
     
-    public void carregaComboboxColaborador(List<Colaborador> colaboradores){
-        for(Colaborador colaborador : colaboradores){
-            cbResponsavel.addItem(colaborador);
-        }
+    public void carregaComboboxColaborador(Colaborador colaborador){
+        cbResponsavel.addItem(colaborador);
     }
     
     /*public void carregaComboboxEmpresa(){

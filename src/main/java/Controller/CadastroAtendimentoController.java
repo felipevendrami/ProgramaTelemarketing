@@ -35,7 +35,7 @@ public class CadastroAtendimentoController {
         inicializarBotoes();
         montaListaComboboxEmpresa();
         montaListaComboboxColaborador();
-        this.cadastroAtendimento.limparTela();
+        cadastroAtendimento.limparTela();
     }
     
     public void exibirTelaCadastroAtendimento(){
@@ -64,13 +64,19 @@ public class CadastroAtendimentoController {
     public void montaListaComboboxEmpresa(){
         EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
         Set<Empresa> empresas = empresaRepositorio.recuperarTodasEmpresas();
-        cadastroAtendimento.carregaComboboxEmpresa(empresas);
+        for(Empresa empresa : empresas){
+            cadastroAtendimento.carregaComboboxEmpresa(empresa);
+        }
+        
     }
     
     public void montaListaComboboxColaborador(){
         ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
         List<Colaborador> colaboradores = colaboradorRepositorio.recuperarTodosColaboradores();
-        cadastroAtendimento.carregaComboboxColaborador(colaboradores);
+        for(Colaborador colaborador : colaboradores){
+            cadastroAtendimento.carregaComboboxColaborador(colaborador);
+        }
+        
     }
     
     /*public void limparTelaCadatroAtendimento(){

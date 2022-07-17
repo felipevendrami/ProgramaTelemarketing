@@ -10,6 +10,7 @@ import Model.Divulgacao;
 import javax.swing.JOptionPane;
 import Model.IAtendimentoDivulgacao;
 import Model.Venda;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -22,12 +23,11 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
     /**
      * Creates new form NovoTramiteView
      */
-    public CadastroTramiteView(Atendimento atendimento) {
-        this.atendimento = atendimento;
+    public CadastroTramiteView() {
         initComponents();
     }
 
-    public void incluirTramite(){
+    /*public void incluirTramite(){
         // Recuperamos as informações da tela
         String tipoTramite = cbTipoTramite.getSelectedItem().toString();
         String descicaoTramite = taTramite.getText();
@@ -35,7 +35,7 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
         // Criamos o trâmite
         this.atendimento.criarTramite(descicaoTramite, tipoTramite);
         JOptionPane.showMessageDialog(null, "Trâmite realizado com sucesso !");
-    }
+    }*/
     
     public void limparTela(){
         cbTipoTramite.setSelectedIndex(-1);
@@ -44,23 +44,52 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
     
     @Override
     public void processoAtendimento(){
-        incluirTramite();
+        /*incluirTramite();
         limparTela();
-        this.setVisible(false);
-    }  
-    public void identificaExcecao() throws AtendimentoTramiteException{
+        this.setVisible(false);*/
+    }
+    
+    /*public void identificaExcecao() throws AtendimentoTramiteException{
         if(cbTipoTramite.getSelectedItem() == null){
             throw new AtendimentoTramiteException("Tipo do Trâmite não selecionado.");
         } else if(taTramite.getText().isBlank()){
             throw new AtendimentoTramiteException("Campo 'Trâmite' não pode ficar vazio.");
         }
-    }
+    }*/
     
-    public void existeVenda()throws AtendimentoTramiteException{
+    /*public void existeVenda()throws AtendimentoTramiteException{
         Divulgacao divulgacao = (Divulgacao) this.atendimento;
         if(divulgacao.existeVenda()){
             throw new AtendimentoTramiteException("O atendimento já possui uma venda.");
         }
+    }*/
+    
+    public void adicionarAcaoCancelar(ActionListener acao){
+        btCancelar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoConfirmar(ActionListener acao){
+        btConfirmar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoNovaVenda(ActionListener acao){
+        btNovaVenda.addActionListener(acao);
+    }
+    
+    public void exibirTelaCadastroTramite(){
+        setVisible(true);
+    }
+    
+    public void fecharTela(){
+        setVisible(false);
+    }
+    
+    public String getTipoTramite(){
+        return cbTipoTramite.getItemAt(cbTipoTramite.getSelectedIndex());
+    }
+    
+    public String getTramite(){
+        return taTramite.getText();
     }
     
     /**
@@ -183,14 +212,14 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btNovaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovaVendaActionPerformed
-        try {
+        /*try {
             identificaExcecao();
             existeVenda();
             CadastroVendaView cadastroVendaView = new CadastroVendaView(this);
             cadastroVendaView.setVisible(true);
         } catch (AtendimentoTramiteException ex) {
             exibirMensagem(ex.getMessage());
-        }
+        }*/
     }//GEN-LAST:event_btNovaVendaActionPerformed
 
     private void cbTipoTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoTramiteActionPerformed
@@ -198,16 +227,16 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
     }//GEN-LAST:event_cbTipoTramiteActionPerformed
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        try {
+        /*try {
             identificaExcecao();
             processoAtendimento();
         } catch (AtendimentoTramiteException ex) {
             exibirMensagem(ex.getMessage());
-        }
+        }*/
     }//GEN-LAST:event_btConfirmarActionPerformed
    
-    public void exibirMensagem(String menssagem){
-        JOptionPane.showMessageDialog(null, menssagem);
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
     }
     /**
      * @param args the command line arguments

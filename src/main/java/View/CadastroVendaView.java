@@ -26,7 +26,7 @@ public class CadastroVendaView extends javax.swing.JFrame{
     /**
      * Creates new form DivulgacaoVendaView
      */
-    public CadastroVendaView(IAtendimentoDivulgacao atendimentoDivulgacao) {
+    public CadastroVendaView() {
         this.atendimentoDivulgacao = atendimentoDivulgacao;
         this.itensPedido = new ArrayList<>();
         initComponents();
@@ -65,6 +65,14 @@ public class CadastroVendaView extends javax.swing.JFrame{
     
     public void setCliente(Cliente cliente){
         this.cliente = cliente;
+    }
+    
+    public void exibirTelaCadastroVenda(){
+        setVisible(true);
+    }
+    
+    public void fecharTela(){
+        setVisible(false);
     }
     
     /**

@@ -8,6 +8,7 @@ import DAO.AtendimentoListDAO;
 import Model.Atendimento;
 import Model.Tramite;
 import Repositorio.AtendimentoRepositorio;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,19 +17,16 @@ import javax.swing.JOptionPane;
  */
 public class VisualizarAtendimentoView extends javax.swing.JFrame {
 
-    private Atendimento atendimento;
+    //private Atendimento atendimento;
     
     /**
      * Creates new form VisualizarAtendimentoView
      */
-    public VisualizarAtendimentoView(int idAtendimento) {
-        this.atendimento = localizaAtendimento(idAtendimento);
+    public VisualizarAtendimentoView() {
         initComponents();
-        preencheInformacoesAtendimento();
-        preencheInformacoesTramites();
     }
 
-    public Atendimento localizaAtendimento(int idAtendimento){
+    /*public Atendimento localizaAtendimento(int idAtendimento){
         AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
         for(Atendimento atendimento : atendimentoRepositorio.recuperarTodosAtendimentos()){
             if(atendimento.getIdAtendimento() == idAtendimento){
@@ -36,17 +34,41 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
             }
         }
         return null;
-    }
+    }*/
     
-    public void preencheInformacoesAtendimento(){
+    /*public void preencheInformacoesAtendimento(){
         taVisualizaAtendimento.append(this.atendimento.retornaInformacoes());
-    }
+    }*/
     
-    public void preencheInformacoesTramites(){
+    /*public void preencheInformacoesTramites(){
         for(Tramite tramite : this.atendimento.getTramites()){
             taVisualizaTramites.append("============ Trâmite ============\n");
             taVisualizaTramites.append(tramite.retornaInformacoes());
         }
+    }*/
+    
+    public void exibirTelaVisualizarAtendimento(){
+        setVisible(true);
+    }
+    
+    public void adicionarAcaoFechar(ActionListener acao){
+        btFechar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoNovoTramite(ActionListener acao){
+        btNovoTramite.addActionListener(acao);
+    }
+    
+    public void fecharTela(){
+        setVisible(false);
+    }
+    
+    public void setInformacaoAtendimento(String informacoes){
+        taVisualizaAtendimento.append(informacoes);
+    }
+    
+    public void setInformacaoTramite(String informacoes){
+        taVisualizaTramites.append(informacoes);
     }
     
     /**
@@ -153,12 +175,12 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btFecharActionPerformed
 
     private void btNovoTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoTramiteActionPerformed
-        try {
+        /*try {
             CadastroTramiteView cadastroTramiteView = new CadastroTramiteView(this.atendimento);
             cadastroTramiteView.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
-        }
+        }*/
 
     }//GEN-LAST:event_btNovoTramiteActionPerformed
 
