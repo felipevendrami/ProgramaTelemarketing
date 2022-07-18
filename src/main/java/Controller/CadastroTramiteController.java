@@ -96,13 +96,18 @@ public class CadastroTramiteController implements IAtendimentoDivulgacao{
     }
     
     public void exibirTelaCadastroVenda(){
-        CadastroVendaController cadastroVendaController = new CadastroVendaController(new CadastroVendaView(), atendimento);
+        CadastroVendaController cadastroVendaController = new CadastroVendaController(new CadastroVendaView());
         cadastroVendaController.exibirTelaCadastroVenda();
     }
     
     @Override
     public void setConversaoDivulgacao(String situacaoVenda) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Divulgacao divulgacao = (Divulgacao) this.atendimento;
+        if(situacaoVenda.equals("Pendente")){
+            divulgacao.setConversao(false);
+        } else {
+            divulgacao.setConversao(true);
+        }
     }
 
     @Override
@@ -114,7 +119,8 @@ public class CadastroTramiteController implements IAtendimentoDivulgacao{
 
     @Override
     public void setVenda(Venda venda) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Divulgacao divulgacao = (Divulgacao) this.atendimento;
+        divulgacao.setVenda(venda);
     }
     
     

@@ -67,7 +67,7 @@ public class CadastroAtendimentoController {
         for(Empresa empresa : empresas){
             cadastroAtendimento.carregaComboboxEmpresa(empresa);
         }
-        
+        //cadastroAtendimento.limparTela();
     }
     
     public void montaListaComboboxColaborador(){

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import Model.IAtendimentoDivulgacao;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -32,25 +33,25 @@ public class CadastroVendaView extends javax.swing.JFrame{
         initComponents();
     }
 
-    public void cadastrarPedidoVenda(){
+    /*public void cadastrarPedidoVenda(){
         VendaRepositorio vendaRepositorio = new VendaListDAO();
         Venda venda = recuperarVenda();
         vendaRepositorio.salvarVenda(venda);
         JOptionPane.showMessageDialog(null, "Venda aberta com sucesso !");
-    }
+    }*/
     
-    public Venda recuperarVenda(){
+    /*public Venda recuperarVenda(){
         // Recuperamos as informações da tela
         Cliente cliente = this.cliente;
         String situacao = getSituacaoVenda();
         Venda venda = new Venda(cliente, situacao);
         return venda;
-    }
+    }*/
     
-    public String getSituacaoVenda(){
+    /*public String getSituacaoVenda(){
         String situacao = cbSituacaoVenda.getSelectedItem().toString();
         return situacao;
-    }
+    }*/
     
     public void adicionarItemVenda(){
         SelecaoProdutoView selecaoProdutoView = new SelecaoProdutoView();
@@ -73,6 +74,38 @@ public class CadastroVendaView extends javax.swing.JFrame{
     
     public void fecharTela(){
         setVisible(false);
+    }
+    
+    public void adicionarAcaoCancelar(ActionListener acao){
+        btCancelar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoConfirmar(ActionListener acao){
+        btConfirmar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoAdicionarProduto(ActionListener acao){
+        btAdicionarProduto.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoRemoverProduto(ActionListener acao){
+        btRemoverProduto.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoBuscarCliente(ActionListener acao){
+        btBuscarCliente.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoCadastrarCliente(ActionListener acao){
+        btCadastrarCliente.addActionListener(acao);
+    }
+    
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
+    
+    public String getSituacaoVenda(){
+        return cbSituacaoVenda.getItemAt(cbSituacaoVenda.getSelectedIndex());
     }
     
     /**
@@ -298,7 +331,7 @@ public class CadastroVendaView extends javax.swing.JFrame{
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        try {
+        /*try {
             cadastrarPedidoVenda();
             this.atendimentoDivulgacao.setVenda(recuperarVenda());
             this.atendimentoDivulgacao.setConversaoDivulgacao(getSituacaoVenda());
@@ -306,7 +339,7 @@ public class CadastroVendaView extends javax.swing.JFrame{
             this.setVisible(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
-        }
+        }*/
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarProdutoActionPerformed

@@ -35,9 +35,6 @@ public class MenuInicialController {
     public MenuInicialController(MenuInicialView menuInicial) {
         this.menuInicial = menuInicial;
         inicializarBotoes();
-        inicializarTelaCadastroAtendimento();
-        inicializaTelaListaAtendimento();
-        inicializarTelaRelatorioAtendimento();
     }
     
     public void exibirTelaMenuInicial(){
@@ -48,18 +45,21 @@ public class MenuInicialController {
         menuInicial.adicionarAcaoNovoAtendimento(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                inicializarTelaCadastroAtendimento();
                 cadastroAtendimento.exibirTelaCadastroAtendimento();
             }
         });
         menuInicial.adicionarAcaoListaAtendimentos(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                inicializaTelaListaAtendimento();
                 listaAtendimento.exibirTelaListaAtendimento();
             }
         });
         menuInicial.adicionarAcaoRelatorioAtendimentos(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                inicializarTelaRelatorioAtendimento();
                 relatorioAtendimento.exibirTelaRelatorioAtendimento();
             }
         });

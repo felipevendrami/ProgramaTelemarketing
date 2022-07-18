@@ -15,6 +15,7 @@ import Model.Venda;
 import Repositorio.AtendimentoRepositorio;
 import View.AtendimentoDivulgacaoView;
 import View.CadastroAtendimentoView;
+import View.CadastroVendaView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -28,8 +29,9 @@ public class AtendimentoDivulgacaoController implements IAtendimentoDivulgacao{
     private AtendimentoDivulgacaoView atendimentoDivulgacao;
     private CadastroAtendimentoView cadastroAtendimento;
     
-    //Controller CadastroAtendimento
-    //private CadastroAtendimentoController cadastroAtendimento;
+    //Venda
+    private Venda venda;
+    private boolean conversaoVenda;
 
     public AtendimentoDivulgacaoController(AtendimentoDivulgacaoView atedimentoDivulgacao, CadastroAtendimentoView cadastroAtendimento) {
         this.atendimentoDivulgacao = atedimentoDivulgacao;
@@ -62,9 +64,19 @@ public class AtendimentoDivulgacaoController implements IAtendimentoDivulgacao{
         atendimentoDivulgacao.adicionarAcaoNovaVenda(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                try {
+                    identificaExcecao();
+                    exibirTelaNovaVenda();
+                } catch (CadastroAtendimentoException ex) {
+                    atendimentoDivulgacao.exibirMensagem(ex.getMessage());
+                }
             }
         });
+    }
+    
+    public void exibirTelaNovaVenda(){
+        CadastroVendaController cadastroVendaController = new CadastroVendaController(new CadastroVendaView());
+        cadastroVendaController.exibirTelaCadastroVenda();
     }
     
     //RECUPERADOS DA VIEW
@@ -108,11 +120,15 @@ public class AtendimentoDivulgacaoController implements IAtendimentoDivulgacao{
 
     @Override
     public void setConversaoDivulgacao(String situacaoVenda) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(situacaoVenda.equals("Pendente")){
+            this.conversaoVenda = false;
+        } else {
+            this.conversaoVenda = true;
+        }
     }
 
     @Override
     public void setVenda(Venda venda) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.venda = venda;
     }
 }
