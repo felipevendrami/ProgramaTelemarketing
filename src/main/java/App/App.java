@@ -6,6 +6,7 @@ package App;
 
 import DAO.ClienteListDAO;
 import DAO.ColaboradorListDAO;
+import DAO.Conexao;
 import DAO.EmpresaListDAO;
 import Model.Cliente;
 import Model.Empresa;
@@ -23,7 +24,7 @@ import View.MenuInicialView;
 public class App {
     public static void main(String[] args) {
         
-        ClienteRepositorio clienteRepositorio = new ClienteListDAO();
+        /*ClienteRepositorio clienteRepositorio = new ClienteListDAO();
         ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
         EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
         
@@ -54,5 +55,9 @@ public class App {
         
         MenuInicialView menuInicial = new MenuInicialView();
         menuInicial.setVisible(true);
+        */
+        
+        Conexao conect = new Conexao();
+        conect.conectar();
     }
 }
