@@ -4,11 +4,8 @@
  */
 package View;
 
-
-import DAO.ColaboradorListDAO;
-import javax.swing.table.DefaultTableModel;
-import Model.Colaborador;
-import Repositorio.ColaboradorRepositorio;
+import TableModel.ListaColaboradoresTableModel;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,35 +15,42 @@ import javax.swing.JOptionPane;
 public class SelecaoColaboradorView extends javax.swing.JFrame {
 
     /**
-     * Creates new form SelecaoClienteView
+     * Creates new form SelecaoColaboradorView
      */
     public SelecaoColaboradorView() {
         initComponents();
-        preencheTabelaColaborador();
     }
-
-    public void preencheTabelaColaborador(){
-        try {
-            DefaultTableModel tabelaColaborador = (DefaultTableModel) tbColaborador.getModel();
-            ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
-            for(Colaborador colaborador : colaboradorRepositorio.recuperarTodosColaboradores()){
-                tabelaColaborador.addRow(new Object[]{colaborador.getIdEntidade(), colaborador.getNome(), colaborador.getEndereco().getCidade(), colaborador.getEndereco().getEstado()});
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Não foi possível recuperar dados dos colaboradores!");
+    
+    public void setTableModel(ListaColaboradoresTableModel listaColaboradoresTableModel){
+        tbColaborador.setModel(listaColaboradoresTableModel);
+    }
+    
+    public void adicionarAcaoFechar(ActionListener acao){
+        btFechar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoVisualizar(ActionListener acao){
+        btVisualizar.addActionListener(acao);
+    }
+    
+    public void fecharTela(){
+        this.setVisible(false);
+    }
+    
+    public String getColaboradorSelecionado(){
+        if(tbColaborador.getSelectedRow() == -1){
+            return null;
         }
-
+        //Retorna o Id da primeira coluna da linha selecionada
+        return tbColaborador.getModel().getValueAt(tbColaborador.getSelectedRow(), 0).toString();
     }
     
-    public int carregaColaboradorSelecionado(){
-        int linha = tbColaborador.getSelectedRow();
-        int idColaborador = Integer.parseInt(tbColaborador.getValueAt(linha, 0).toString());
-        return idColaborador;
-    }    
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
     
-    public void abreVisualizacaoColaborador(){
-        VisualizarColaboradorView visualizarColaboradorView = new VisualizarColaboradorView(carregaColaboradorSelecionado());
-        visualizarColaboradorView.setVisible(true);
+    public void exibirTelaSelecaoColaborador(){
+        setVisible(true);
     }
     
     /**
@@ -64,7 +68,7 @@ public class SelecaoColaboradorView extends javax.swing.JFrame {
         btVisualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Selecionar Cliente");
+        setTitle("Selecionar Colaborador");
         setMinimumSize(new java.awt.Dimension(600, 300));
         setResizable(false);
 
@@ -73,14 +77,14 @@ public class SelecaoColaboradorView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "IdEntidade", "Nome Colaborador", "Cidade", "UF"
+                "idEntidade", "Nome Colaborador", "Cidade", "UF"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -100,18 +104,8 @@ public class SelecaoColaboradorView extends javax.swing.JFrame {
         }
 
         btFechar.setText("Fechar");
-        btFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFecharActionPerformed(evt);
-            }
-        });
 
         btVisualizar.setText("Visualizar");
-        btVisualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVisualizarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,18 +140,6 @@ public class SelecaoColaboradorView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btFecharActionPerformed
-
-    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
-        try {
-            abreVisualizacaoColaborador();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao visualizar!");
-        }
-    }//GEN-LAST:event_btVisualizarActionPerformed
 
     /**
      * @param args the command line arguments

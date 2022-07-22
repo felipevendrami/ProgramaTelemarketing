@@ -4,13 +4,8 @@
  */
 package View;
 
-import DAO.EmpresaListDAO;
-import Model.Contato;
-import Repositorio.EmpresaRepositorio;
 import javax.swing.JOptionPane;
-import Model.Empresa;
-import Model.Endereco;
-import Exception.CadastroEmpresaException;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -19,65 +14,66 @@ import Exception.CadastroEmpresaException;
 public class CadastroEmpresaView extends javax.swing.JFrame {
     
     /**
-     * Creates new form NovoAtendimentoView
+     * Creates new form NovaEmpresaView
      */
     public CadastroEmpresaView() {
         initComponents();
-    }    
-    
-    public Empresa recuperarEmpresa() {
-        String empresa = tfEmpresa.getText();
-        String cnpj = tfCnpj.getText();
-        
-        // dados contato
-        String nome = tfNome.getText();
-        String telefone = tfTelefone.getText();
-        String email = tfEmail.getText();
-        Contato contato = new Contato(nome, telefone, email);
-        
-        // dados endereco
-        String rua = tfRua.getText();
-        String bairro = tfBairro.getText();
-        String cidade = tfCidade.getText();
-        String estado = tfEstado.getText();
-        Endereco endereco = new Endereco(rua, bairro, cidade, estado);
-        
-        Empresa novaEmpresa = new Empresa(empresa, endereco, contato, cnpj);
-        return novaEmpresa;
     }
     
-    public void identificaExcecao() throws CadastroEmpresaException{
-        if(tfEmpresa.getText().isBlank()){
-            throw new CadastroEmpresaException("Campo 'Empresa' não informado.");
-        } else if (tfCnpj.getText().isBlank()){
-            throw new CadastroEmpresaException("Campo 'CNPJ' não informado.");
-        } else if (tfRua.getText().isBlank()){
-            throw new CadastroEmpresaException("Campo 'Rua' não informado.");
-        } else if (tfBairro.getText().isBlank()){
-            throw new CadastroEmpresaException("Campo 'Bairro' não informado.");
-        } else if (tfCidade.getText().isBlank()){
-            throw new CadastroEmpresaException("Campo 'Cidade' não informado.");
-        } else if (tfEstado.getText().isBlank()){
-            throw new CadastroEmpresaException("Campo 'Estado' não informado.");
-        } else if (tfNome.getText().isBlank()){
-            throw new CadastroEmpresaException("Campo 'Nome' não informado.");
-        } else if (tfEmail.getText().isBlank()){
-            throw new CadastroEmpresaException("Campo 'Email' não informado.");
-        } else if (tfTelefone.getText().isBlank()){
-            throw new CadastroEmpresaException("Campo 'Telefone' não informado.");
-        }
+    public void adicionarAcaoConfirmar(ActionListener acao){
+        btContinuar.addActionListener(acao);
     }
     
-    public void criaEmpresa() throws CadastroEmpresaException{
-        EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
-        Empresa empresa = recuperarEmpresa();
-        boolean cadastroOk = empresaRepositorio.salvarEmpresa(empresa);
-        if (cadastroOk) {
-            exibirMensagem("Empresa criada com sucesso!");
-            this.setVisible(false);
-        } else {
-            throw new CadastroEmpresaException("CNPJ já cadastrado. Insira um CNPJ válido!");
-        }
+    public void adicionarAcaoCancelar(ActionListener acao){
+        btCancelar.addActionListener(acao);
+    }
+    
+    public void exibirTelaCadastroEmpresa(){
+        setVisible(true);
+    }
+    
+    public void fecharTela(){
+        setVisible(false);
+    }
+    
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
+    
+    public String getBairro() {
+        return tfBairro.getText();
+    }
+
+    public String getCidade() {
+        return tfCidade.getText();
+    }
+
+    public String getEmpresa() {
+        return tfEmpresa.getText();
+    }
+
+    public String getCnpj() {
+        return tfCnpj.getText();
+    }
+
+    public String getEmail() {
+        return tfEmail.getText();
+    }
+
+    public String getEstado() {
+        return tfEstado.getText();
+    }
+
+    public String getNome() {
+        return tfNome.getText();
+    }
+
+    public String getRua() {
+        return tfRua.getText();
+    }
+
+    public String getTelefone() {
+        return tfTelefone.getText();
     }
     
     /**
@@ -114,7 +110,7 @@ public class CadastroEmpresaView extends javax.swing.JFrame {
         tfEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Novo Atendimento");
+        setTitle("Nova Empresa");
         setMinimumSize(new java.awt.Dimension(600, 196));
         setResizable(false);
 
@@ -125,18 +121,8 @@ public class CadastroEmpresaView extends javax.swing.JFrame {
         jLabel1.setText("CNPJ:");
 
         btCancelar.setText("Cancelar");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
 
         btContinuar.setText("Continuar");
-        btContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btContinuarActionPerformed(evt);
-            }
-        });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Empresa:");
@@ -274,23 +260,6 @@ public class CadastroEmpresaView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btCancelarActionPerformed
-
-    private void btContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContinuarActionPerformed
-        try {
-            identificaExcecao();
-            criaEmpresa();
-        } catch (CadastroEmpresaException ex) {
-            exibirMensagem(ex.getMessage());
-        }
-    }//GEN-LAST:event_btContinuarActionPerformed
-
-    
-    public void exibirMensagem(String menssagem){
-        JOptionPane.showMessageDialog(null, menssagem);
-    }
     /**
      * @param args the command line arguments
      */

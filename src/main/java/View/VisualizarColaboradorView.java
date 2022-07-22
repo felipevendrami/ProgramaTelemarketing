@@ -4,40 +4,38 @@
  */
 package View;
 
-import DAO.ColaboradorListDAO;
-import Model.Colaborador;
-import Repositorio.ColaboradorRepositorio;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author julia
  */
 public class VisualizarColaboradorView extends javax.swing.JFrame {
-    
-    private Colaborador colaborador;
 
     /**
-     * Creates new form VisualizarAtendimentoView
+     * Creates new form VisualizarColaboradorView
      */
-    public VisualizarColaboradorView(int idColaborador) {
-        this.colaborador = localizaColaborador(idColaborador);
+    
+    public void adicionarAcaoFechar(ActionListener acao){
+        btFechar.addActionListener(acao);
+    }
+    
+    public void fecharTela(){
+        setVisible(false);
+    }
+    
+    public VisualizarColaboradorView() {
         initComponents();
-        preencheInformacoesColaborador();
     }
     
-    public Colaborador localizaColaborador(int idColaborador) {
-        ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
-        for (Colaborador colaborador : colaboradorRepositorio.recuperarTodosColaboradores()) {
-            if (colaborador.getIdEntidade() == idColaborador) {
-                return colaborador;
-            } 
-        }
-        return null;
+    public void preencheInformacoesColaborador(String colaborador) {
+        taVisualizaColaborador.append(colaborador);
     }
     
-    public void preencheInformacoesColaborador() {
-        taVisualizaColaborador.append(this.colaborador.retornaInformacoes());
+    public void exibirTelaVisualizarColaborador(){
+        setVisible(true);
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,7 +50,7 @@ public class VisualizarColaboradorView extends javax.swing.JFrame {
         btFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Visualização do Pedido");
+        setTitle("Visualização do Colaborador");
         setMinimumSize(new java.awt.Dimension(600, 410));
         setResizable(false);
 
@@ -61,11 +59,6 @@ public class VisualizarColaboradorView extends javax.swing.JFrame {
         jScrollPane.setViewportView(taVisualizaColaborador);
 
         btFechar.setText("Fechar");
-        btFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFecharActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,10 +85,6 @@ public class VisualizarColaboradorView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btFecharActionPerformed
 
     /**
      * @param args the command line arguments

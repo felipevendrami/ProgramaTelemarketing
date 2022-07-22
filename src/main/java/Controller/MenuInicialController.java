@@ -5,9 +5,14 @@
 package Controller;
 
 import View.CadastroAtendimentoView;
+import View.CadastroClienteView;
+import View.CadastroColaboradorView;
+import View.CadastroEmpresaView;
 import View.ListaAtendimentosView;
 import View.MenuInicialView;
 import View.RelatorioAtendimentoView;
+import View.SelecaoColaboradorView;
+import View.SelecaoEmpresaView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Action;
@@ -25,7 +30,12 @@ public class MenuInicialController {
     
     
     //Controllers Entidade
+    private CadastroClienteController cadastroCliente;
+    private CadastroColaboradorController cadastroColaborador;
+    private CadastroEmpresaController cadastroEmpresa;
     
+    private SelecaoColaboradorController selecaoColaborador;
+    private SelecaoEmpresaController selecaoEmpresa;
     
     //Controllers Atendimento
     private CadastroAtendimentoController cadastroAtendimento;
@@ -63,6 +73,42 @@ public class MenuInicialController {
                 relatorioAtendimento.exibirTelaRelatorioAtendimento();
             }
         });
+        menuInicial.adicionarAcaoNovoCliente(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inicializarTelaCadastroCliente();
+                cadastroCliente.exibirTelaCadastroCliente();
+            }
+        });
+        menuInicial.adicionarAcaoNovoColaborador(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inicializarTelaCadastroColaborador();
+                cadastroColaborador.exibirTelaCadastroColaborador();
+            }
+        });
+        menuInicial.adicionarAcaoNovaEmpresa(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inicializarTelaCadastroEmpresa();
+                cadastroEmpresa.exibirTelaCadastroEmpresa();
+            }
+        });
+        menuInicial.adicionarAcaoSelecaoColaborador(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inicializarTelaSelecaoColaborador();
+                selecaoColaborador.exibirTelaSelecaoColaborador();
+            }
+        });
+        menuInicial.adicionarAcaoSelecaoEmpresa(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inicializarTelaSelecaoEmpresa();
+                selecaoEmpresa.exibirTelaSelecaoEmpresa();
+            }
+        });
+        
     }
     
     public void inicializarTelaCadastroAtendimento(){
@@ -75,5 +121,25 @@ public class MenuInicialController {
     
     public void inicializarTelaRelatorioAtendimento(){
         relatorioAtendimento = new RelatorioAtendimentoController(new RelatorioAtendimentoView());
+    }
+    
+    public void inicializarTelaCadastroCliente(){
+        cadastroCliente = new CadastroClienteController(new CadastroClienteView());
+    }
+    
+    public void inicializarTelaCadastroColaborador(){
+        cadastroColaborador = new CadastroColaboradorController(new CadastroColaboradorView());
+    }
+    
+    public void inicializarTelaCadastroEmpresa(){
+        cadastroEmpresa = new CadastroEmpresaController(new CadastroEmpresaView());
+    }
+    
+    public void inicializarTelaSelecaoColaborador(){
+        selecaoColaborador = new SelecaoColaboradorController(new SelecaoColaboradorView());
+    }
+    
+    public void inicializarTelaSelecaoEmpresa(){
+        selecaoEmpresa = new SelecaoEmpresaController(new SelecaoEmpresaView());
     }
 }

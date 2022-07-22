@@ -4,11 +4,7 @@
  */
 package View;
 
-import DAO.ColaboradorListDAO;
-import Model.Colaborador;
-import Model.Contato;
-import Model.Endereco;
-import Repositorio.ColaboradorRepositorio;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,35 +14,70 @@ import javax.swing.JOptionPane;
 public class CadastroColaboradorView extends javax.swing.JFrame {
     
     /**
-     * Creates new form NovoAtendimentoView
+     * Creates new form NovoColaboradorView
      */
     public CadastroColaboradorView() {
         initComponents();
     }
     
-    public Colaborador recuperarColaborador(){
-        // dados cliente
-        String colaborador = tfColaborador.getText();
-        String setor = tfSetor.getText();
-        String cargo = tfCargo.getText();
-        
-        // dados contato
-        String nome = tfNome.getText();
-        String telefone = tfTelefone.getText();
-        String email = tfEmail.getText();
-        Contato contato = new Contato(nome, telefone, email);
-        
-        // dados endereco
-        String rua = tfRua.getText();
-        String bairro = tfBairro.getText();
-        String cidade = tfCidade.getText();
-        String estado = tfEstado.getText();
-        Endereco endereco = new Endereco(rua, bairro, cidade, estado);
-        
-        Colaborador novoColaborador = new Colaborador(colaborador, endereco, contato, setor, cargo);
-        return novoColaborador;
-        
-        
+    public void adicionarAcaoConfirmar(ActionListener acao){
+        btContinuar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoCancelar(ActionListener acao){
+        btCancelar.addActionListener(acao);
+    }    
+    
+    public void exibirTelaCadastroColaborador(){
+        setVisible(true);
+    }    
+    
+    public void fecharTela(){
+        setVisible(false);
+    }
+    
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
+
+    public String getBairro() {
+        return tfBairro.getText();
+    }
+
+    public String getCargo() {
+        return tfCargo.getText();
+    }
+
+    public String getCidade() {
+        return tfCidade.getText();
+    }
+
+    public String getColaborador() {
+        return tfColaborador.getText();
+    }
+
+    public String getEmail() {
+        return tfEmail.getText();
+    }
+
+    public String getEstado() {
+        return tfEstado.getText();
+    }
+
+    public String getNome() {
+        return tfNome.getText();
+    }
+
+    public String getRua() {
+        return tfRua.getText();
+    }
+
+    public String getSetor() {
+        return tfSetor.getText();
+    }
+
+    public String getTelefone() {
+        return tfTelefone.getText();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,7 +115,7 @@ public class CadastroColaboradorView extends javax.swing.JFrame {
         tfCargo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Novo Atendimento");
+        setTitle("Novo Colaborador");
         setMinimumSize(new java.awt.Dimension(600, 196));
         setResizable(false);
 
@@ -95,18 +126,8 @@ public class CadastroColaboradorView extends javax.swing.JFrame {
         jLabel1.setText("Setor:");
 
         btCancelar.setText("Cancelar");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
 
         btContinuar.setText("Continuar");
-        btContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btContinuarActionPerformed(evt);
-            }
-        });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Colaborador:");
@@ -255,24 +276,6 @@ public class CadastroColaboradorView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btCancelarActionPerformed
-
-    private void btContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContinuarActionPerformed
-        try {
-            ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
-            Colaborador colaborador = recuperarColaborador();
-            colaboradorRepositorio.salvarColaborador(colaborador);
-            JOptionPane.showMessageDialog(null, "Colaborador criado com sucesso!");
-            this.setVisible(false);
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao cadastrar colaborador!");
-        }
-
-    }//GEN-LAST:event_btContinuarActionPerformed
 
     /**
      * @param args the command line arguments

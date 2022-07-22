@@ -4,40 +4,37 @@
  */
 package View;
 
-import DAO.ClienteListDAO;
-import Model.Cliente;
-import Repositorio.ClienteRepositorio;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author julia
  */
 public class VisualizarClienteView extends javax.swing.JFrame {
-    
-    private Cliente cliente;
 
     /**
-     * Creates new form VisualizarAtendimentoView
+     * Creates new form VisualizarClienteView
      */
-    public VisualizarClienteView(int idCliente) {
-        this.cliente = localizaCliente(idCliente);
+    public VisualizarClienteView() {
         initComponents();
-        preencheInformacoesColaborador();
     }
     
-    public Cliente localizaCliente(int idCliente) {
-        ClienteRepositorio clienteRepositorio = new ClienteListDAO();
-        for (Cliente cliente : clienteRepositorio.recuperarTodosClientes()) {
-            if (cliente.getIdEntidade() == idCliente) {
-                return cliente;
-            } 
-        }
-        return null;
+    public void adicionarAcaoFechar(ActionListener acao){
+        btFechar.addActionListener(acao);
     }
     
-    public void preencheInformacoesColaborador() {
-        taVisualizaCliente.append(this.cliente.retornaInformacoes());
+    public void fecharTela(){
+        setVisible(false);
     }
+    
+    public void preencheInformacoesCliente(String cliente) {
+        taVisualizaCliente.append(cliente);
+    }
+    
+    public void exibirTelaVisualizarCliente(){
+        setVisible(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,7 +49,7 @@ public class VisualizarClienteView extends javax.swing.JFrame {
         btFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Visualização do Pedido");
+        setTitle("Visualização do Cliente");
         setMinimumSize(new java.awt.Dimension(600, 410));
         setResizable(false);
 
@@ -61,11 +58,6 @@ public class VisualizarClienteView extends javax.swing.JFrame {
         jScrollPane.setViewportView(taVisualizaCliente);
 
         btFechar.setText("Fechar");
-        btFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFecharActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,10 +84,6 @@ public class VisualizarClienteView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,13 +118,6 @@ public class VisualizarClienteView extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new VisualizarColaboradorView().setVisible(true);
-//            }
-//        });
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

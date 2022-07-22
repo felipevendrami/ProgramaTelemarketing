@@ -4,10 +4,8 @@
  */
 package View;
 
-import DAO.ClienteListDAO;
-import Repositorio.ClienteRepositorio;
-import javax.swing.table.DefaultTableModel;
-import Model.Cliente;
+import TableModel.ListaClientesTableModel;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,55 +14,48 @@ import javax.swing.JOptionPane;
  */
 public class SelecaoClienteView extends javax.swing.JFrame {
 
-    private Cliente cliente;
-    private CadastroVendaView cadVendaView;
     /**
      * Creates new form SelecaoClienteView
      */
-    public SelecaoClienteView(CadastroVendaView cadVendaView) {
-        this.cadVendaView = cadVendaView;
+    public SelecaoClienteView() {
         initComponents();
-        preencheTabelaClientes();
     }
-
-    public void preencheTabelaClientes(){
-        try {
-            DefaultTableModel tabelaClientes = (DefaultTableModel) tbClientes.getModel();
-            ClienteRepositorio clienteRepositorio = new ClienteListDAO();
-            for(Cliente cliente : clienteRepositorio.recuperarTodosClientes()){
-                tabelaClientes.addRow(new Object[]{cliente.getIdEntidade(), cliente.getNome(), cliente.getEndereco().getCidade(), cliente.getEndereco().getEstado()});
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Não foi possível recuperar dados dos clientes!");
+     
+    public void setTableModel(ListaClientesTableModel listaClientesTableModel){
+        tbClientes.setModel(listaClientesTableModel);
+    }
+    
+    public void adicionarAcaoFechar(ActionListener acao){
+        btFechar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoVisualizar(ActionListener acao){
+        btVisualizar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoSelecionar(ActionListener acao){
+        btSelecionar.addActionListener(acao);
+    }
+    
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
+    
+    public void exibirTelaSelecaoCliente(){
+        setVisible(true);
+    }
+    
+    public void fecharTela(){
+        this.setVisible(false);
+    }  
+    
+    public String getClienteSelecionado() {
+        if(tbClientes.getSelectedRow() == -1){
+            return null;
         }
+        //Retorna o Id da primeira coluna da linha selecionada
+        return tbClientes.getModel().getValueAt(tbClientes.getSelectedRow(), 0).toString();        
     }
-    
-    public int carregaClienteSelecionado(){
-        int linha = tbClientes.getSelectedRow();
-        int idCliente = Integer.parseInt(tbClientes.getValueAt(linha, 0).toString());
-        return idCliente;
-    }
-    
-    public void localizarCliente(){
-        ClienteRepositorio clienteRepositorio = new ClienteListDAO();
-        int idCliente = carregaClienteSelecionado();
-        for(Cliente cliente : clienteRepositorio.recuperarTodosClientes()){
-            if(cliente.getIdEntidade() == idCliente){
-                this.cliente = cliente;
-            }
-        }
-    }
-    
-    public void setClienteSelecionado(){
-        cadVendaView.setCliente(this.cliente);
-        cadVendaView.carregaCliente();
-    }
-    
-    public void abreVisualizacaoCliente(){
-        VisualizarClienteView visualizarClienteView = new VisualizarClienteView(carregaClienteSelecionado());
-        visualizarClienteView.setVisible(true);
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,25 +109,10 @@ public class SelecaoClienteView extends javax.swing.JFrame {
         }
 
         btFechar.setText("Fechar");
-        btFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFecharActionPerformed(evt);
-            }
-        });
 
         btVisualizar.setText("Visualizar");
-        btVisualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVisualizarActionPerformed(evt);
-            }
-        });
 
         btSelecionar.setText("Selecionar");
-        btSelecionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSelecionarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,24 +153,6 @@ public class SelecaoClienteView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btFecharActionPerformed
-
-    private void btSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelecionarActionPerformed
-        localizarCliente();
-        setClienteSelecionado();
-        this.setVisible(false);
-    }//GEN-LAST:event_btSelecionarActionPerformed
-
-    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
-        try {
-            abreVisualizacaoCliente();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao visualizar!");
-        }
-    }//GEN-LAST:event_btVisualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,4 +196,6 @@ public class SelecaoClienteView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable tbClientes;
     // End of variables declaration//GEN-END:variables
+
+
 }

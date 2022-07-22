@@ -10,7 +10,9 @@ import Model.Cliente;
 import Model.IAtendimentoDivulgacao;
 import Model.Venda;
 import Repositorio.VendaRepositorio;
+import View.CadastroClienteView;
 import View.CadastroVendaView;
+import View.SelecaoClienteView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -77,13 +79,15 @@ public class CadastroVendaController {
         cadastroVenda.adicionarAcaoCadastrarCliente(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Aguardar criação do controlles Cadastro de Clientes
+                CadastroClienteController cadastroCliente = new CadastroClienteController(new CadastroClienteView());
+                cadastroCliente.exibirTelaCadastroCliente();
             }
         });
         cadastroVenda.adicionarAcaoBuscarCliente(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Aguardar criação do controller de Selação de Cliente
+                SelecaoClienteController selecaoCliente = new SelecaoClienteController(new SelecaoClienteView(), CadastroVendaController.this);
+                selecaoCliente.exibirTelaSelecaoCliente();
             }
         });
     }
@@ -108,5 +112,13 @@ public class CadastroVendaController {
     public String getSituacaoVenda(){
         String situacao = cadastroVenda.getSituacaoVenda();
         return situacao;
+    }
+    
+    public void setCliente(Cliente cliente){
+        this.cliente = cliente;
+    }
+    
+    public void carregaCliente(){
+        cadastroVenda.carregaCliente(cliente.getNome());
     }
 }

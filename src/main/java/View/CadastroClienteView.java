@@ -4,13 +4,9 @@
  */
 package View;
 
-import DAO.ClienteListDAO;
-import Repositorio.ClienteRepositorio;
-import Model.Cliente;
-import Model.Endereco;
-import Model.Contato;
 import javax.swing.JOptionPane;
-import Exception.CadastroClienteException;
+import java.awt.event.ActionListener;
+
 
 /**
  *
@@ -19,71 +15,68 @@ import Exception.CadastroClienteException;
 public class CadastroClienteView extends javax.swing.JFrame {
     
     /**
-     * Creates new form NovoAtendimentoView
+     * Creates new form NovoClienteView
      */
     public CadastroClienteView() {
         initComponents();
     }
     
-    public Cliente recuperarCliente(){
-        // dados cliente
-        String cliente = tfCliente.getText();
-        String cpf = tfCpf.getText();
-        
-        // dados contato
-        String nome = tfNome.getText();
-        String telefone = tfTelefone.getText();
-        String email = tfEmail.getText();
-        Contato contato = new Contato(nome, telefone, email);
-        
-        // dados endereco
-        String rua = tfRua.getText();
-        String bairro = tfBairro.getText();
-        String cidade = tfCidade.getText();
-        String estado = tfEstado.getText();
-        Endereco endereco = new Endereco(rua, bairro, cidade, estado);
-        
-        Cliente novoCliente = new Cliente(cliente, endereco, contato, cpf);
-        return novoCliente;   
+    public void adicionarAcaoConfirmar(ActionListener acao){
+        btContinuar.addActionListener(acao);
     }
     
-    public void identificaExcecao() throws CadastroClienteException{
-        if(tfCliente.getText().isBlank()){
-            throw new CadastroClienteException("Campo 'Cliente' não informado.");
-        } else if (tfCpf.getText().isBlank()){
-            throw new CadastroClienteException("Campo 'CPF' não informado.");
-        } else if (tfRua.getText().isBlank()){
-            throw new CadastroClienteException("Campo 'Rua' não informado.");
-        } else if (tfBairro.getText().isBlank()){
-            throw new CadastroClienteException("Campo 'Bairro' não informado.");
-        } else if (tfCidade.getText().isBlank()){
-            throw new CadastroClienteException("Campo 'Cidade' não informado.");
-        } else if (tfEstado.getText().isBlank()){
-            throw new CadastroClienteException("Campo 'Estado' não informado.");
-        } else if (tfNome.getText().isBlank()){
-            throw new CadastroClienteException("Campo 'Nome' não informado.");
-        } else if (tfEmail.getText().isBlank()){
-            throw new CadastroClienteException("Campo 'Email' não informado.");
-        } else if (tfTelefone.getText().isBlank()){
-            throw new CadastroClienteException("Campo 'Telefone' não informado.");
-        }
+    public void adicionarAcaoCancelar(ActionListener acao){
+        btCancelar.addActionListener(acao);
+    }
+
+    public String getBairro() {
+        return tfBairro.getText();
+    }
+
+    public String getCidade() {
+        return tfCidade.getText();
+    }
+
+    public String getCliente() {
+        return tfCliente.getText();
+    }
+
+    public String getCpf() {
+        return tfCpf.getText();
+    }
+
+    public String getEmail() {
+        return tfEmail.getText();
+    }
+
+    public String getEstado() {
+        return tfEstado.getText();
+    }
+
+    public String getNome() {
+        return tfNome.getText();
+    }
+
+    public String getRua() {
+        return tfRua.getText();
+    }
+
+    public String getTelefone() {
+        return tfTelefone.getText();
     }
     
-    public void criaCliente() throws CadastroClienteException{
-        ClienteRepositorio clienteRepositorio = new ClienteListDAO();
-        Cliente cliente = recuperarCliente();
-        boolean cadastroOk = clienteRepositorio.salvarCliente(cliente);
-        if (cadastroOk) {
-            exibirMensagem("Cliente criado com sucesso!");
-            this.setVisible(false);
-        } else {
-            throw new CadastroClienteException("CPF já cadastrado. Insira um CPF válido!");
-        }
+    public void exibirTelaCadastroCliente(){
+        setVisible(true);
     }
     
-    public void exibirMensagem(String menssagem){
-        JOptionPane.showMessageDialog(null, menssagem);
+    public void fecharTela(){
+        setVisible(false);
     }
+    
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
+    }   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,7 +111,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
         tfEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Novo Atendimento");
+        setTitle("Novo Cliente");
         setMinimumSize(new java.awt.Dimension(600, 196));
         setResizable(false);
 
@@ -129,18 +122,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jLabel1.setText("CPF:");
 
         btCancelar.setText("Cancelar");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
 
         btContinuar.setText("Continuar");
-        btContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btContinuarActionPerformed(evt);
-            }
-        });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Cliente:");
@@ -278,20 +261,6 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btCancelarActionPerformed
-
-    private void btContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContinuarActionPerformed
-        try {
-            identificaExcecao();
-            criaCliente();
-        } catch (CadastroClienteException ex) {
-            exibirMensagem(ex.getMessage());
-        }
-
-    }//GEN-LAST:event_btContinuarActionPerformed
 
     /**
      * @param args the command line arguments

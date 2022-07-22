@@ -147,28 +147,28 @@ public class MenuInicialView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoClienteActionPerformed
-        CadastroClienteView cadastroCliente = new CadastroClienteView();
-        cadastroCliente.setVisible(true);
+//        CadastroClienteView cadastroCliente = new CadastroClienteView();
+//        cadastroCliente.setVisible(true);
     }//GEN-LAST:event_miNovoClienteActionPerformed
 
     private void miNovaEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovaEmpresaActionPerformed
-        CadastroEmpresaView cadastroEmpresa = new CadastroEmpresaView();
-        cadastroEmpresa.setVisible(true);
+//        CadastroEmpresaView cadastroEmpresa = new CadastroEmpresaView();
+//        cadastroEmpresa.setVisible(true);
     }//GEN-LAST:event_miNovaEmpresaActionPerformed
 
     private void miNovoColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoColaboradorActionPerformed
-        CadastroColaboradorView cadastroColaborador = new CadastroColaboradorView();
-        cadastroColaborador.setVisible(true);
+//        CadastroColaboradorView cadastroColaborador = new CadastroColaboradorView();
+//        cadastroColaborador.setVisible(true);
     }//GEN-LAST:event_miNovoColaboradorActionPerformed
 /**/
     private void miListaColaboradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaColaboradoresActionPerformed
-        SelecaoColaboradorView selecaoColaboradorView = new SelecaoColaboradorView();
-        selecaoColaboradorView.setVisible(true);
+//        SelecaoColaboradorView selecaoColaboradorView = new SelecaoColaboradorView();
+//        selecaoColaboradorView.setVisible(true);
     }//GEN-LAST:event_miListaColaboradoresActionPerformed
 
     private void miListaEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaEmpresasActionPerformed
-        SelecaoEmpresaView selecaoEmpresaView = new SelecaoEmpresaView();
-        selecaoEmpresaView.setVisible(true);
+//        SelecaoEmpresaView selecaoEmpresaView = new SelecaoEmpresaView();
+//        selecaoEmpresaView.setVisible(true);
     }//GEN-LAST:event_miListaEmpresasActionPerformed
 
     private void miNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoProdutoActionPerformed
@@ -192,6 +192,25 @@ public class MenuInicialView extends javax.swing.JFrame {
         miRelatorioAtedimento.addActionListener(acao);
     }
     
+    public void adicionarAcaoNovoCliente(ActionListener acao){
+        miNovoCliente.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoNovoColaborador(ActionListener acao){
+        miNovoColaborador.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoNovaEmpresa(ActionListener acao){
+        miNovaEmpresa.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoSelecaoColaborador(ActionListener acao){
+        miListaColaboradores.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoSelecaoEmpresa(ActionListener acao){
+        miListaEmpresas.addActionListener(acao);
+    }
     
     /**
      * @param args the command line arguments

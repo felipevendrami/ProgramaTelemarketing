@@ -4,10 +4,6 @@
  */
 package View;
 
-import DAO.VendaListDAO;
-import Model.Cliente;
-import Model.Venda;
-import Repositorio.VendaRepositorio;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -20,16 +16,15 @@ import java.awt.event.ActionListener;
  */
 public class CadastroVendaView extends javax.swing.JFrame{
 
-    private Cliente cliente;
-    private List<String> itensPedido;
-    private IAtendimentoDivulgacao atendimentoDivulgacao;
+//    private List<String> itensPedido;
+//    private IAtendimentoDivulgacao atendimentoDivulgacao;
     
     /**
      * Creates new form DivulgacaoVendaView
      */
     public CadastroVendaView() {
-        this.atendimentoDivulgacao = atendimentoDivulgacao;
-        this.itensPedido = new ArrayList<>();
+//        this.atendimentoDivulgacao = atendimentoDivulgacao;
+//        this.itensPedido = new ArrayList<>();
         initComponents();
     }
 
@@ -58,14 +53,8 @@ public class CadastroVendaView extends javax.swing.JFrame{
         selecaoProdutoView.setVisible(true);
     }
     
-    public void carregaCliente(){
-        this.cliente = cliente;
-        String cliente = this.cliente.getNome();
+    public void carregaCliente(String cliente){
         tfCliente.setText(cliente);
-    }
-    
-    public void setCliente(Cliente cliente){
-        this.cliente = cliente;
     }
     
     public void exibirTelaCadastroVenda(){
@@ -327,7 +316,7 @@ public class CadastroVendaView extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        this.setVisible(false);
+//        this.setVisible(false);
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
@@ -347,13 +336,13 @@ public class CadastroVendaView extends javax.swing.JFrame{
     }//GEN-LAST:event_btAdicionarProdutoActionPerformed
 
     private void btCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarClienteActionPerformed
-        CadastroClienteView cadastroCliente = new CadastroClienteView();
-        cadastroCliente.setVisible(true);
+//        CadastroClienteView cadastroCliente = new CadastroClienteView();
+//        cadastroCliente.setVisible(true);
     }//GEN-LAST:event_btCadastrarClienteActionPerformed
 
     private void btBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarClienteActionPerformed
-        SelecaoClienteView selecaoCliente = new SelecaoClienteView(this);
-        selecaoCliente.setVisible(true);
+//        SelecaoClienteView selecaoCliente = new SelecaoClienteView(this);
+//        selecaoCliente.setVisible(true);
     }//GEN-LAST:event_btBuscarClienteActionPerformed
 
     private void btRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverProdutoActionPerformed

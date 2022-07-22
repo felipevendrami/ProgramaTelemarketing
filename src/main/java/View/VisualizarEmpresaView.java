@@ -4,39 +4,35 @@
  */
 package View;
 
-import DAO.EmpresaListDAO;
-import Model.Empresa;
-import Repositorio.EmpresaRepositorio;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author julia
  */
 public class VisualizarEmpresaView extends javax.swing.JFrame {
-    
-    private Empresa empresa;
 
     /**
-     * Creates new form VisualizarAtendimentoView
+     * Creates new form VisualizarEmpresaView
      */
-    public VisualizarEmpresaView(int idEmpresa) {
-        this.empresa = localizaEmpresa(idEmpresa);
+    public VisualizarEmpresaView() {
         initComponents();
-        preencheInformacoesEmpresa();
     }
     
-    public Empresa localizaEmpresa(int idEmpresa) {
-        EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
-        for (Empresa empresa : empresaRepositorio.recuperarTodasEmpresas()) {
-            if (empresa.getIdEntidade() == idEmpresa) {
-                return empresa;
-            } 
-        }
-        return null;
+    public void adicionarAcaoFechar(ActionListener acao){
+        btFechar.addActionListener(acao);
     }
     
-    public void preencheInformacoesEmpresa() {
-        taVisualizaEmpresa.append(this.empresa.retornaInformacoes());
+    public void fecharTela(){
+        setVisible(false);
+    }
+    
+    public void preencheInformacoesEmpresa(String empresa) {
+        taVisualizaEmpresa.append(empresa);
+    }
+    
+    public void exibirTelaVisualizarEmpresa(){
+        setVisible(true);
     }
     
     /**
@@ -53,7 +49,7 @@ public class VisualizarEmpresaView extends javax.swing.JFrame {
         btFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Visualização do Pedido");
+        setTitle("Visualização da Empresa");
         setMinimumSize(new java.awt.Dimension(600, 410));
         setResizable(false);
 
@@ -62,11 +58,6 @@ public class VisualizarEmpresaView extends javax.swing.JFrame {
         jScrollPane.setViewportView(taVisualizaEmpresa);
 
         btFechar.setText("Fechar");
-        btFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFecharActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,10 +84,6 @@ public class VisualizarEmpresaView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btFecharActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,50 +4,50 @@
  */
 package View;
 
-
-import DAO.ColaboradorListDAO;
-import DAO.EmpresaListDAO;
-import javax.swing.table.DefaultTableModel;
-import Model.Empresa;
-import Repositorio.EmpresaRepositorio;
+import TableModel.ListaEmpresaTableModel;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author felip
- */
+
 public class SelecaoEmpresaView extends javax.swing.JFrame {
 
     /**
-     * Creates new form SelecaoClienteView
+     * Creates new form SelecaoEmpresaView
      */
     public SelecaoEmpresaView() {
         initComponents();
-        preencheTabelaEmpresa();
     }
-
-    public void preencheTabelaEmpresa(){
-        try {
-            DefaultTableModel tabelaEmpresa = (DefaultTableModel) tbEmpresa.getModel();
-            EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
-            for(Empresa empresa : empresaRepositorio.recuperarTodasEmpresas()){
-                tabelaEmpresa.addRow(new Object[]{empresa.getIdEntidade(), empresa.getNome(), empresa.getEndereco().getCidade(), empresa.getEndereco().getEstado()});
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Não foi possível recuperar dados das empresas!");
+    
+    public void setTableModel(ListaEmpresaTableModel listaEmpresaTableModel){
+        tbEmpresa.setModel(listaEmpresaTableModel);
+    }
+    
+    public void adicionarAcaoFechar(ActionListener acao){
+        btFechar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoVisualizar(ActionListener acao){
+        btVisualizar.addActionListener(acao);
+    }
+    
+    public void fecharTela(){
+        this.setVisible(false);
+    }
+    
+    public String getEmpresaSelecionada(){
+        if(tbEmpresa.getSelectedRow() == -1){
+            return null;
         }
-
+        //Retorna o Id da primeira coluna da linha selecionada
+        return tbEmpresa.getModel().getValueAt(tbEmpresa.getSelectedRow(), 0).toString();
     }
     
-    public int carregaEmpresaSelecionada(){
-        int linha = tbEmpresa.getSelectedRow();
-        int idEmpresa = Integer.parseInt(tbEmpresa.getValueAt(linha, 0).toString());
-        return idEmpresa;
-    }    
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
     
-    public void abreVisualizacaoEmpresa(){
-        VisualizarEmpresaView visualizarEmpresaView = new VisualizarEmpresaView(carregaEmpresaSelecionada());
-        visualizarEmpresaView.setVisible(true);
+    public void exibirTelaSelecaoEmpresa(){
+        setVisible(true);
     }
     
     /**
@@ -65,7 +65,7 @@ public class SelecaoEmpresaView extends javax.swing.JFrame {
         btVisualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Selecionar Cliente");
+        setTitle("Selecionar Empresa");
         setMinimumSize(new java.awt.Dimension(600, 300));
         setResizable(false);
 
@@ -101,18 +101,8 @@ public class SelecaoEmpresaView extends javax.swing.JFrame {
         }
 
         btFechar.setText("Fechar");
-        btFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFecharActionPerformed(evt);
-            }
-        });
 
         btVisualizar.setText("Visualizar");
-        btVisualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btVisualizarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,18 +137,6 @@ public class SelecaoEmpresaView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btFecharActionPerformed
-
-    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
-        try {
-            abreVisualizacaoEmpresa();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu ao visualizar!");
-        }
-    }//GEN-LAST:event_btVisualizarActionPerformed
 
     /**
      * @param args the command line arguments
