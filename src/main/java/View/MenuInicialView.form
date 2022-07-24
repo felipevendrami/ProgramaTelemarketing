@@ -24,9 +24,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Novo Cliente ..."/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miNovoClienteActionPerformed"/>
-              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miNovaEmpresa">
               <Properties>
@@ -35,9 +32,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nova Empresa ..."/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miNovaEmpresaActionPerformed"/>
-              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miNovoColaborador">
               <Properties>
@@ -46,9 +40,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Novo Colaborador ..."/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miNovoColaboradorActionPerformed"/>
-              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miListaEmpresas">
               <Properties>
@@ -57,9 +48,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Lista Empresas ..."/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miListaEmpresasActionPerformed"/>
-              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miListaColaboradores">
               <Properties>
@@ -68,9 +56,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Lista Colaboradores ..."/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miListaColaboradoresActionPerformed"/>
-              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

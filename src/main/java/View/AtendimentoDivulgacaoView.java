@@ -4,16 +4,7 @@
  */
 package View;
 
-import Controller.CadastroAtendimentoController;
-import DAO.AtendimentoListDAO;
-import Exception.CadastroAtendimentoException;
-import Model.Atendimento;
-import Model.Colaborador;
-import Model.Divulgacao;
-import Model.Empresa;
-import Repositorio.AtendimentoRepositorio;
 import javax.swing.JOptionPane;
-import Model.IAtendimentoDivulgacao;
 import Model.Venda;
 import java.awt.event.ActionListener;
 
@@ -21,10 +12,8 @@ import java.awt.event.ActionListener;
  *
  * @author felip
  */
-public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAtendimentoDivulgacao {
+public class AtendimentoDivulgacaoView extends javax.swing.JFrame{
 
-    //private CadastroAtendimentoController cadastroAtendimento;
-    //private CadastroAtendimentoView cadAtendimentoView;
     private Venda venda;
     private boolean conversaoVenda;
     
@@ -34,43 +23,6 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
     public AtendimentoDivulgacaoView() {
         initComponents();
     }
-
-    /*public void abrirAtendimentoDivulgacao(){
-        AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
-        Atendimento atendimento = recuperarAtendimentoDivulgacao();
-        atendimentoRepositorio.salvarAtendimento(atendimento);
-        JOptionPane.showMessageDialog(null, "Atendimento aberto com sucesso !");
-    }*/
-    
-    /*public Atendimento recuperarAtendimentoDivulgacao(){
-        // Recuperamos as informações da tela
-        Empresa empresa = cadAtendimentoView.getEmpresa();
-        Colaborador responsavel = cadAtendimentoView.getResponsavel();
-        String tipoContato = cbTipoContato.getSelectedItem().toString();
-        String contato = tfContato.getText();
-        String tramite = taTramite.getText();
-        
-        // Criamos o atendimento e retornamos
-        Atendimento atendimentoDivulgacao = new Divulgacao(tipoContato, contato, responsavel, tramite, empresa, this.conversaoVenda, this.venda);
-        return atendimentoDivulgacao;
-    }*/
-    
-    @Override
-    public void processoAtendimento(){
-        /*abrirAtendimentoDivulgacao();
-        cadAtendimentoView.limparTela();
-        this.setVisible(false);*/
-    }
-    
-    /*public void identificaExcecao() throws CadastroAtendimentoException{
-        if(cbTipoContato.getSelectedItem() == null){
-            throw new CadastroAtendimentoException("Tipo de Contato não selecionado.");
-        } else if (tfContato.getText().isBlank()){
-            throw new CadastroAtendimentoException("Campo 'Contato' não informado.");
-        } else if (taTramite.getText().isBlank()){
-            throw new CadastroAtendimentoException("Campo 'Trâmite' não pode ficar vazio.");
-        }
-    }*/
     
     public void adicionarAcaoCancelar(ActionListener acao){
         btCancelar.addActionListener(acao);
@@ -143,11 +95,6 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
         jScrollPane1.setViewportView(taTramite);
 
         btNovaVenda.setText("Nova Venda");
-        btNovaVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btNovaVendaActionPerformed(evt);
-            }
-        });
 
         btConfirmar.setText("Confirmar");
 
@@ -218,16 +165,6 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btNovaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovaVendaActionPerformed
-        /*try {
-            identificaExcecao();
-            CadastroVendaView cadastroVendaView = new CadastroVendaView(this);
-            cadastroVendaView.setVisible(true);
-        } catch (CadastroAtendimentoException ex) {
-            exibirMensagem(ex.getMessage());
-        }*/
-    }//GEN-LAST:event_btNovaVendaActionPerformed
-
     public void exibirMensagem(String mensagem){
         JOptionPane.showMessageDialog(null, mensagem);
     }
@@ -286,17 +223,4 @@ public class AtendimentoDivulgacaoView extends javax.swing.JFrame implements IAt
     private javax.swing.JTextField tfContato;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void setConversaoDivulgacao(String situacaoVenda) {
-        if(situacaoVenda.equals("Pendente")){
-            this.conversaoVenda = false;
-        } else {
-            this.conversaoVenda = true;
-        }
-    }
-
-    @Override
-    public void setVenda(Venda venda) {
-        this.venda = venda;
-    }
 }

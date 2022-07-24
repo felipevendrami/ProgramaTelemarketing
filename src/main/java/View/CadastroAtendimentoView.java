@@ -4,16 +4,9 @@
  */
 package View;
 
-import DAO.ColaboradorListDAO;
-import DAO.EmpresaListDAO;
-import Exception.CadastroAtendimentoException;
 import Model.Colaborador;
 import Model.Empresa;
-import Repositorio.ColaboradorRepositorio;
-import Repositorio.EmpresaRepositorio;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,43 +30,6 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
         cbResponsavel.addItem(colaborador);
     }
     
-    /*public void carregaComboboxEmpresa(){
-        try{
-            EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
-            Set<Empresa> empresas = empresaRepositorio.recuperarTodasEmpresas();
-            for(Empresa empresa : empresas){
-                cbEmpresa.addItem(empresa);
-            }
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Não existem empresas cadastradas!");
-        }
-    }*/
-    
-    /*public void carregaComboboxColaborador(){
-        try {
-            ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
-            List<Colaborador> colaboradores = colaboradorRepositorio.recuperarTodosColaboradores();
-            for(Colaborador responsavel : colaboradores){
-                cbResponsavel.addItem(responsavel);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Não existem colaboradores cadastrados!");
-        }
-    }*/
-    
-    /*public void abrirTelaTipoAtendimento(String tipoAtendimento){
-        if(tipoAtendimento.equals("Divulgação")){
-            AtendimentoDivulgacaoView atendimentoDivulgacao = new AtendimentoDivulgacaoView(this);
-            atendimentoDivulgacao.setVisible(true);
-        } if(tipoAtendimento.equals("Suporte")){
-            AtendimentoSuporteView atendimentoSuporteView = new AtendimentoSuporteView(this);
-            atendimentoSuporteView.setVisible(true);
-        } if(tipoAtendimento.equals("Pesquisa")){
-            AtendimentoPesquisaView atendimentoPesquisaView = new AtendimentoPesquisaView(this);
-            atendimentoPesquisaView.setVisible(true);
-        }
-    }*/
-    
     public void limparTela(){
         cbEmpresa.setSelectedIndex(-1);
         cbResponsavel.setSelectedIndex(-1);
@@ -91,19 +47,6 @@ public class CadastroAtendimentoView extends javax.swing.JFrame {
     public String getTipoAtendimento(){
         return cbTipoAtendimento.getItemAt(cbTipoAtendimento.getSelectedIndex());
     }
-    
-   /*public void identificaTipoAtendimento() throws CadastroAtendimentoException{
-        if(cbEmpresa.getSelectedItem() == null){
-            throw new CadastroAtendimentoException("Empresa não selecionada.");
-        } else if(cbResponsavel.getSelectedItem() == null){
-            throw new CadastroAtendimentoException("Responsável não selecionado.");
-        } else if(cbTipoAtendimento.getSelectedItem() == null){
-            throw new CadastroAtendimentoException("Tipo de atendimento não selecionado.");
-        } else {
-            String tipoAtendimento = cbTipoAtendimento.getSelectedItem().toString();
-            abrirTelaTipoAtendimento(tipoAtendimento);
-        }
-    }*/
     
     public void exibirMensagem(String mensagem){
         JOptionPane.showMessageDialog(null, mensagem);

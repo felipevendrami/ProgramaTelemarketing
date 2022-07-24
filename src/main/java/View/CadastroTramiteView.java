@@ -4,19 +4,15 @@
  */
 package View;
 
-import Exception.AtendimentoTramiteException;
 import Model.Atendimento;
-import Model.Divulgacao;
 import javax.swing.JOptionPane;
-import Model.IAtendimentoDivulgacao;
-import Model.Venda;
 import java.awt.event.ActionListener;
 
 /**
  *
  * @author felip
  */
-public class CadastroTramiteView extends javax.swing.JFrame implements IAtendimentoDivulgacao {
+public class CadastroTramiteView extends javax.swing.JFrame{
 
     private Atendimento atendimento;
     
@@ -26,43 +22,11 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
     public CadastroTramiteView() {
         initComponents();
     }
-
-    /*public void incluirTramite(){
-        // Recuperamos as informações da tela
-        String tipoTramite = cbTipoTramite.getSelectedItem().toString();
-        String descicaoTramite = taTramite.getText();
-        
-        // Criamos o trâmite
-        this.atendimento.criarTramite(descicaoTramite, tipoTramite);
-        JOptionPane.showMessageDialog(null, "Trâmite realizado com sucesso !");
-    }*/
     
     public void limparTela(){
         cbTipoTramite.setSelectedIndex(-1);
         taTramite.setText("");
     }
-    
-    @Override
-    public void processoAtendimento(){
-        /*incluirTramite();
-        limparTela();
-        this.setVisible(false);*/
-    }
-    
-    /*public void identificaExcecao() throws AtendimentoTramiteException{
-        if(cbTipoTramite.getSelectedItem() == null){
-            throw new AtendimentoTramiteException("Tipo do Trâmite não selecionado.");
-        } else if(taTramite.getText().isBlank()){
-            throw new AtendimentoTramiteException("Campo 'Trâmite' não pode ficar vazio.");
-        }
-    }*/
-    
-    /*public void existeVenda()throws AtendimentoTramiteException{
-        Divulgacao divulgacao = (Divulgacao) this.atendimento;
-        if(divulgacao.existeVenda()){
-            throw new AtendimentoTramiteException("O atendimento já possui uma venda.");
-        }
-    }*/
     
     public void adicionarAcaoCancelar(ActionListener acao){
         btCancelar.addActionListener(acao);
@@ -122,11 +86,6 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
 
         cbTipoTramite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Em Andamento", "Fechamento" }));
         cbTipoTramite.setSelectedIndex(-1);
-        cbTipoTramite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoTramiteActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Trâmite:");
 
@@ -135,25 +94,10 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
         jScrollPane1.setViewportView(taTramite);
 
         btConfirmar.setText("Confirmar");
-        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btConfirmarActionPerformed(evt);
-            }
-        });
 
         btCancelar.setText("Cancelar");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
 
         btNovaVenda.setText("Nova Venda");
-        btNovaVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btNovaVendaActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,34 +150,6 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btCancelarActionPerformed
-
-    private void btNovaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovaVendaActionPerformed
-        /*try {
-            identificaExcecao();
-            existeVenda();
-            CadastroVendaView cadastroVendaView = new CadastroVendaView(this);
-            cadastroVendaView.setVisible(true);
-        } catch (AtendimentoTramiteException ex) {
-            exibirMensagem(ex.getMessage());
-        }*/
-    }//GEN-LAST:event_btNovaVendaActionPerformed
-
-    private void cbTipoTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoTramiteActionPerformed
-        
-    }//GEN-LAST:event_cbTipoTramiteActionPerformed
-
-    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        /*try {
-            identificaExcecao();
-            processoAtendimento();
-        } catch (AtendimentoTramiteException ex) {
-            exibirMensagem(ex.getMessage());
-        }*/
-    }//GEN-LAST:event_btConfirmarActionPerformed
    
     public void exibirMensagem(String mensagem){
         JOptionPane.showMessageDialog(null, mensagem);
@@ -286,19 +202,4 @@ public class CadastroTramiteView extends javax.swing.JFrame implements IAtendime
     private javax.swing.JTextArea taTramite;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void setConversaoDivulgacao(String situacaoVenda) {
-        Divulgacao divulgacao = (Divulgacao) this.atendimento;
-        if(situacaoVenda.equals("Pendente")){
-            divulgacao.setConversao(false);
-        } else {
-            divulgacao.setConversao(true);
-        }
-    }
-
-    @Override
-    public void setVenda(Venda venda) {
-        Divulgacao divulgacao = (Divulgacao) this.atendimento;
-        divulgacao.setVenda(venda);
-    }
 }

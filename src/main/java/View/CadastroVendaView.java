@@ -4,10 +4,7 @@
  */
 package View;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
-import Model.IAtendimentoDivulgacao;
 import java.awt.event.ActionListener;
 
 /**
@@ -15,38 +12,13 @@ import java.awt.event.ActionListener;
  * @author felip
  */
 public class CadastroVendaView extends javax.swing.JFrame{
-
-//    private List<String> itensPedido;
-//    private IAtendimentoDivulgacao atendimentoDivulgacao;
     
     /**
      * Creates new form DivulgacaoVendaView
      */
     public CadastroVendaView() {
-//        this.atendimentoDivulgacao = atendimentoDivulgacao;
-//        this.itensPedido = new ArrayList<>();
         initComponents();
     }
-
-    /*public void cadastrarPedidoVenda(){
-        VendaRepositorio vendaRepositorio = new VendaListDAO();
-        Venda venda = recuperarVenda();
-        vendaRepositorio.salvarVenda(venda);
-        JOptionPane.showMessageDialog(null, "Venda aberta com sucesso !");
-    }*/
-    
-    /*public Venda recuperarVenda(){
-        // Recuperamos as informações da tela
-        Cliente cliente = this.cliente;
-        String situacao = getSituacaoVenda();
-        Venda venda = new Venda(cliente, situacao);
-        return venda;
-    }*/
-    
-    /*public String getSituacaoVenda(){
-        String situacao = cbSituacaoVenda.getSelectedItem().toString();
-        return situacao;
-    }*/
     
     public void adicionarItemVenda(){
         SelecaoProdutoView selecaoProdutoView = new SelecaoProdutoView();
@@ -136,18 +108,8 @@ public class CadastroVendaView extends javax.swing.JFrame{
         tfCliente.setEditable(false);
 
         btBuscarCliente.setText("Buscar");
-        btBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBuscarClienteActionPerformed(evt);
-            }
-        });
 
         btCadastrarCliente.setText("Cadastrar");
-        btCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCadastrarClienteActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Situação:");
 
@@ -156,18 +118,8 @@ public class CadastroVendaView extends javax.swing.JFrame{
         jLabel4.setText("Itens:");
 
         btAdicionarProduto.setText("Adicionar");
-        btAdicionarProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAdicionarProdutoActionPerformed(evt);
-            }
-        });
 
         btRemoverProduto.setText("Remover");
-        btRemoverProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRemoverProdutoActionPerformed(evt);
-            }
-        });
 
         tbItens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -208,18 +160,8 @@ public class CadastroVendaView extends javax.swing.JFrame{
         tfTotal.setEditable(false);
 
         btCancelar.setText("Cancelar");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
 
         btConfirmar.setText("Confirmar");
-        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btConfirmarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -314,40 +256,6 @@ public class CadastroVendaView extends javax.swing.JFrame{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-//        this.setVisible(false);
-    }//GEN-LAST:event_btCancelarActionPerformed
-
-    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        /*try {
-            cadastrarPedidoVenda();
-            this.atendimentoDivulgacao.setVenda(recuperarVenda());
-            this.atendimentoDivulgacao.setConversaoDivulgacao(getSituacaoVenda());
-            atendimentoDivulgacao.processoAtendimento();
-            this.setVisible(false);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
-        }*/
-    }//GEN-LAST:event_btConfirmarActionPerformed
-
-    private void btAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarProdutoActionPerformed
-        
-    }//GEN-LAST:event_btAdicionarProdutoActionPerformed
-
-    private void btCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarClienteActionPerformed
-//        CadastroClienteView cadastroCliente = new CadastroClienteView();
-//        cadastroCliente.setVisible(true);
-    }//GEN-LAST:event_btCadastrarClienteActionPerformed
-
-    private void btBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarClienteActionPerformed
-//        SelecaoClienteView selecaoCliente = new SelecaoClienteView(this);
-//        selecaoCliente.setVisible(true);
-    }//GEN-LAST:event_btBuscarClienteActionPerformed
-
-    private void btRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverProdutoActionPerformed
-        
-    }//GEN-LAST:event_btRemoverProdutoActionPerformed
 
     /**
      * @param args the command line arguments

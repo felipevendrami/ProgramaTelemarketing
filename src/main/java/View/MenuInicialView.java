@@ -52,47 +52,22 @@ public class MenuInicialView extends javax.swing.JFrame {
 
         miNovoCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miNovoCliente.setText("Novo Cliente ...");
-        miNovoCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miNovoClienteActionPerformed(evt);
-            }
-        });
         mnEntidades.add(miNovoCliente);
 
         miNovaEmpresa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miNovaEmpresa.setText("Nova Empresa ...");
-        miNovaEmpresa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miNovaEmpresaActionPerformed(evt);
-            }
-        });
         mnEntidades.add(miNovaEmpresa);
 
         miNovoColaborador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miNovoColaborador.setText("Novo Colaborador ...");
-        miNovoColaborador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miNovoColaboradorActionPerformed(evt);
-            }
-        });
         mnEntidades.add(miNovoColaborador);
 
         miListaEmpresas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miListaEmpresas.setText("Lista Empresas ...");
-        miListaEmpresas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miListaEmpresasActionPerformed(evt);
-            }
-        });
         mnEntidades.add(miListaEmpresas);
 
         miListaColaboradores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miListaColaboradores.setText("Lista Colaboradores ...");
-        miListaColaboradores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miListaColaboradoresActionPerformed(evt);
-            }
-        });
         mnEntidades.add(miListaColaboradores);
 
         mbSistemaTelemarketing.add(mnEntidades);
@@ -145,31 +120,6 @@ public class MenuInicialView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void miNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoClienteActionPerformed
-//        CadastroClienteView cadastroCliente = new CadastroClienteView();
-//        cadastroCliente.setVisible(true);
-    }//GEN-LAST:event_miNovoClienteActionPerformed
-
-    private void miNovaEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovaEmpresaActionPerformed
-//        CadastroEmpresaView cadastroEmpresa = new CadastroEmpresaView();
-//        cadastroEmpresa.setVisible(true);
-    }//GEN-LAST:event_miNovaEmpresaActionPerformed
-
-    private void miNovoColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoColaboradorActionPerformed
-//        CadastroColaboradorView cadastroColaborador = new CadastroColaboradorView();
-//        cadastroColaborador.setVisible(true);
-    }//GEN-LAST:event_miNovoColaboradorActionPerformed
-/**/
-    private void miListaColaboradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaColaboradoresActionPerformed
-//        SelecaoColaboradorView selecaoColaboradorView = new SelecaoColaboradorView();
-//        selecaoColaboradorView.setVisible(true);
-    }//GEN-LAST:event_miListaColaboradoresActionPerformed
-
-    private void miListaEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaEmpresasActionPerformed
-//        SelecaoEmpresaView selecaoEmpresaView = new SelecaoEmpresaView();
-//        selecaoEmpresaView.setVisible(true);
-    }//GEN-LAST:event_miListaEmpresasActionPerformed
 
     private void miNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNovoProdutoActionPerformed
         CadastroProdutoView cadastroProdutoView = new CadastroProdutoView();

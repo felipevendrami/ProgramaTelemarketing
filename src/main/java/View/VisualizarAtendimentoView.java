@@ -4,12 +4,7 @@
  */
 package View;
 
-import DAO.AtendimentoListDAO;
-import Model.Atendimento;
-import Model.Tramite;
-import Repositorio.AtendimentoRepositorio;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,27 +21,6 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
         initComponents();
     }
 
-    /*public Atendimento localizaAtendimento(int idAtendimento){
-        AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
-        for(Atendimento atendimento : atendimentoRepositorio.recuperarTodosAtendimentos()){
-            if(atendimento.getIdAtendimento() == idAtendimento){
-                return atendimento;
-            }
-        }
-        return null;
-    }*/
-    
-    /*public void preencheInformacoesAtendimento(){
-        taVisualizaAtendimento.append(this.atendimento.retornaInformacoes());
-    }*/
-    
-    /*public void preencheInformacoesTramites(){
-        for(Tramite tramite : this.atendimento.getTramites()){
-            taVisualizaTramites.append("============ Trâmite ============\n");
-            taVisualizaTramites.append(tramite.retornaInformacoes());
-        }
-    }*/
-    
     public void exibirTelaVisualizarAtendimento(){
         setVisible(true);
     }
@@ -101,18 +75,8 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
         jScrollPane.setViewportView(taVisualizaAtendimento);
 
         btFechar.setText("Fechar");
-        btFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFecharActionPerformed(evt);
-            }
-        });
 
         btNovoTramite.setText("Novo Trâmite");
-        btNovoTramite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btNovoTramiteActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Atendimento > Lista Atendimento > Atendimento > Informações do Atendimento");
 
@@ -169,20 +133,6 @@ public class VisualizarAtendimentoView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btFecharActionPerformed
-
-    private void btNovoTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoTramiteActionPerformed
-        /*try {
-            CadastroTramiteView cadastroTramiteView = new CadastroTramiteView(this.atendimento);
-            cadastroTramiteView.setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Um erro aconteceu!");
-        }*/
-
-    }//GEN-LAST:event_btNovoTramiteActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,17 +5,7 @@
 package View;
 
 import Controller.CadastroAtendimentoController;
-import DAO.AtendimentoListDAO;
-import DAO.VendaListDAO;
-import Exception.CadastroAtendimentoException;
-import Model.Atendimento;
-import Model.Colaborador;
-import Model.Empresa;
-import Model.ISelecaoVendaView;
-import Model.Suporte;
 import Model.Venda;
-import Repositorio.AtendimentoRepositorio;
-import Repositorio.VendaRepositorio;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
@@ -23,10 +13,9 @@ import javax.swing.JOptionPane;
  *
  * @author felip
  */
-public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelecaoVendaView{
+public class AtendimentoSuporteView extends javax.swing.JFrame{
     
     private CadastroAtendimentoController cadastroAtendimento;
-    //private CadastroAtendimentoView cadAtendimentoView;
     private Venda venda;
     
     /**
@@ -35,43 +24,6 @@ public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelec
     public AtendimentoSuporteView() {
         initComponents();
     }
-
-    /*public void abrirAtendimentoSuporte(){
-        AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
-        Atendimento atendimento = recuperarAtendimentoSuporte();
-        atendimentoRepositorio.salvarAtendimento(atendimento);
-        JOptionPane.showMessageDialog(null, "Atendimento aberto com sucesso");
-    }*/
-    
-    /*public Atendimento recuperarAtendimentoSuporte(){
-        //Recuperamos as informações da tela
-        Venda venda =  this.venda;
-        Empresa empresa = cadAtendimentoView.getEmpresa();
-        Colaborador responsavel = cadAtendimentoView.getResponsavel();
-        String tramite = taTramite.getText();
-        //Criamos o atendimento e retornamos
-        Atendimento atendimentoSuporte = new Suporte(venda, responsavel, tramite, empresa);
-        return atendimentoSuporte;
-    }*/
-    
-    @Override
-    public void carregaVenda(){
-        String venda = this.venda.retornaInformacoesCurto();
-        tfPedido.setText(venda);
-    }
-    
-    @Override
-    public void setVenda(Venda venda){
-        this.venda = venda;
-    }
-    
-    /*public void identificaExcecao() throws CadastroAtendimentoException{
-        if(this.venda == null){
-            throw new CadastroAtendimentoException("É necessário selecionar uma venda.");
-        } else if(taTramite.getText().isBlank()){
-            throw new CadastroAtendimentoException("Campo 'Trâmite' não pode ficar vazio.");
-        }
-    }*/
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,11 +56,6 @@ public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelec
         tfPedido.setEditable(false);
 
         btBuscarPedido.setText("Buscar");
-        btBuscarPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBuscarPedidoActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Trâmite:");
 
@@ -177,11 +124,6 @@ public class AtendimentoSuporteView extends javax.swing.JFrame implements ISelec
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPedidoActionPerformed
-        ListaPedidosView listaPedidos = new ListaPedidosView(this);
-        listaPedidos.setVisible(true);
-    }//GEN-LAST:event_btBuscarPedidoActionPerformed
 
     public void exibirMensagem(String mensagem){
         JOptionPane.showMessageDialog(null, mensagem);

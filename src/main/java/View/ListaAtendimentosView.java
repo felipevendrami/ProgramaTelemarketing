@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,33 +26,20 @@ public class ListaAtendimentosView extends javax.swing.JFrame {
      */
     public ListaAtendimentosView() {
         initComponents();
-        //preencheTabelaAtendimentos();
     }
 
     
-    public List<Atendimento> retornaListaOrdanada(){
+    /*public List<Atendimento> (){
         AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
         List<Atendimento> atendimentosOrdenados = atendimentoRepositorio.recuperarTodosAtendimentos();
         Collections.sort(atendimentosOrdenados, new AtendimentoComparator());
         return atendimentosOrdenados;
     }
     
-    /*public void preencheTabelaAtendimentos(){
-        DefaultTableModel tabelaAtendimentos = (DefaultTableModel) tbAtendimentos.getModel();
-        for(Atendimento atendimento : retornaListaOrdanada()){
-            tabelaAtendimentos.addRow(new Object[]{atendimento.getIdAtendimento(), atendimento.getTipo(), atendimento.getEmpresa().getNome(), atendimento.getResponsavel().getNome(), atendimento.getDataAbertura(), atendimento.getSituacao(), atendimento.retornarUltimoTramite().getDataTramite()});
-        }
-    }*/
-    
     public int carregaAtendimentoSelecionado(){
         int linha = tbAtendimentos.getSelectedRow();
         int idAtendimento = Integer.parseInt(tbAtendimentos.getValueAt(linha, 0).toString());
         return idAtendimento;
-    }
-    
-    /*public void abreVisualizacaoAtendimento(){
-        VisualizarAtendimentoView visualizarAtendimentoView = new VisualizarAtendimentoView();
-        visualizarAtendimentoView.setVisible(true);
     }*/
     
     /**

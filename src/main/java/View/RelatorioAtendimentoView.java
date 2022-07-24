@@ -4,18 +4,8 @@
  */
 package View;
 
-import DAO.AtendimentoListDAO;
-import DAO.ColaboradorListDAO;
-import Model.Atendimento;
 import Model.Colaborador;
-import Repositorio.AtendimentoRepositorio;
-import Repositorio.ColaboradorRepositorio;
 import java.awt.event.ActionListener;
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 /**
  *
@@ -29,52 +19,6 @@ public class RelatorioAtendimentoView extends javax.swing.JFrame {
     public RelatorioAtendimentoView() {
         initComponents();
     }
-
-    /*public void carregaComboboxColaborador(){
-        ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
-        List<Colaborador> responsaveis = colaboradorRepositorio.recuperarTodosColaboradores();
-        for(Colaborador responsavel : responsaveis){
-            cbResponsavel.addItem(responsavel);
-        }
-    }*/
-    
-    /*public Colaborador retornaResponsavel(){
-        Colaborador responsavel = cbResponsavel.getItemAt(cbResponsavel.getSelectedIndex());
-        return responsavel;
-    }*/
-    
-    /*public List<Atendimento> montarListaFiltroResponsavel(){
-        List<Atendimento> atendimentosResponsavel = new ArrayList<>();
-        Colaborador responsavel = retornaResponsavel();
-        AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
-        for(Atendimento atendimento : atendimentoRepositorio.recuperarTodosAtendimentos()){
-            if(atendimento.getResponsavel() == responsavel){
-                atendimentosResponsavel.add(atendimento);
-            }
-        }
-        return atendimentosResponsavel;
-    }*/
-    
-    /*public List<Atendimento> montaListaOrdenada(){
-        if(cbResponsavel.getSelectedIndex() != (-1)){
-            AtendimentoRepositorio atendimentoRepositorio = new AtendimentoListDAO();
-            List<Atendimento> atendimentosList = atendimentoRepositorio.recuperarTodosAtendimentos();
-            Collections.sort(atendimentosList);
-            return atendimentosList;
-        } else {
-            List<Atendimento> atendimentoListResponsavel = montarListaFiltroResponsavel();
-            Collections.sort(atendimentoListResponsavel);
-            return atendimentoListResponsavel;
-        }
-    }*/
-    
-    /*public void imprimeRelatorio(List<Atendimento> listaRelatorio){
-        for(Atendimento atendimento : listaRelatorio){
-            if(!atendimento.getSituacao().equals("Finalizado")){
-                taAtendimentos.append(atendimento.toString() + "\n");
-            }
-        }
-    }*/
     
     public void preencheRelatorio(String informacao){
         taAtendimentos.append(informacao);
