@@ -16,7 +16,7 @@ import java.util.List;
 
 public abstract class Atendimento implements IAtendimento, Comparable<Atendimento>{
     
-    private static int geradorIdAtendimento = 0;
+    private static int geradorIdAtendimento = 1;
     protected int idAtendimento;
     protected LocalDateTime dataAbertura;
     protected LocalDateTime dataFechamento;
@@ -33,7 +33,7 @@ public abstract class Atendimento implements IAtendimento, Comparable<Atendiment
     */
     
     public Atendimento(Colaborador responsavel, String descricaoTramite, Empresa empresa){
-        //this.idAtendimento = geradorIdAtendimento ++;
+        this.idAtendimento = geradorIdAtendimento ++;
         this.responsavel = responsavel;
         this.situacao = "Aberto";
         this.dataAbertura = getDataHoraAtual();

@@ -32,6 +32,14 @@ public class Tramite implements IAtendimento, Comparable<Tramite>{
         this.dataTramite = getDataHoraAtual();
     }
 
+    public String getTipoTramite() {
+        return tipoTramite;
+    }
+
+    public void setIdTramite(int idTramite) {
+        this.idTramite = idTramite;
+    }
+    
     public int getIdTramite() {
         return idTramite;
     }

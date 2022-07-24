@@ -4,13 +4,18 @@
  */
 package Controller;
 
+import DAO.AtendimentoDivulgacaoDAO;
+import DAO.AtendimentoDivulgacaoListDAO;
 import DAO.AtendimentoListDAO;
+import DAO.TramiteDAO;
+import DAO.TramiteListDAO;
 import Exception.CadastroAtendimentoException;
 import Model.Atendimento;
 import Model.Colaborador;
 import Model.Divulgacao;
 import Model.Empresa;
 import Model.IAtendimentoDivulgacao;
+import Model.Tramite;
 import Model.Venda;
 import Repositorio.AtendimentoRepositorio;
 import View.AtendimentoDivulgacaoView;
@@ -79,6 +84,36 @@ public class AtendimentoDivulgacaoController implements IAtendimentoDivulgacao{
         cadastroVendaController.exibirTelaCadastroVenda();
     }
     
+    public void abrirAtendimentoDivulgacaoBD(){
+        Divulgacao atDivulgacao = recuperarAtendimentoDivulgacaoBD();
+        Atendimento atendimento = (Atendimento) atDivulgacao;
+        if(AtendimentoListDAO.salvarAtendimentoBD(atendimento) && AtendimentoDivulgacaoListDAO.salvarAtendimentoDivulgacaoBD(atDivulgacao)){
+            gravarTramiteBD(atendimento.getIdAtendimento());
+            atendimentoDivulgacao.exibirMensagem("Atendimento e trâmite gravado no banco de dados !");
+        } else {
+            atendimentoDivulgacao.exibirMensagem("Não foi possível gravar o atendimento no banco de dados !");
+        }
+    }
+    
+    public Divulgacao recuperarAtendimentoDivulgacaoBD(){
+        // Recuperamos as informações da tela
+        Empresa empresa = cadastroAtendimento.getEmpresa();
+        Colaborador responsavel = cadastroAtendimento.getResponsavel();
+        String tipoContato = atendimentoDivulgacao.getTipoContato();
+        String contato = atendimentoDivulgacao.getContato();
+        String tramite = atendimentoDivulgacao.getTramite();
+        
+        // Criamos o atendimento e retornamos
+        Divulgacao atendimentoDivulgacao = new Divulgacao(tipoContato, contato, responsavel, tramite, empresa, false, null);
+        return atendimentoDivulgacao;
+    }
+    
+    public void gravarTramiteBD(int idAtendimento){
+        String textoTramite = atendimentoDivulgacao.getTramite();
+        Tramite tramiteAbertura = new Tramite(textoTramite, "Abertura");
+        TramiteListDAO.salvarTramite(tramiteAbertura, idAtendimento);
+    }
+    
     //RECUPERADOS DA VIEW
     
     public void identificaExcecao() throws CadastroAtendimentoException{
@@ -94,6 +129,7 @@ public class AtendimentoDivulgacaoController implements IAtendimentoDivulgacao{
     @Override
     public void processoAtendimento(){
         abrirAtendimentoDivulgacao();
+        abrirAtendimentoDivulgacaoBD();
         cadastroAtendimento.limparTela();
         atendimentoDivulgacao.fecharTela();
     }

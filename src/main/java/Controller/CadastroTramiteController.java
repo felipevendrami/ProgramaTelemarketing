@@ -4,10 +4,13 @@
  */
 package Controller;
 
+import DAO.AtendimentoListDAO;
+import DAO.TramiteListDAO;
 import Exception.AtendimentoTramiteException;
 import Model.Atendimento;
 import Model.Divulgacao;
 import Model.IAtendimentoDivulgacao;
+import Model.Tramite;
 import Model.Venda;
 import View.CadastroTramiteView;
 import View.CadastroVendaView;
@@ -68,6 +71,19 @@ public class CadastroTramiteController implements IAtendimentoDivulgacao{
         });
     }
     
+    public void incluirTramiteBD(){
+        String tipoTramite = cadastroTramite.getTipoTramite();
+        String descicaoTramite = cadastroTramite.getTramite();
+        int idAtendimento = atendimento.getIdAtendimento();
+        Tramite tramite = new Tramite(descicaoTramite, tipoTramite);
+        if(TramiteListDAO.salvarTramite(tramite, idAtendimento)){
+            //Atualiza situação tramite no BD
+            if(tipoTramite.equals("Fechamento")){
+                AtendimentoListDAO.atualizaSituacaoAtendimento(idAtendimento, tramite.getDataTramite());
+            }
+            cadastroTramite.exibirMensagem("Trâmite gravado no banco de dados !");
+        }
+    }
     //RECUPERADOS VIEW
     
     public void identificaExcecao() throws AtendimentoTramiteException{
@@ -77,7 +93,7 @@ public class CadastroTramiteController implements IAtendimentoDivulgacao{
             throw new AtendimentoTramiteException("Campo 'Trâmite' não pode ficar vazio.");
         }
     }
-
+    
     public void incluirTramite(){
         // Recuperamos as informações da tela
         String tipoTramite = cadastroTramite.getTipoTramite();
@@ -113,6 +129,7 @@ public class CadastroTramiteController implements IAtendimentoDivulgacao{
     @Override
     public void processoAtendimento() {
         incluirTramite();
+        incluirTramiteBD();
         cadastroTramite.limparTela();
         cadastroTramite.fecharTela();
     }

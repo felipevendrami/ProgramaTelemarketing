@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -33,7 +34,7 @@ public class AtendimentoListDAO implements AtendimentoRepositorio{
         return this.atendimentos;
     }
     
-    private static void createTableAtendimento(){
+    private static void createTableAtendimentoBD(){
         Connection connection = Conexao.getConnection();
         String sqlCreate = "CREATE TABLE IF NOT EXISTS atendimento"
                 + " (id_atendimento     INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -41,7 +42,8 @@ public class AtendimentoListDAO implements AtendimentoRepositorio{
                 + "  id_colaborador     INTEGER,"
                 + "  data_abertura      TEXT,"
                 + "  data_fechamento    TEXT,"
-                + "  situacao           TEXT,";
+                + "  situacao           TEXT,"
+                + "  tipo               TEXT)";
         
         Statement stmt = null;
         try {
@@ -51,32 +53,12 @@ public class AtendimentoListDAO implements AtendimentoRepositorio{
             System.out.println(e.getMessage());
         }
     }
-    
-    private static void createTableAtendimentoDivulgacao(){
-        Connection connection = Conexao.getConnection();
-        String sqlCreate = "CREATE TABLE IF NOT EXISTS atendimento_divulgacao"
-                +  " (id_ate_divulgacao     INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +  "  id_atendimento        INTEGER,"
-                +  "  id_venda              INTEGER,"
-                +  "  tipo_contato          TEXT,"
-                +  "  contato               TEXT,"
-                +  "  conversao             INTEGER,"
-                +  "  FOREIGN KEY (id_atendimento) REFERENCES atendimento (id_atendimento)";
-
-        Statement stmt = null;
-        try {
-            stmt = connection.createStatement();
-            stmt.execute(sqlCreate);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public static boolean salvarAtendimentoo(Divulgacao atendimento){
-        createTableAtendimento();
+        
+    public static boolean salvarAtendimentoBD(Atendimento atendimento){
+        createTableAtendimentoBD();
         
         Connection connection = Conexao.getConnection();
-        String sql = "INSERT INTO atendimento (id_empresa, id_colaborador, data_abertura, situacao) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO atendimento (id_empresa, id_colaborador, data_abertura, situacao, tipo) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement pstmt;
         
         try {
@@ -85,16 +67,13 @@ public class AtendimentoListDAO implements AtendimentoRepositorio{
             pstmt.setString(2, Integer.toString(atendimento.getResponsavel().getIdEntidade()));
             pstmt.setString(3, atendimento.getDataAbertura());
             pstmt.setString(4, atendimento.getSituacao());
+            pstmt.setString(5, atendimento.getTipo());
             pstmt.execute();
-            System.out.println("Atendimento Gravado!");
             final ResultSet resultado = pstmt.getGeneratedKeys();
             if(resultado.next()){
                 int id = resultado.getInt(1);
                 atendimento.setIdAtendimento(id);
-            }
-            
-            salvarAtendimentoDivulgacao(atendimento);
-            
+            }            
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -102,30 +81,18 @@ public class AtendimentoListDAO implements AtendimentoRepositorio{
         }
     }
     
-    public static boolean salvarAtendimentoDivulgacao(Divulgacao atendimentoDivulgacao){
-        createTableAtendimentoDivulgacao();
+    public static void atualizaSituacaoAtendimento(int idAtendimento, String dataFechamento){
         Connection connection = Conexao.getConnection();
-        String sql = "INSERT INTO atendimento_divulgacao (id_atendimento, id_venda, tipo_contato, contato, conversao) VALUES (?, ?, ?, ?, ?)";
+        String sql = "UPDATE atendimento SET situacao = ?, data_fechamento = ? WHERE id_atendimento = " + idAtendimento;
         PreparedStatement pstmt;
         
         try {
             pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, Integer.toString(atendimentoDivulgacao.getIdAtendimento()));
-            pstmt.setString(2, null);
-            pstmt.setString(3, atendimentoDivulgacao.getTipoContato());
-            pstmt.setString(4, atendimentoDivulgacao.getContato());
-            String conversao = "0";
-            if(atendimentoDivulgacao.isConversao() == true){
-                conversao = "1";
-            }
-            pstmt.setString(5, conversao);
+            pstmt.setString(1, "Finalizado");
+            pstmt.setString(2, dataFechamento);
             pstmt.execute();
-            System.out.println("Divulgação gravada!");
-            return true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return false;
         }
     }
-    
 }
