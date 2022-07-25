@@ -73,6 +73,7 @@ public class CadastroEmpresaController {
     public void criaEmpresa() throws CadastroEmpresaException{
         EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
         Empresa empresa = recuperarEmpresa();
+        // Tenta cadastrar empresa, se CNPJ repetido ele não deixa.
         boolean cadastroOk = empresaRepositorio.salvarEmpresa(empresa);
         if (cadastroOk) {
             cadastroEmpresa.exibirMensagem("Empresa criada com sucesso!");

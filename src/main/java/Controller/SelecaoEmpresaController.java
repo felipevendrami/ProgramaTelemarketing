@@ -66,6 +66,7 @@ public class SelecaoEmpresaController {
         }
     }
     
+    //Recebe Set, percorre Set, adiciona cada elemento na lista e retorna lista.
     public List<Empresa> converterSetEmList(Set<Empresa> empresasSet){
         List<Empresa> empresasEmLista = new ArrayList<>();
         for(Empresa empresa: empresasSet){

@@ -21,6 +21,7 @@ public class VisualizarEmpresaController {
     
     private Empresa empresaSelecionada;
     
+    //Pego empresa através do Set pelo Id e jogo as informações da empresa para a tela.
     public VisualizarEmpresaController(VisualizarEmpresaView visualizarEmpresa, int idEntidade){
         this.visualizarEmpresa = visualizarEmpresa;
         this.empresaSelecionada = localizaEmpresa(idEntidade);
