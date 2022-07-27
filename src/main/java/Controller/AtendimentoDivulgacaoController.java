@@ -4,10 +4,8 @@
  */
 package Controller;
 
-import DAO.AtendimentoDivulgacaoDAO;
 import DAO.AtendimentoDivulgacaoListDAO;
 import DAO.AtendimentoListDAO;
-import DAO.TramiteDAO;
 import DAO.TramiteListDAO;
 import Exception.CadastroAtendimentoException;
 import Model.Atendimento;
