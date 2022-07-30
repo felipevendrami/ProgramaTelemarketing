@@ -3,32 +3,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  *
  * @author nicol
  */
-public class Produto{
-    protected int codigo;
+public class Produto {
+
+    private static int geradorIdProduto = 0;
+
+    private int idProduto;
     protected String nome;
-    protected double valor;
-    protected double percentDesc;
-    protected double valorDesc;
+    protected String preco;
+    protected String marca;
 
-    public Produto(int codigo, String nome, double valor, double percentDesc, double valorDesc) {
-        this.codigo = codigo;
+    public Produto(String nome, String preco,String marca) {
+        this.idProduto = geradorIdProduto++;
         this.nome = nome;
-        this.valor = valor;
-        this.percentDesc = percentDesc;
-        this.valorDesc = valorDesc;
+        this.preco = preco;
+        this.marca = marca;
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public int getIdProduto() {
+        return this.idProduto;
     }
 
     public String getNome() {
@@ -39,30 +40,45 @@ public class Produto{
         this.nome = nome;
     }
 
-    public double getValor() {
-        return valor;
+    public String getPreco() {
+        return preco;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setPreco(String preco) {
+        this.preco = preco;
     }
 
-    public double getPercentDesc() {
-        return percentDesc;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setPercentDesc(double percentDesc) {
-        this.percentDesc = percentDesc;
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+        @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Produto other = (Produto) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return true;
     }
 
-    public double getValorDesc() {
-        return valorDesc;
+    public String retornaInformacoes() {
+        return "Nome: " + this.getNome()+ "Marca: " + this.getMarca() + "Preco: " + this.getPreco();
     }
 
-    public void setValorDesc(double valorDesc) {
-        this.valorDesc = valorDesc;
-    }
-
-    
+    @Override
+    public String toString() {
+        return "Produto{" + "idProduto=" + idProduto + ", nome=" + nome + ", preco=" + preco + ", marca=" + marca + '}';
+    }    
 }
-

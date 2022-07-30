@@ -38,6 +38,7 @@ public class MenuInicialView extends javax.swing.JFrame {
         miListaColaboradores = new javax.swing.JMenuItem();
         mnProdutos = new javax.swing.JMenu();
         miNovoProduto = new javax.swing.JMenuItem();
+        miListarProdutos = new javax.swing.JMenuItem();
         mnAtendimento = new javax.swing.JMenu();
         miNovoAtendimento = new javax.swing.JMenuItem();
         miListaAtendimentos = new javax.swing.JMenuItem();
@@ -84,6 +85,9 @@ public class MenuInicialView extends javax.swing.JFrame {
             }
         });
         mnProdutos.add(miNovoProduto);
+
+        miListarProdutos.setText("Listar Produtos");
+        mnProdutos.add(miListarProdutos);
 
         mbSistemaTelemarketing.add(mnProdutos);
 
@@ -161,6 +165,13 @@ public class MenuInicialView extends javax.swing.JFrame {
     public void adicionarAcaoSelecaoEmpresa(ActionListener acao){
         miListaEmpresas.addActionListener(acao);
     }
+    public void adicionarAcaoNovoProduto(ActionListener acao){
+        miNovoProduto.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoListarProdutos(ActionListener acao){
+        miListarProdutos.addActionListener(acao);
+    }
     
     /**
      * @param args the command line arguments
@@ -202,6 +213,7 @@ public class MenuInicialView extends javax.swing.JFrame {
     private javax.swing.JMenuItem miListaAtendimentos;
     private javax.swing.JMenuItem miListaColaboradores;
     private javax.swing.JMenuItem miListaEmpresas;
+    private javax.swing.JMenuItem miListarProdutos;
     private javax.swing.JMenuItem miNovaEmpresa;
     private javax.swing.JMenuItem miNovoAtendimento;
     private javax.swing.JMenuItem miNovoCliente;

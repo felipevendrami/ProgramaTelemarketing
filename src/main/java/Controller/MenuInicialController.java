@@ -8,11 +8,13 @@ import View.CadastroAtendimentoView;
 import View.CadastroClienteView;
 import View.CadastroColaboradorView;
 import View.CadastroEmpresaView;
+import View.CadastroProdutoView;
 import View.ListaAtendimentosView;
 import View.MenuInicialView;
 import View.RelatorioAtendimentoView;
 import View.SelecaoColaboradorView;
 import View.SelecaoEmpresaView;
+import View.SelecaoProdutoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Action;
@@ -27,7 +29,8 @@ public class MenuInicialController {
     private MenuInicialView menuInicial;
     
     //Controllers Produto
-    
+    private CadastroProdutoController cadastroProduto;
+    private SelecaoProdutoController selecaoProduto;
     
     //Controllers Entidade
     private CadastroClienteController cadastroCliente;
@@ -109,6 +112,20 @@ public class MenuInicialController {
             }
         });
         
+         menuInicial.adicionarAcaoNovoProduto(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inicializarTelaNovoProduto();
+                cadastroProduto.exibirTelaCadastroProduto();
+            }
+        });
+            menuInicial.adicionarAcaoListarProdutos(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inicializarTelaSelecaoProduto();
+                selecaoProduto.exibirTelaSelecaoProduto();
+            }
+        });
     }
     
     public void inicializarTelaCadastroAtendimento(){
@@ -142,4 +159,11 @@ public class MenuInicialController {
     public void inicializarTelaSelecaoEmpresa(){
         selecaoEmpresa = new SelecaoEmpresaController(new SelecaoEmpresaView());
     }
+     public void inicializarTelaNovoProduto(){
+        cadastroProduto = new CadastroProdutoController(new CadastroProdutoView());
+    }
+      public void inicializarTelaSelecaoProduto(){
+        selecaoProduto = new SelecaoProdutoController(new SelecaoProdutoView());
+    }
+    
 }

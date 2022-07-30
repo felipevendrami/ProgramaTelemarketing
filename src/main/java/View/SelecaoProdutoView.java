@@ -3,18 +3,51 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
+import TableModel.ListaProdutosTableModel;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author felip
+ * @author nicol
  */
 public class SelecaoProdutoView extends javax.swing.JFrame {
 
     /**
-     * Creates new form SelecaoProduto
+     * Creates new form SelecaoProdutoView
      */
     public SelecaoProdutoView() {
         initComponents();
+    }
+    public void setTableModel(ListaProdutosTableModel listaProdutosTableModel){
+        tbProduto.setModel(listaProdutosTableModel);
+    }
+    public void adicionarAcaoFechar(ActionListener acao){
+        btFechar.addActionListener(acao);
+    }
+    
+    public void adicionarAcaoVisualizar(ActionListener acao){
+        btVisualizar.addActionListener(acao);
+    }
+    
+    public void fecharTela(){
+        this.setVisible(false);
+    }
+    
+    public String getProdutoSelecionado(){
+        if(tbProduto.getSelectedRow() == -1){
+            return null;
+        }
+        //Retorna o Id da primeira coluna da linha selecionada
+        return tbProduto.getModel().getValueAt(tbProduto.getSelectedRow(), 0).toString();
+    }
+    
+    public void exibirMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
+    
+    public void exibirTelaSelecaoProduto(){
+        setVisible(true);
     }
 
     /**
@@ -26,90 +59,55 @@ public class SelecaoProdutoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane = new javax.swing.JScrollPane();
-        tbProdutos = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbProduto = new javax.swing.JTable();
         btFechar = new javax.swing.JButton();
-        btSelecionar = new javax.swing.JButton();
+        btVisualizar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Selecao Produto");
-        setMaximumSize(new java.awt.Dimension(600, 300));
-        setMinimumSize(new java.awt.Dimension(600, 300));
-        setPreferredSize(new java.awt.Dimension(600, 300));
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tbProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        tbProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "IdProduto", "Produto", "Valor"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane.setViewportView(tbProdutos);
-        if (tbProdutos.getColumnModel().getColumnCount() > 0) {
-            tbProdutos.getColumnModel().getColumn(0).setResizable(false);
-            tbProdutos.getColumnModel().getColumn(1).setResizable(false);
-            tbProdutos.getColumnModel().getColumn(2).setResizable(false);
-        }
+        ));
+        jScrollPane2.setViewportView(tbProduto);
 
         btFechar.setText("Fechar");
-        btFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFecharActionPerformed(evt);
-            }
-        });
 
-        btSelecionar.setText("Selecionar");
+        btVisualizar.setText("Visualizar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 432, Short.MAX_VALUE)
-                        .addComponent(btSelecionar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btFechar))
-                    .addComponent(jScrollPane))
-                .addContainerGap())
+                        .addComponent(btFechar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btVisualizar))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btFechar)
-                    .addComponent(btSelecionar))
-                .addContainerGap())
+                    .addComponent(btVisualizar)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,7 +135,6 @@ public class SelecaoProdutoView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(SelecaoProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -149,8 +146,8 @@ public class SelecaoProdutoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btFechar;
-    private javax.swing.JButton btSelecionar;
-    private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JTable tbProdutos;
+    private javax.swing.JButton btVisualizar;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tbProduto;
     // End of variables declaration//GEN-END:variables
 }

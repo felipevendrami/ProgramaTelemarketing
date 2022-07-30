@@ -8,13 +8,16 @@ import Controller.MenuInicialController;
 import DAO.ClienteListDAO;
 import DAO.ColaboradorListDAO;
 import DAO.EmpresaListDAO;
+import DAO.ProdutoListDAO;
 import Model.Cliente;
 import Model.Colaborador;
 import Model.Empresa;
 import Model.Endereco;
+import Model.Produto;
 import Repositorio.ClienteRepositorio;
 import Repositorio.ColaboradorRepositorio;
 import Repositorio.EmpresaRepositorio;
+import Repositorio.ProdutoRepositorio;
 import View.MenuInicialView;
 
 /**
@@ -28,6 +31,7 @@ public class AppComController {
         ClienteRepositorio clienteRepositorio = new ClienteListDAO();
         ColaboradorRepositorio colaboradorRepositorio = new ColaboradorListDAO();
         EmpresaRepositorio empresaRepositorio = new EmpresaListDAO();
+        ProdutoRepositorio produtoRepositorio = new ProdutoListDAO();
         
         Endereco endereco = new Endereco("Rua do Teste", "Testinho", "Ibirama", "SC");
         Endereco endereco2 = new Endereco("Rua do Seu Chico", "Centro", "Rio do Sul", "SC");
@@ -54,6 +58,11 @@ public class AppComController {
         empresaRepositorio.salvarEmpresa(empresa2);
         empresaRepositorio.salvarEmpresa(empresa3);
         
+        Produto produto = new Produto("Iphone", "5.000,00", "Apple");
+        Produto produto2 = new Produto("Motorola", "1.500,00", "Lenovo");
+        produtoRepositorio.salvarProduto(produto);
+        produtoRepositorio.salvarProduto(produto2);
+
         MenuInicialController menuInicial = new MenuInicialController(new MenuInicialView());
         menuInicial.exibirTelaMenuInicial();
     }
