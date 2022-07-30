@@ -30,21 +30,22 @@ public class EmpresaListDAO implements EmpresaRepositorio{
         return this.empresas;
     }
         
-    private static void createTableEmpresaBD(){
-        Connection connection = Conexao.getConnection();
-        String sqlCreate = "CREATE TABLE IF NOT EXISTS empresa"
-                + " (id_entidade INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "  nome               TEXT,"
-                + "  cnpj               TEXT,"
-                + "  id_endereco        INTEGER)";
-        
-        Statement stmt = null;
-        try {
-            stmt = connection.createStatement();
-            stmt.execute(sqlCreate);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+// Criação da Tabela no Banco de Dados    
+//    private static void createTableEmpresaBD(){
+//        Connection connection = Conexao.getConnection();
+//        String sqlCreate = "CREATE TABLE IF NOT EXISTS empresa"
+//                + " (id_entidade INTEGER PRIMARY KEY AUTOINCREMENT,"
+//                + "  nome               TEXT,"
+//                + "  cnpj               TEXT,"
+//                + "  id_endereco        INTEGER)";
+//        
+//        Statement stmt = null;
+//        try {
+//            stmt = connection.createStatement();
+//            stmt.execute(sqlCreate);
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
     
 }

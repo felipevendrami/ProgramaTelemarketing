@@ -17,11 +17,13 @@ public class ListaColaboradoresTableModel extends AbstractTableModel{
     private List<Colaborador> colaboradores;
     
     //Colunas da Tabela
-    private final String[] atributoColunas = {"IdEntidade","Nome Colaborador","Cidade","UF"};
+    private final String[] atributoColunas = {"IdEntidade","Nome Colaborador","Cidade","UF","Bairro","Rua"};
     private final int COLUNA_IDENTIDADE = 0;
     private final int COLUNA_NOME_COLABORADOR = 1;
     private final int COLUNA_CIDADE = 2;
     private final int COLUNA_UF = 3;
+    private final int COLUNA_BAIRRO = 4;
+    private final int COLUNA_RUA = 5;
     
     public ListaColaboradoresTableModel(List<Colaborador> colaboradores) {
         this.colaboradores = colaboradores;
@@ -59,8 +61,44 @@ public class ListaColaboradoresTableModel extends AbstractTableModel{
             case COLUNA_UF:
                 valor = colaborador.getEndereco().getEstado();
                 break;
+            case COLUNA_BAIRRO:
+                valor = colaborador.getEndereco().getBairro();
+                break;
+            case COLUNA_RUA:
+                valor = colaborador.getEndereco().getRua();
+                break;
         }
         return valor;
     }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        Colaborador colaborador = this.colaboradores.get(rowIndex);
+        switch (columnIndex) {
+            case COLUNA_CIDADE:
+                colaborador.getEndereco().setCidade((String) aValue);
+                break;
+            case COLUNA_NOME_COLABORADOR:
+                colaborador.setNome((String) aValue);
+                break;
+            case COLUNA_UF:
+                colaborador.getEndereco().setEstado((String) aValue);
+                break;
+            case COLUNA_BAIRRO:
+                colaborador.getEndereco().setBairro((String) aValue);
+                break;
+            case COLUNA_RUA:
+                colaborador.getEndereco().setRua((String) aValue);
+                break;
+        }
+        fireTableDataChanged();
+    }
+    
+    
     
 }

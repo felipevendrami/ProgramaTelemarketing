@@ -16,11 +16,13 @@ public class ListaClientesTableModel extends AbstractTableModel{
     
     private List<Cliente> clientes;
     
-    private final String[] atributoColunas = {"idEntidade", "Nome Cliente", "Cidade", "UF"};
+    private final String[] atributoColunas = {"idEntidade", "Nome Cliente", "Cidade", "UF", "Bairro", "Rua"};
     private final int COLUNA_IDENTIDADE = 0;
     private final int COLUNA_NOME_CLIENTE = 1;
     private final int COLUNA_CIDADE = 2;
     private final int COLUNA_UF = 3;
+    private final int COLUNA_BAIRRO = 4;
+    private final int COLUNA_RUA = 5;
     
     public ListaClientesTableModel(List<Cliente> clientes){
         this.clientes = clientes;
@@ -58,9 +60,44 @@ public class ListaClientesTableModel extends AbstractTableModel{
             case COLUNA_UF:
                 valor = cliente.getEndereco().getEstado();
                 break;
+            case COLUNA_BAIRRO:
+                valor = cliente.getEndereco().getBairro();
+                break;
+            case COLUNA_RUA:
+                valor = cliente.getEndereco().getRua();
+                break;
         }
         return valor;
     }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        Cliente cliente = this.clientes.get(rowIndex);
+        switch (columnIndex) {
+            case COLUNA_CIDADE:
+                cliente.getEndereco().setCidade((String) aValue);
+                break;
+            case COLUNA_NOME_CLIENTE:
+                cliente.setNome((String) aValue);
+                break;
+            case COLUNA_UF:
+                cliente.getEndereco().setEstado((String) aValue);
+                break;
+            case COLUNA_BAIRRO:
+                cliente.getEndereco().setBairro((String) aValue);
+                break;
+            case COLUNA_RUA:
+                cliente.getEndereco().setRua((String) aValue);
+                break;
+        }
+        fireTableDataChanged();
+    }
+    
     
     
 }
